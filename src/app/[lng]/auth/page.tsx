@@ -6,9 +6,7 @@ import Switch from "components/pure-elements/switch";
 import { useFetch } from "hooks/useFetch";
 import { useLanguageClient } from "hooks/useLanguageClient";
 import { PostModel } from "model/services/post.model";
-import { NextApiResponse } from "next";
 import { useEffect, useState } from "react";
-import { METHOD } from "services/base.service";
 import { PostService } from "services/post.service";
 
 
@@ -19,8 +17,8 @@ const Login = ({ params: { lng } }: any) => {
 
   const [title, setTitle] = useState<string>("")
   const [body, setBody] = useState<string>("")
-  const [test , setTest ] = useState<boolean>(false)
-  const [test2 , setTest2 ] = useState<boolean>(false)
+  const [test, setTest] = useState<boolean>(false)
+  const [test2, setTest2] = useState<boolean>(false)
 
   const { loading, data, error } = useFetch<any>({
     service: post.create.bind(post),
@@ -34,7 +32,17 @@ const Login = ({ params: { lng } }: any) => {
   })
 
 
-
+  const { loading : loadingData, error : ErrorData , data : dataPost } = useFetch<any>({
+    service: post.read.bind(post),
+    options: {
+      headers:{
+        'tto' : 'ertetr'
+      },
+      body:{
+        bg:'sdas'
+      }
+    }
+  })
 
   const submitData = async (e: any) => {
 
@@ -67,13 +75,13 @@ const Login = ({ params: { lng } }: any) => {
         {t("signIn")}
         <div>
           {loading && <>... loading </>}
-          {/* {fetData?.map((item: any) => {
+          {dataPost?.map((item: any) => {
             return (
               <>
                 {item.title}
               </>
             )
-          })} */}
+          })}
           {error && <> Error </>}
         </div>
         <div className="flex flex-row justify-start" >

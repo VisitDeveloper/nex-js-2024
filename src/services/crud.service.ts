@@ -15,7 +15,7 @@ extends BaseServiceClass {
         return this.fetchHelper(`${this.entityBaseUrl}`, METHOD.POST, body, customHeaders, 'include' ,signal);
     }
 
-    async read(customHeaders: Record<string, string> = {}) : Promise<NextApiResponse<Array<EntityModel>>> {
+    async read(body?: Record<string, any> | null | undefined , customHeaders: Record<string, string> = {}) : Promise<NextApiResponse<Array<EntityModel>>> {
         return this.fetchHelper(`${this.entityBaseUrl}`, METHOD.GET, null, customHeaders , 'include' ,signal);
     }
 
