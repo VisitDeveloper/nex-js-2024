@@ -1,0 +1,13 @@
+{
+  "application": {
+    "name": "AAAAAA"
+  },
+  "dashboard": "Dashboard",
+  "posts": "Posts",
+  "users": "Users",
+  "analytics": "Analytics",
+  "settings": "Settings",
+  "myAccount": "My Account",
+  "support": "Support",
+  "logout": "Logout"
+}

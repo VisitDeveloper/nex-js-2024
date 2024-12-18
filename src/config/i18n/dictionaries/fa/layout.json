@@ -1,0 +1,13 @@
+{
+  "application": {
+    "name": "AAAAAA"
+  },
+  "dashboard": "داشبورد",
+  "posts": "مطالب",
+  "users": "کاربران",
+  "analytics": "ارزیابی",
+  "settings": "تنظیمات",
+  "myAccount": "حساب من",
+  "support": "پشتیبانی",
+  "logout": "خروج"
+}
