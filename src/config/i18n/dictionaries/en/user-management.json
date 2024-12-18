@@ -1,0 +1,12 @@
+{
+  "allUsers": "All Users",
+  "active": "Active",
+  "draft": "Draft",
+  "users": "Users",
+  "usersDescription": "Manage your User and view their statistic.",
+  "username": "Username",
+  "email": "Email",
+  "confirmed": "Confirmed",
+  "blocked": "Blocked",
+  "addUser": "Add User"
+}

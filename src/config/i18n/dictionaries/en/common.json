@@ -1,0 +1,23 @@
+{
+  "title": "Hi there!",
+  "search": "Search",
+  "filter": "Filter",
+  "filterBy": "Filter by",
+  "all": "All",
+  "createdAt": "Created At",
+  "updatedAt": "Updated At",
+  "actions": "Actions",
+  "true": "True",
+  "false": "False",
+  "edit": "Edit",
+  "delete": "Delete",
+  "back": "Back",
+  "discard": "Discard",
+  "cancel": "Cancel",
+  "save": "Save",
+  "submit": "Submit",
+  "saveChanges": "Save changes",
+  "deleteQuestion": "Are you absolutely sure?",
+  "deleteDescription": "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
+  "export": "Export"
+}
