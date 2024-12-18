@@ -27,4 +27,7 @@ export { default as ListSetup } from 'components/wrapper-elements/ListSetup';
 // layout 
 export { default as HeaderLayout } from 'components/layout/Header'
 export { default as FooterLayout } from 'components/layout/Footer'
-export { default as MainLayout } from 'components/layout/MainLayout' 
+export { default as MainLayout } from 'components/layout/MainLayout'
+
+// pure-elements 
+export { default as SwitchSimple } from 'components/pure-elements/switch/index'

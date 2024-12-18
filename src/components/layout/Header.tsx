@@ -6,8 +6,10 @@ interface HeaderLayoutProps {
     children?: React.ReactNode | JSX.Element | React.ReactElement;
 }
 
-export default function HeaderLayout(props :HeaderLayoutProps) {
+export default function HeaderLayout({children , ...props} :HeaderLayoutProps) {
   return (
-    <Header>header{props.children}</Header>
+    <Header {...props}>
+      {children}
+    </Header>
   )
 }
