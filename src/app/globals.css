@@ -2,9 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
 
 @layer utilities {
   .text-balance {
@@ -13,6 +19,7 @@ body {
 }
 
 @layer base {
+
   /* hsl */
   /* we should change hex to hsl */
   /* also we can use tailwind css in colors */
@@ -43,6 +50,7 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
@@ -71,10 +79,22 @@ body {
   }
 }
 
+
+
+.header-glass {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.32);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
