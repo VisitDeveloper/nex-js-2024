@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang={lng} dir={dir(lng)}>
       <body
-        className={` antialiased`}
+        className={`antialiased bg-mainBackground`}
       >
         <ThemeProvider
           attribute="class"
@@ -29,7 +29,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div >
+          <div  className="bg-mainBackground">
             {children}
           </div>
         </ThemeProvider>

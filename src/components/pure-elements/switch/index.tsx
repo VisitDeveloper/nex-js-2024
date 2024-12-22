@@ -1,41 +1,12 @@
-
-
-
-// import { Label } from "@/components/ui/label"
-// import { Switch } from "@/components/ui/switch"
-// import { useTheme } from 'next-themes'
-// import { useEffect, useState } from "react";
-
-// export default function SwitchSimple() {
-//     const { setTheme } = useTheme();
-//     const [statusTheme, setStatusTheme] = useState<boolean>(false)
-
-//     useEffect(() => {
-//         if (!statusTheme) {
-//             setTheme('light')
-//         } else {
-//             setTheme('dark')
-//         }
-//     }, [statusTheme])
-
-//     return (
-//         <div className="flex items-center space-x-2">
-//             <Switch id="airplane-mode" checked={statusTheme} onChange={() => setStatusTheme(!statusTheme)} />
-//             <Label htmlFor="airplane-mode">Airplane Mode</Label>
-//         </div>
-//     )
-// }
-
-
 "use client"
 import * as React from "react"
 import * as SwitchPrimitives from "@radix-ui/react-switch";
-
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from "react";
-
 import { cn } from "lib/utils"
 import { Label } from "@radix-ui/react-label";
+import { Moon, Sun1 } from 'iconsax-react';
+
 
 const Switch = React.forwardRef<
     React.ElementRef<typeof SwitchPrimitives.Root>,
@@ -61,12 +32,11 @@ Switch.displayName = SwitchPrimitives.Root.displayName
 export { Switch }
 
 
-export default function SwitchSimple() {
+export default function SwitchSimpleTheme() {
     const { setTheme } = useTheme();
     const [statusTheme, setStatusTheme] = useState<boolean>(false);
 
     useEffect(() => {
-        // تغییر تم بر اساس وضعیت
         setTheme(statusTheme ? 'dark' : 'light');
     }, [statusTheme]);
 
@@ -77,10 +47,14 @@ export default function SwitchSimple() {
                 className={`${statusTheme ? 'bg-gray-800' : 'bg-gray-200'}`}
             />
             <Label htmlFor="airplane-mode">
-                {
-                
+                {statusTheme ? <>
+
+                    <Sun1 size="20" className="dark:text-black" />
+                </> : <>
+                    <Moon size="20" className="dark:text-black" />
+                </>
                 }
-                </Label>
+            </Label>
         </div>
     )
 }
