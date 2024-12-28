@@ -13,6 +13,7 @@ const config: Config = {
 				mainBackground: 'hsl(var(--background-main))',
 				miniBackground: 'hsl(var(--background-mini))',
 
+				iconColor : 'hsl(var(--icon-color))', 
 
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',

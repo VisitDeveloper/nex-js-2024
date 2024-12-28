@@ -29,7 +29,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div  className="bg-mainBackground">
+          <div className="bg-mainBackground">
             {children}
           </div>
         </ThemeProvider>
