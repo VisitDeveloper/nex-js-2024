@@ -8,6 +8,7 @@ html {
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  
 }
 
 
@@ -26,8 +27,9 @@ body {
   :root {
 
     --background-main : 	0, 0%, 100%;
-    --background-mini : 0, 0%, 80%;
+    --background-mini : 240, 11%, 96%;
 
+    --icon-color : 14, 100%, 70%;
 
 
     --background: 0 0% 100%;
@@ -62,6 +64,8 @@ body {
     --background-main : 	0, 0%, 7%;
     --background-mini : 0, 0%, 10%;
     
+    --icon-color : 156, 81%, 55%;
+
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;
@@ -100,6 +104,16 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+.header-glass-dark{
+/* From https://css.glass */
+background: rgba(39, 39, 39, 1);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(39, 39, 39, 0.3);
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -109,3 +123,5 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+

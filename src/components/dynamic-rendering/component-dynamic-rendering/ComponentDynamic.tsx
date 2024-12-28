@@ -5,7 +5,6 @@ import { Fragment } from "react";
 import { CreateObjectLiterals } from "tools/object-literal";
 import { MainLayoutProps } from "components/layout/MainLayout";
 
-
 // eslint-disable-next-line react-refresh/only-export-components
 export const typeComponent = {
   ListSetup: "ListSetup",

@@ -67,10 +67,6 @@ const Login = ({ params: { lng } }: any) => {
             <DynamicObjectLiterals type="MainLayout" configKey={{
                 className: '',
                 children: <>
-                    
-                    
-
-                   
                     <Button variant={"outline"} size={"sm"}> Var</Button>
                     {t("signIn")}
                     <div>
