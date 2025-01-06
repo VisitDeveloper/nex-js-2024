@@ -36,8 +36,20 @@ export default function SwitchSimpleTheme() {
     const { setTheme } = useTheme();
     const [statusTheme, setStatusTheme] = useState<boolean>(false);
 
+    // Load theme status from localStorage on component mount
     useEffect(() => {
-        setTheme(statusTheme ? 'dark' : 'light');
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            const isDark = savedTheme === 'dark';
+            setStatusTheme(isDark);
+            setTheme(isDark ? 'dark' : 'light'); // Set theme based on saved state
+        }
+    }, [setTheme]);
+
+    // Save theme status to localStorage when statusTheme changes
+    useEffect(() => {
+        localStorage.setItem('theme', statusTheme ? 'dark' : 'light');
+        setTheme(statusTheme ? "dark" : "light");
     }, [statusTheme]);
 
     return (
@@ -49,9 +61,9 @@ export default function SwitchSimpleTheme() {
             <Label htmlFor="airplane-mode">
                 {statusTheme ? <>
 
-                    <Sun1 size="20" className="dark:text-black" />
+                    <Sun1 size="20" className="dark:text-white cursor-pointer" />
                 </> : <>
-                    <Moon size="20" className="dark:text-black" />
+                    <Moon size="20" className="dark:text-black cursor-pointer" />
                 </>
                 }
             </Label>
