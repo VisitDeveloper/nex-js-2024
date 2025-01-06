@@ -63,6 +63,7 @@ const config: Config = {
 			},
 			backgroundImage: {
 				'hero': "url('/main-bg.jpg')",
+				'company' : "url('/theme.png')"
 			},
 			boxShadow: {
 				'normal': '0 0 5px #31ea9f',

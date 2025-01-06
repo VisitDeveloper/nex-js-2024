@@ -33,3 +33,5 @@ export { default as Copyright } from 'components/layout/Copyright'
 // pure-elements 
 export { default as SwitchSimpleTheme } from 'components/pure-elements/switch/index'
 export { default as Button } from 'components/pure-elements/button/index'
+export {default as Card} from 'components/pure-elements/card/index'
+export {default as Carousel} from 'components/pure-elements/carousel-slider/index'
