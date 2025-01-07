@@ -1,9 +1,8 @@
 
 import Section from 'components/elements/section';
-import React from 'react'
+import React, { JSX } from 'react'
 import MobileNavigation from './MobileNavigation';
 import { motion } from 'motion/react'
-import { useParams } from 'next/navigation';
 export interface MainLayoutProps {
   children?: React.ReactNode | JSX.Element | React.ReactElement;
   className?: string;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{JSX} from 'react';
 
 interface ParagraphProps extends React.HTMLProps<HTMLParagraphElement>{
   children?: React.ReactElement | React.ReactNode | JSX.Element

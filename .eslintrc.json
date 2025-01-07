@@ -2,6 +2,16 @@
   "extends": [
     "next/core-web-vitals",
     "next/typescript",
-    "plugin:storybook/recommended"
-  ]
+    "plugin:storybook/recommended",
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "react",
+    "react-hooks"
+  ],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "react-refresh/only-export-components": "off"
+  }
 }

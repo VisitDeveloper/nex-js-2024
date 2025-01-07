@@ -1,10 +1,10 @@
 import Footer from 'components/elements/footer'
 import ListSetup from 'components/wrapper-elements/ListSetup';
 import Row from 'components/wrapper-elements/Row';
-import { Copyright, Div, Span } from 'components/index';
+import { Copyright, Span } from 'components/index';
 import React from 'react'
 import Link from 'next/link';
-import { Call, Facebook, Home, InfoCircle, Instagram, Location, MessageEdit, Mobile, MobileProgramming, NoteText, Send2, Sms, Whatsapp } from 'iconsax-react';
+import { Call, Facebook, Home, InfoCircle, Instagram, Location, MessageEdit, MobileProgramming, NoteText, Send2, Sms, Whatsapp } from 'iconsax-react';
 
 
 export default function FooterLayout({ ...props }) {
@@ -137,7 +137,7 @@ export default function FooterLayout({ ...props }) {
             </Span>
             <ListSetup alignItems='center' justifyContent='start' direction='row' className='gap-2'>
               <div className='cursor-pointer'>
-                <Instagram size="20" className='text-iconColor'/>
+                <Instagram size="20" className='text-iconColor' />
               </div>
               <div className='cursor-pointer'>
                 <Whatsapp size="20" className='text-iconColor' />

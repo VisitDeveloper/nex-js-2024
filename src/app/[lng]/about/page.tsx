@@ -2,7 +2,7 @@
 'use client'
 import React from 'react'
 import { motion } from 'motion/react';
-import { Button, DynamicObjectLiterals, MainLayout } from 'components';
+import { MainLayout } from 'components';
 
 export default function About() {
 

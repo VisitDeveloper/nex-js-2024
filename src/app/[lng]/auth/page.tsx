@@ -1,12 +1,12 @@
 
 'use client';
+import React from 'react';
 import { DynamicObjectLiterals, ListSetup } from "components";
 import { Button } from "components/pure-elements/button";
 import Switch from "components/pure-elements/switch";
 import { useFetch } from "hooks/useFetch";
 import { useLanguageClient } from "hooks/useLanguageClient";
-import { PostModel } from "model/services/post.model";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PostService } from "services/post.service";
 
 
@@ -20,7 +20,7 @@ const Login = ({ params: { lng } }: any) => {
   const [test, setTest] = useState<boolean>(false)
   const [test2, setTest2] = useState<boolean>(false)
 
-  const { loading, data, error } = useFetch<any>({
+  const { loading, error } = useFetch<any>({
     service: post.create.bind(post),
     options: {
       headers: {
@@ -32,25 +32,18 @@ const Login = ({ params: { lng } }: any) => {
   })
 
 
-  const { loading : loadingData, error : ErrorData , data : dataPost } = useFetch<any>({
+  const { data: dataPost } = useFetch<any>({
     service: post.read.bind(post),
     options: {
-      headers:{
-        'tto' : 'ertetr'
+      headers: {
+        'tto': 'ertetr'
       },
-      body:{
-        bg:'sdas'
+      body: {
+        bg: 'sdas'
       }
     }
   })
 
-  const submitData = async (e: any) => {
-
-  }
-
-  useEffect(() => {
-    console.log('fetData', data)
-  }, [])
 
 
 
@@ -86,7 +79,7 @@ const Login = ({ params: { lng } }: any) => {
         </div>
         <div className="flex flex-row justify-start" >
 
-          <form onSubmit={submitData}>
+          <form >
             <input type="text" name="title" value={title} onChange={(e) => setTitle(e.target.value)} />
             <input type="text" name="body" value={body} onChange={(e) => setBody(e.target.value)} />
             <button type="submit">

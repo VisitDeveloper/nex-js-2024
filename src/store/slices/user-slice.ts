@@ -1,21 +1,21 @@
 import { StateCreator } from 'zustand';
 
 export interface User {
-    id: number;
-    name: string;
-};
+    id?: number;
+    name?: string;
+}
 
 export type UsersSlice = {
     users: User[];
-    addUser: (todo: User) => void;
-    updateUser: (id: number, newUser: Partial<User>) => void;
-    deleteUser: (id: number) => void;
-};
+    addUser: (todo?: User) => void;
+    updateUser: (id?: number, newUser?: Partial<User>) => void;
+    deleteUser: (id?: number) => void;
+}
 
-export const createUsersSlice: StateCreator<UsersSlice> = (set, get) => ({
+export const createUsersSlice: StateCreator<UsersSlice> = (set) => ({
     users: [],
     addUser: (user) => set((state) => ({
-        users: [...state.users, user],
+        users: [...state.users, user!],
     })),
     updateUser: (id, newUser) => set((state) => ({
         users: state.users.map((user) =>

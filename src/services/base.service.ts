@@ -1,4 +1,4 @@
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 import { parseStringPromise, Builder } from "xml2js";
 
 export enum METHOD {
@@ -8,13 +8,13 @@ export enum METHOD {
     PUT = "PUT",
     PATCH = "PATCH",
     HEAD = 'HEAD'
-};
+}
 
 
 
 export interface NextOptionsFetch {
     method: METHOD;
-    body?: any ;
+    body?: any;
     headers: any;
     credentials?: RequestCredentials;
     signal?: AbortSignal;
@@ -35,7 +35,7 @@ export class BaseServiceClass {
 
     private createRequestOptions(
         method: METHOD,
-        body: any ,
+        body: any,
         customHeaders: any = {},
         credentials: RequestCredentials = 'include',
         signal?: AbortSignal
@@ -59,7 +59,7 @@ export class BaseServiceClass {
             signal
         };
 
-        
+
 
         if (body) {
             if (body instanceof FormData) {
@@ -85,7 +85,7 @@ export class BaseServiceClass {
         signal?: AbortSignal
     ): Promise<any> {
         const fullURL = `${this.baseURL}/${url}`;
-        const options = this.createRequestOptions(method, body , customHeaders, credentials, signal);
+        const options = this.createRequestOptions(method, body, customHeaders, credentials, signal);
 
         try {
             const response = await fetch(fullURL, options);

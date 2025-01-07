@@ -11,7 +11,6 @@ import {
   H5,
   H6,
   Header,
-  Img,
   LI,
   OL,
   P,
@@ -38,9 +37,8 @@ const KeysToComponentMap: any = {
   h4: H4,
   h5: H5,
   h6: H6,
-  img: Img,
-  ol:OL,
-  section : Section ,
+  ol: OL,
+  section: Section,
   // dynamicRenderingGlobal: DynamicRenderingGlobal
 };
 
@@ -61,9 +59,9 @@ const StylesMaps = (styles: Array<StylePropsArray>) => {
   return mappedStyles;
 };
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
- const ConfigRenderComponent = (config: any) => {
-   
-   if (typeof KeysToComponentMap[config.component] !== "undefined") {
+const ConfigRenderComponent = (config: any) => {
+
+  if (typeof KeysToComponentMap[config.component] !== "undefined") {
     console.log(config.id, config.className, StylesMaps(config.styles));
     return createElement(
       KeysToComponentMap[config.component],
@@ -75,10 +73,10 @@ const StylesMaps = (styles: Array<StylePropsArray>) => {
         ...config
       },
       config.children &&
-        (typeof config.children === "string"
-          ? config.children
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          : config.children.map((c: any) => ConfigRenderComponent(c)))
+      (typeof config.children === "string"
+        ? config.children
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        : config.children.map((c: any) => ConfigRenderComponent(c)))
     );
   }
 };

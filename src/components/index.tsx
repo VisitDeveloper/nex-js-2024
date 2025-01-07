@@ -8,7 +8,6 @@ export { default as Footer } from "./elements/footer";
 export { default as Header } from "./elements/header";
 export { default as P } from "components/elements/p";
 export { default as Span } from "./elements/span";
-export { default as Img } from "./elements/img";
 export { default as Div } from "./elements/div";
 export { default as OL } from "./elements/ol";
 export { default as UL } from "./elements/ul";

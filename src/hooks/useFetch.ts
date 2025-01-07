@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback, useRef } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 interface UseFetchReadyToUse {
   service: (body?: Record<string, any> | null | undefined, customHeaders?: Record<string, string>) => Promise<any>;
@@ -28,7 +28,7 @@ export const useFetch = <T>({ service, options }: UseFetchReadyToUse) => {
     setError(null);
 
     try {
-      const result: T = await service(JSON.parse(memoizedOptions?.body),JSON.parse(memoizedOptions?.headers));
+      const result: T = await service(JSON.parse(memoizedOptions?.body), JSON.parse(memoizedOptions?.headers));
       setData(result);
     } catch (err: any) {
       setError(err.message || "Something went wrong");
@@ -37,10 +37,11 @@ export const useFetch = <T>({ service, options }: UseFetchReadyToUse) => {
     }
   }
 
-  // Only trigger fetchData when necessary
+  /* eslint-disable-next-line react-hooks/exhaustive-deps */
   useEffect(() => {
     fetch();
-  }, [memoizedOptions.headers , memoizedOptions.body]);
+    /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, [memoizedOptions.headers, memoizedOptions.body]);
 
   return { data, error, loading };
 };

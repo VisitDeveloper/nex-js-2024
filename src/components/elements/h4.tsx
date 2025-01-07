@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{JSX} from 'react';
 
 interface H4Props extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>{
     children ?: React.ReactElement | React.ReactNode | JSX.Element;
@@ -11,5 +11,4 @@ function H4({children , ...props} : H4Props) {
     </h4>
   )
 }
-// eslint-disable-next-line react-refresh/only-export-components
 export default H4

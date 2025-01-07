@@ -50,6 +50,7 @@ export default function SwitchSimpleTheme() {
     useEffect(() => {
         localStorage.setItem('theme', statusTheme ? 'dark' : 'light');
         setTheme(statusTheme ? "dark" : "light");
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [statusTheme]);
 
     return (
