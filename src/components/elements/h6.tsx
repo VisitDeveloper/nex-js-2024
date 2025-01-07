@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{JSX} from 'react';
 
 interface H6Props extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>{
     children ?: React.ReactElement | React.ReactNode | JSX.Element;
@@ -11,5 +11,4 @@ function H6({children , ...props} : H6Props) {
     </h6>
   )
 }
-// eslint-disable-next-line react-refresh/only-export-components
 export default H6

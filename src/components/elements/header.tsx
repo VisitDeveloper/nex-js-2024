@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{JSX} from 'react';
 
 interface FooterrProps extends React.HTMLProps<HTMLElement> {
     children?: React.ReactNode | React.ReactElement | JSX.Element

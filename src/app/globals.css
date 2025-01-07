@@ -125,3 +125,30 @@ border: 1px solid rgba(39, 39, 39, 0.3);
 }
 
 
+#slideset1 {
+  height: 10em;
+  position: relative;
+  overflow: hidden;
+  /* border: 1px solid #fff; */
+}
+
+
+#slideset1>* {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding: 15px;
+  animation: 12s autoplay2 infinite ease-in-out;
+}
+
+@keyframes autoplay2 {
+  0% {top: 100%}
+  4% {top: 0%}
+  33.33% {top: 0%}
+  37.33% {top: -100%}
+  100% {top: -100%}
+}
+
+#slideset1 > *:nth-child(1) {animation-delay: 0s}
+#slideset1 > *:nth-child(2) {animation-delay: 4s}
+#slideset1 > *:nth-child(3) {animation-delay: 8s}

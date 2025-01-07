@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React,{JSX} from 'react';
 
 interface H3Props extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>{
     children ?: React.ReactElement | React.ReactNode | JSX.Element;
@@ -12,5 +12,4 @@ function H3({children , ...props} : H3Props) {
     </h3>
   )
 }
-// eslint-disable-next-line react-refresh/only-export-components
 export default H3

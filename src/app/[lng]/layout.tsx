@@ -1,4 +1,5 @@
 'use client'
+import React from 'react';
 import "./../globals.css";
 import { ThemeProvider } from "provider/ThemeProvider";
 import { dir } from "i18next";
@@ -40,7 +41,7 @@ export default function RootLayout({
               }}
               className="bg-mainBackground"> */}
             {/* </motion.div> */}
-              {children}
+            {children}
           </AnimatePresence>
           <DynamicObjectLiterals type='FooterLayout' />
         </ThemeProvider>
