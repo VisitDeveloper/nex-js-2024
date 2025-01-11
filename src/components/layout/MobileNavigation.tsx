@@ -11,7 +11,7 @@ function MobileNavigation() {
         <>
             <div
                 style={{ backgroundColor: theme === 'dark' ? "rgba(15, 15, 15, 0.6)" : 'rgba(255, 255, 255, 0.32)', border: theme === 'dark' ? '1px solid rgba(39, 39, 39, 0.3)' : '1px solid rgba(255, 255, 255, 0.3)' }}
-                className="backdrop-blur-sm flex justify-between items-center w-[420px] mx-auto rounded-3xl h-[80px] fixed bottom-2 right-0 left-0"
+                className="backdrop-blur-sm flex justify-between items-center w-[420px] mx-auto rounded-3xl h-[80px] fixed bottom-2 right-0 left-0 z-10"
             >
                 <ListSetup className='gap-2 w-full p-4' alignItems='center' direction='row' justifyContent='between'>
 
