@@ -92,7 +92,7 @@ export const scrollReveal = {
 
 //  new generation 
 
-export const containerVariants: Variants = {
+export const introduceVariants: Variants = {
     open: {
         transition: {
             staggerChildren: 0.3, // فاصله بین انیمیشن هر عنصر
@@ -101,13 +101,29 @@ export const containerVariants: Variants = {
     closed: {},
 };
 
-export const itemVariants: Variants = {
+export const introduceitemVariants: Variants = {
     open: {
         opacity: 1,
         y: 0,
         transition: { type: "spring", stiffness: 300, damping: 24 },
     },
     closed: { opacity: 0, y: 20, transition: { duration: 0.2 } },
+};
+
+
+export const threeElementsVariants = {
+    hidden: { opacity: 0 },
+    show: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.3, // زمان‌بندی برای نمایش هر آیتم
+        },
+    },
+};
+
+export const ThreeElementitemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 };
 
 export const fadeAnime: Variants = {
