@@ -1,94 +1,82 @@
 
 'use client';
 import React from 'react';
-import { Div, H1, ListSetup, MainLayout, P, Span } from "components";
-import { Button } from "components/pure-elements/button";
-import { useFetch } from "hooks/useFetch";
-import { useLanguageClient } from "hooks/useLanguageClient";
-import { useState } from "react";
-import { PostService } from "services/post.service";
-import { motion } from 'motion/react';
-import { fadeAnime, photoAnime } from "config/animation";
-import Image from "next/image";
-import { useScroll } from "hooks/useScroll";
+import { MainLayout, ProgressItems, SlideShow } from "components";
+// import { Button } from "components/pure-elements/button";
+// import { useFetch } from "hooks/useFetch";
+// import { useLanguageClient } from "hooks/useLanguageClient";
+// import { useState } from "react";
+// import { PostService } from "services/post.service";
+// import { motion } from 'motion/react';
+// import Image from "next/image";
+// import { useScroll } from "hooks/useScroll";
 import Carousel from "components/pure-elements/carousel-slider";
-import { Typewriter } from "react-simple-typewriter";
-import { useTheme } from "next-themes";
-import { MessageQuestion } from "iconsax-react";
+// import { useTheme } from "next-themes";
+// import { MessageQuestion } from "iconsax-react";
 import Introduce from 'components/specific_elements/main-page/introduce';
 import ThreeElement from 'components/specific_elements/main-page/three-element';
 
 
-const post = new PostService()
+// const post = new PostService()
 
 const Login = ({ params: { lng } }: any) => {
-    const { t } = useLanguageClient(lng, 'auth');
-    const [test] = useState<boolean>(false)
-    const [test2] = useState<boolean>(false);
-    const { theme } = useTheme()
+    // const { t } = useLanguageClient(lng, 'auth');
+    // const [test] = useState<boolean>(false)
+    // const [test2] = useState<boolean>(false);
+    // const { theme } = useTheme()
 
-    const { loading, error } = useFetch<any>({
-        service: post.create.bind(post),
-        options: {
-            headers: {
-                'Token': 'b Tokkkkkkkk',
-                'ds': `${test}`
-            },
-            body: { name: `${test2}`, age: 30 },
-        }
-    })
-
-
-    const { data: dataPost } = useFetch<any>({
-        service: post.read.bind(post),
-        options: {
-            headers: {
-                'tto': 'ertetr'
-            },
-            body: {
-                bg: 'sdas'
-            }
-        }
-    })
+    // const { loading, error } = useFetch<any>({
+    //     service: post.create.bind(post),
+    //     options: {
+    //         headers: {
+    //             'Token': 'b Tokkkkkkkk',
+    //             'ds': `${test}`
+    //         },
+    //         body: { name: `${test2}`, age: 30 },
+    //     }
+    // })
 
 
+    // const { data: dataPost } = useFetch<any>({
+    //     service: post.read.bind(post),
+    //     options: {
+    //         headers: {
+    //             'tto': 'ertetr'
+    //         },
+    //         body: {
+    //             bg: 'sdas'
+    //         }
+    //     }
+    // })
 
 
 
 
-    const [element, controls] = useScroll();
 
 
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        show: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.3, // زمان‌بندی برای نمایش هر آیتم
-            },
-        },
-    };
 
-    const itemVariants = {
-        hidden: { opacity: 0, y: 50 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-    };
+
+
 
     return (
         <>
-            <MainLayout>
+            <MainLayout className='overflow-x-hidden'>
 
                 <Introduce />
 
                 <ThreeElement />
 
+                {/* desktop */}
                 <Carousel />
 
+                {/* mobile */}
+                <SlideShow />
 
 
-                <div className='mt-64 flex flex-row gap-2 px-10'>
+
+
+                {/* <div className='mt-64 flex flex-row gap-2 px-10'>
                     <div className='w-2/5'>
-                        {/* <Image src={} alt='' width={} height={}/>  */}
                         <Image width={500} height={200} src={'/theme.png'} alt="image cover" className="rounded-3xl shadow-lg" />
                     </div>
 
@@ -110,45 +98,13 @@ const Login = ({ params: { lng } }: any) => {
                         </div>
 
                     </div>
-                </div>
+                </div> */}
 
+                <ProgressItems />
 
+                {/* {t("signIn")} */}
 
-
-
-                <motion.div
-                    variants={fadeAnime}
-                    animate={controls}
-                    initial="hidden"
-                    className="grid grid-cols-12 py-10 gap-4 justify-center items-center md:h-52 h-auto bg-miniBackground mt-40 text-black dark:text-white"
-                    ref={element}>
-                    <div className='flex flex-col gap-0 items-center col-span-12 md:col-span-3'>
-                        <div>icon</div>
-                        <div>Years Experience</div>
-                        <div>+6</div>
-
-                    </div>
-                    <div className='flex flex-col gap-0 items-center col-span-12 md:col-span-3' >
-                        <div>icon</div>
-                        <div className=''>Team Members</div>
-                        <div>12</div>
-
-                    </div>
-                    <div className='flex flex-col gap-0 items-center col-span-12 md:col-span-3'>
-                        <div>icon</div>
-                        <div>Clients</div>
-                        <div>+200</div>
-
-                    </div>
-                    <div className='flex flex-col gap-0 items-center col-span-12 md:col-span-3'>
-                        <div>icon</div>
-                        <div>Complete Project</div>
-                        <div>+12</div>
-
-                    </div>
-                </motion.div>
-                {t("signIn")}
-                <div>
+                {/* <div>
                     {loading && <>... loading </>}
                     {dataPost?.map((item: any) => {
                         return (
@@ -158,7 +114,11 @@ const Login = ({ params: { lng } }: any) => {
                         )
                     })}
                     {error && <> Error </>}
-                </div>
+                </div> */}
+
+                {/* <div>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias sequi tempore tenetur ad harum culpa, recusandae dicta dignissimos voluptatibus voluptate accusamus corrupti minus hic atque explicabo laboriosam incidunt dolores nulla.
+                </div> */}
             </MainLayout >
         </>
 

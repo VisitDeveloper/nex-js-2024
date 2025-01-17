@@ -13,16 +13,17 @@ export default function ThreeElement() {
     const { theme } = useTheme()
 
     return (
-        <>
+        <div className='md:mx-10 '>
             <motion.div
                 variants={threeElementsVariants}
                 ref={element2}
                 initial="hidden"
                 animate={controls2}
-                className="flex flex-row gap-10 items-center justify-between w-full px-10 mt-20">
+                className="grid grid-cols-12 gap-10 items-center justify-between mt-28 w-[90%] md:w-full mx-auto">
+
                 <motion.div
                     variants={ThreeElementitemVariants}
-                    className="w-full shadow-lg bg-miniBackground dark:bg-darkBackground px-5 py-5 my-4 rounded-3xl h-[202px]">
+                    className="w-[92%] ml-0 lg:w-full mx-auto shadow-lg bg-miniBackground dark:bg-darkBackground col-span-12 lg:col-span-4 px-5 py-5 my-4 rounded-3xl h-[202px]">
                     <Div
                         id="slideset1"
                     >
@@ -60,25 +61,27 @@ export default function ThreeElement() {
                     </Div>
                 </motion.div>
 
-                <motion.div variants={ThreeElementitemVariants} className="w-full shadow-lg flex flex-col bg-miniBackground dark:bg-darkBackground my-5y px-5 py-2 rounded-3xl ">
+                {/* <motion.div variants={ThreeElementitemVariants}
+                    className="w-[92%] ml-0 lg:w-full mx-auto  shadow-lg flex flex-col bg-miniBackground dark:bg-darkBackground col-span-12 lg:col-span-4 my-5y px-5 py-2 rounded-3xl h-[202px]">
                     <div className='flex flex-row gap-2 items-center mt-4'>
                         <span>
                             <MessageQuestion size="25" className="text-iconColor" />
                         </span>
                         <span className="font-thin text-2xl ">
-                            Who we are ?
+                            Who are we?
                         </span>
 
                     </div>
                     <Span className='w-full h-[2px] dark:bg-slate-700  bg-slate-200 mt-0 mb-2'></Span>
-                    <div className="mb-1 text-justify">
+                    <div className="mb-1 text-justify hyphens-auto	break-words">
                         At Brainwave Education, we specialize in creating inspiring and imaginative stories for children.
                         Our mission is to spark creativity and nurture young minds by
-                        providing engaging content that encourages learning and exploration.
-                        We believe every story has the power to shape a brighter future.
+
                     </div>
-                </motion.div>
-                <motion.div variants={ThreeElementitemVariants} className="w-full shadow-lg items-center justify-center flex flex-row text-2xl text-iconColor bg-miniBackground my-4 px-5 py-5 rounded-3xl h-[202px]">
+                </motion.div> */}
+
+                <motion.div variants={ThreeElementitemVariants}
+                    className="w-[92%] ml-0 lg:w-full mx-auto  shadow-lg items-center justify-center flex flex-row text-2xl text-iconColor bg-miniBackground col-span-12 lg:col-span-4 my-4 px-5 py-5 rounded-3xl h-[202px]">
                     <Typewriter
                         words={["Brainwave Education",
                             "Imagination Unleashed for Every Child.",
@@ -97,6 +100,6 @@ export default function ThreeElement() {
                     />
                 </motion.div>
             </motion.div>
-        </>
+        </div>
     )
 }

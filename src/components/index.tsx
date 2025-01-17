@@ -27,10 +27,13 @@ export { default as ListSetup } from 'components/wrapper-elements/ListSetup';
 export { default as HeaderLayout } from 'components/layout/Header'
 export { default as FooterLayout } from 'components/layout/Footer'
 export { default as MainLayout } from 'components/layout/MainLayout'
-export { default as Copyright } from 'components/layout/Copyright'
 
 // pure-elements 
 export { default as SwitchSimpleTheme } from 'components/pure-elements/switch/index'
 export { default as Button } from 'components/pure-elements/button/index'
-export {default as Card} from 'components/pure-elements/card/index'
-export {default as Carousel} from 'components/pure-elements/carousel-slider/index'
+export { default as Card } from 'components/pure-elements/card/index'
+export { default as Carousel } from 'components/pure-elements/carousel-slider/index'
+
+// specific_elements
+export { default as ProgressItems } from 'components/specific_elements/main-page/progress-items'
+export { default as SlideShow } from 'components/specific_elements/main-page/slide-show'
