@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { animate, motion, useMotionValue } from 'motion/react';
 import { fadeAnime } from 'config/animation';
@@ -24,9 +25,26 @@ export default function Carousel() {
     const [mustFinish, setMustFinish] = useState(false);
     const [rerender, setRerender] = useState(false);
 
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768); // عرض 768 پیکسل برای موبایل
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     useEffect(() => {
         let controls;
-        const finalPosition = -width / 2 - 8; // Changed `let` to `const`
+        const cardWidth = isMobile ? 120 : 200; // عرض کارت بر اساس حالت موبایل یا دسکتاپ
+        const gap = isMobile ? 8 : 16; // فاصله بین کارت‌ها
+        const totalWidth = (cardWidth + gap) * images.length; // محاسبه کل عرض کارت‌ها
+
+        const finalPosition = -totalWidth; // موقعیت نهایی برای انیمیشن
 
         if (mustFinish) {
             controls = animate(xTranslation, [xTranslation.get(), finalPosition], {
@@ -48,19 +66,27 @@ export default function Carousel() {
         }
 
         return controls?.stop;
-    }, [rerender, xTranslation, duration, width, mustFinish]); // Added `mustFinish` to dependencies
+    }, [rerender, xTranslation, duration, width, mustFinish, isMobile]);
 
     return (
-        <>
+        <div
+            className="relative overflow-hidden w-full md:block hidden" // جلوگیری از اسکرول صفحه
+            style={{
+                height: isMobile ? 150 : 300, // ارتفاع متناسب با موبایل و دسکتاپ
+            }}
+        >
             <motion.div
                 variants={fadeAnime}
                 initial="hidden"
                 animate="show"
-                className="pt-40 pb-20"
+                className="pt-20 pb-10"
             >
                 <motion.div
-                    className="absolute left-0 flex gap-4"
-                    style={{ x: xTranslation }}
+                    className="absolute left-0 flex"
+                    style={{
+                        x: xTranslation,
+                        gap: isMobile ? '8px' : '16px', // فاصله بین کارت‌ها
+                    }}
                     ref={ref}
                     onHoverStart={() => {
                         setMustFinish(true);
@@ -72,10 +98,18 @@ export default function Carousel() {
                     }}
                 >
                     {[...images, ...images].map((item, idx) => (
-                        <Card image={`${item}`} key={idx} />
+                        <Card
+                            image={`${item}`}
+                            key={idx}
+                            style={{
+                                width: isMobile ? '120px' : '200px', // تنظیم عرض کارت
+                                flexShrink: 0,
+                            }}
+                        />
                     ))}
                 </motion.div>
             </motion.div>
-        </>
+        </div>
     );
 }
+

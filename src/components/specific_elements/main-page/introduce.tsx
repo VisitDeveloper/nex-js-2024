@@ -8,7 +8,7 @@ import Image from 'next/image';
 export default function Introduce() {
     return (
         <>
-            <ListSetup alignItems="center" direction="row" justifyContent="between" className="gap-4 px-9">
+            <div className='flex lg:flex-row flex-col-reverse items-center justify-between gap-4 mx-10 '>
                 <motion.div
                     initial="closed"
                     animate="open"
@@ -45,12 +45,13 @@ export default function Introduce() {
 
                 <motion.div initial="hidden"
                     animate="show"
-                    variants={photoAnime}>
+                    variants={photoAnime}
+                    className='mx-10'>
 
-                    <Image width={700} height={500} src={'/theme.png'} alt="image cover" className="rounded-3xl shadow-lg" />
+                    <Image width={700} height={500} src={'/theme.png'} alt="image cover" className="rounded-3xl shadow-lg " />
                 </motion.div>
+            </div>
 
-            </ListSetup>
         </>
     )
 }

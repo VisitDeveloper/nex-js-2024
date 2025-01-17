@@ -1,7 +1,7 @@
 import Footer from 'components/elements/footer'
 import ListSetup from 'components/wrapper-elements/ListSetup';
 import Row from 'components/wrapper-elements/Row';
-import { Copyright, Span } from 'components/index';
+import { Span } from 'components/index';
 import React from 'react'
 import Link from 'next/link';
 import { Call, Facebook, Home, InfoCircle, Instagram, Location, MessageEdit, MobileProgramming, NoteText, Send2, Sms, Whatsapp } from 'iconsax-react';
@@ -11,7 +11,7 @@ export default function FooterLayout({ ...props }) {
   return (
     <>
       <Footer {...props} className='mb-24'>
-        <div className=' dark:text-white  bg-miniBackground  text-black h-auto py-8'>
+        <div className=' dark:text-white  bg-miniBackground  text-black h-auto py-8 mx-10 shadow-lg rounded-3xl'>
           <Row className='px-10 gap-4'>
             <div className='md:col-span-4 col-span-12'>
               <ListSetup className='gap-4' alignItems='start' direction='col' justifyContent='start'  >
@@ -131,27 +131,36 @@ export default function FooterLayout({ ...props }) {
             </div>
 
           </Row>
-          <div className='px-10 gap-2 mt-8 flex flex-row-reverse '>
-            <Span>
-              - Social Media
-            </Span>
-            <ListSetup alignItems='center' justifyContent='start' direction='row' className='gap-2'>
-              <div className='cursor-pointer'>
-                <Instagram size="20" className='text-iconColor' />
-              </div>
-              <div className='cursor-pointer'>
-                <Whatsapp size="20" className='text-iconColor' />
-              </div>
-              <div className='cursor-pointer'>
-                <Send2 size="20" className='text-iconColor' />
-              </div>
-              <div className='cursor-pointer'>
-                <Facebook size="20" className='text-iconColor' />
-              </div>
-            </ListSetup>
+
+          <div className='flex flex-col md:flex-row-reverse justify-between items-center '>
+            
+            
+            <div className='px-10 gap-2 mt-8 flex flex-row-reverse '>
+              <Span>
+                - Social Media
+              </Span>
+              <ListSetup alignItems='center' justifyContent='start' direction='row' className='gap-2'>
+                <div className='cursor-pointer'>
+                  <Instagram size="20" className='text-iconColor' />
+                </div>
+                <div className='cursor-pointer'>
+                  <Whatsapp size="20" className='text-iconColor' />
+                </div>
+                <div className='cursor-pointer'>
+                  <Send2 size="20" className='text-iconColor' />
+                </div>
+                <div className='cursor-pointer'>
+                  <Facebook size="20" className='text-iconColor' />
+                </div>
+              </ListSetup>
+            </div>
+            <div className='px-10 gap-2 mt-8 text-xs font-bold'>
+              © 2025 Stroy Reader. All rights reserved.
+            </div>
           </div>
+
+
         </div>
-        <Copyright />
 
       </Footer>
 

@@ -55,12 +55,12 @@ export default function HeaderLayout({ ...props }) {
   const { theme } = useTheme()
   return (
     <>
-      <Div className="mb-[100px] z-50">
+      <Div className="mb-[100px] z-50 rounded-3xl mx-10 hidden md:block">
         <Header {...props}
-          style={{ backgroundColor: theme === 'dark' ? "rgba(15, 15, 15, 0.6)" : 'rgba(255, 255, 255, 0.32)' }}
+          style={{ backgroundColor: theme === 'dark' ? "rgba(15, 15, 15, 0.6)" : 'rgba(255, 255, 255, 0.32)', border: theme === 'dark' ? '1px solid #2fe99f' : '1px solid #FF8A65' }}
 
-          className="backdrop-blur-sm fixed top-0 right-0 w-[100%] h-[60px] flex
-         justify-between items-center px-10 z-50">
+          className="backdrop-blur-sm fixed top-0 right-0 left-0 rounded-3xl mt-2 h-[70px] flex
+         justify-between items-center px-10 z-50  mx-10">
           <ListSetup alignItems="center" direction="row" justifyContent="start" className="gap-5">
             <span className="text-4xl font-thin">
               Logo |
