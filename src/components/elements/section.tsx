@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{JSX} from 'react';
 
 interface SectionProps extends React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> {
     children?: React.ReactNode | React.ReactElement | JSX.Element

@@ -8,7 +8,6 @@ export { default as Footer } from "./elements/footer";
 export { default as Header } from "./elements/header";
 export { default as P } from "components/elements/p";
 export { default as Span } from "./elements/span";
-export { default as Img } from "./elements/img";
 export { default as Div } from "./elements/div";
 export { default as OL } from "./elements/ol";
 export { default as UL } from "./elements/ul";
@@ -27,4 +26,14 @@ export { default as ListSetup } from 'components/wrapper-elements/ListSetup';
 // layout 
 export { default as HeaderLayout } from 'components/layout/Header'
 export { default as FooterLayout } from 'components/layout/Footer'
-export { default as MainLayout } from 'components/layout/MainLayout' 
+export { default as MainLayout } from 'components/layout/MainLayout'
+
+// pure-elements 
+export { default as SwitchSimpleTheme } from 'components/pure-elements/switch/index'
+export { default as Button } from 'components/pure-elements/button/index'
+export { default as Card } from 'components/pure-elements/card/index'
+export { default as Carousel } from 'components/pure-elements/carousel-slider/index'
+
+// specific_elements
+export { default as ProgressItems } from 'components/specific_elements/main-page/progress-items'
+export { default as SlideShow } from 'components/specific_elements/main-page/slide-show'
