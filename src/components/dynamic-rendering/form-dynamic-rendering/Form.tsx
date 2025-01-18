@@ -1,6 +1,5 @@
-import React from "react";
-import {Row} from "components/index";
-
+import React, { JSX } from 'react';
+import { Row } from "components/index";
 interface FormProps extends React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> {
   children?: React.ReactNode | React.ReactElement | JSX.Element;
 }

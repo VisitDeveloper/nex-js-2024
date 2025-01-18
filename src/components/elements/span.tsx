@@ -1,14 +1,14 @@
-import React from 'react';
+import React,{JSX} from 'react';
 
 interface SpanProps extends React.HTMLProps<HTMLSpanElement> {
-    children?: React.ReactNode | React.ReactElement | JSX.Element
+  children?: React.ReactNode | React.ReactElement | JSX.Element
 }
 
-function Span({children ,...props}: SpanProps) {
-    return (
-      <span {...props}>
-          {children}
-      </span>
-    )
-  }
+function Span({ children, ...props }: SpanProps) {
+  return (
+    <span {...props}>
+      {children}
+    </span>
+  )
+}
 export default Span

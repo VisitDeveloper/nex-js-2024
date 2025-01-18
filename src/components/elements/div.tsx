@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{JSX} from 'react';
 
 interface DivProps extends React.HTMLProps<HTMLDivElement> {
   children?: React.ReactNode  | React.ReactElement | JSX.Element

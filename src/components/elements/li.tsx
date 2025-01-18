@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{JSX} from 'react';
 
 interface LiProps extends React.HTMLProps<HTMLLIElement> {
     children?: React.ReactNode | React.ReactElement | JSX.Element
@@ -11,5 +11,4 @@ function LI({children ,...props}: LiProps) {
       </li>
     )
   }
-// eslint-disable-next-line react-refresh/only-export-components
 export default LI
