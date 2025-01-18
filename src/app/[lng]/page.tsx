@@ -2,6 +2,9 @@
 'use client';
 import React from 'react';
 import { MainLayout, ProgressItems, SlideShow } from "components";
+import Carousel from "components/pure-elements/carousel-slider";
+import Introduce from 'components/specific_elements/main-page/introduce';
+import ThreeElement from 'components/specific_elements/main-page/three-element';
 // import { Button } from "components/pure-elements/button";
 // import { useFetch } from "hooks/useFetch";
 // import { useLanguageClient } from "hooks/useLanguageClient";
@@ -10,16 +13,13 @@ import { MainLayout, ProgressItems, SlideShow } from "components";
 // import { motion } from 'motion/react';
 // import Image from "next/image";
 // import { useScroll } from "hooks/useScroll";
-import Carousel from "components/pure-elements/carousel-slider";
 // import { useTheme } from "next-themes";
 // import { MessageQuestion } from "iconsax-react";
-import Introduce from 'components/specific_elements/main-page/introduce';
-import ThreeElement from 'components/specific_elements/main-page/three-element';
 
 
 // const post = new PostService()
-
-const Login = ({ params: { lng } }: any) => {
+// { params: { lng } }: any
+const Login = () => {
     // const { t } = useLanguageClient(lng, 'auth');
     // const [test] = useState<boolean>(false)
     // const [test2] = useState<boolean>(false);
