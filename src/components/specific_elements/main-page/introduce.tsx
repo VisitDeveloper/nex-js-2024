@@ -8,7 +8,7 @@ import Image from 'next/image';
 export default function Introduce() {
     return (
         <>
-            <div className='flex lg:flex-row flex-col-reverse items-center justify-between gap-4 mx-10 '>
+            <div className='flex lg:flex-row flex-col-reverse items-center justify-between gap-4 mx-10 mt-10'>
                 <motion.div
                     initial="closed"
                     animate="open"

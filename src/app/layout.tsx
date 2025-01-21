@@ -1,23 +1,24 @@
 'use client'
 import React from 'react';
-import "./../globals.css";
+import "./globals.css";
 import { ThemeProvider } from "provider/ThemeProvider";
 import { dir } from "i18next";
 import { AnimatePresence } from "motion/react";
-import { DynamicObjectLiterals } from "components";
+import { DynamicObjectLiterals, MainLayout } from "components";
 
 export default function RootLayout({
   children,
-  params: { lng },
+  // params: { lng },
 }: Readonly<{
   children: React.ReactNode;
-  params: {
-    lng: string
-  }
+  // params: {
+  //   lng: string
+  // }
 }>) {
 
+  // lang={lng} dir={dir(lng)}
   return (
-    <html lang={lng} dir={dir(lng)}>
+    <html lang='en' dir='ltr'>
       <body
         className={`antialiased bg-mainBackground overflow-x-hidden`}
       >
@@ -41,7 +42,10 @@ export default function RootLayout({
               }}
               className="bg-mainBackground"> */}
             {/* </motion.div> */}
-            {children}
+            <MainLayout className='overflow-x-hidden'>
+
+              {children}
+            </MainLayout>
           </AnimatePresence>
           <DynamicObjectLiterals type='FooterLayout' />
         </ThemeProvider>

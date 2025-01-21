@@ -13,7 +13,8 @@ const config: Config = {
 				mainBackground: 'hsl(var(--background-main))',
 				miniBackground: 'hsl(var(--background-mini))',
 
-				iconColor : 'hsl(var(--icon-color))', 
+				iconColor: 'hsl(var(--icon-color))',
+				itemFormBackground: 'hsl(var(--background-form-item))',
 
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
@@ -63,7 +64,7 @@ const config: Config = {
 			},
 			backgroundImage: {
 				'hero': "url('/main-bg.jpg')",
-				'company' : "url('/theme.png')"
+				'company': "url('/theme.png')"
 			},
 			boxShadow: {
 				'normal': '0 0 5px #31ea9f',
