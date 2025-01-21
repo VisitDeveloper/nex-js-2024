@@ -5,12 +5,12 @@ import React, { JSX } from 'react'
 import { Home, InfoCircle, MessageEdit, MobileProgramming, NoteText } from 'iconsax-react';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
-import { useParams } from 'next/navigation';
+// import { useParams } from 'next/navigation';
 
 
 
 
-interface RouteHeader {
+export interface RouteHeader {
   name: string;
   route: string;
   icon: React.ReactElement | JSX.Element | React.ReactNode;
@@ -19,34 +19,34 @@ interface RouteHeader {
 
 
 export default function HeaderLayout({ ...props }) {
-  const params = useParams()
+  // const params = useParams()
 
   const ArrayRouteHeader: Array<RouteHeader> = [
     {
       name: 'Home',
-      route: `/en`,
+      route: `/`,
       icon: <Home size="20" className="text-iconColor" />
     },
     {
       name: 'Weblog',
-      route: `/en`,
+      route: `/`,
       icon: <MessageEdit size="20" className='text-iconColor' />
     },
     {
       name: 'Applications',
-      route: `/en`,
+      route: `/`,
       icon: <MobileProgramming size="20" className='text-iconColor' />
 
     },
     {
       name: 'About',
-      route: `/${params.lng}/about`,
+      route: `/about`,
       icon: <InfoCircle size="20" className='text-iconColor' />
 
     },
     {
       name: 'Contact',
-      route: `/en`,
+      route: `/contact-us`,
       icon: <NoteText size="20" className='text-iconColor' />
 
     },

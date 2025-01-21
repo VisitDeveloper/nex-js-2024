@@ -1,10 +1,10 @@
 
 'use client';
 import React from 'react';
-import { MainLayout, ProgressItems, SlideShow } from "components";
-import Carousel from "components/pure-elements/carousel-slider";
-import Introduce from 'components/specific_elements/main-page/introduce';
-import ThreeElement from 'components/specific_elements/main-page/three-element';
+import { MainLayout, ProgressItems, SlideShow , Carousel , Introduce , ThreeElement } from "components";
+// import Carousel from "components/pure-elements/carousel-slider";
+// import Introduce from 'components/specific_elements/main-page/introduce';
+// import ThreeElement from 'components/specific_elements/main-page/three-element';
 // import { Button } from "components/pure-elements/button";
 // import { useFetch } from "hooks/useFetch";
 // import { useLanguageClient } from "hooks/useLanguageClient";
@@ -60,7 +60,7 @@ const Login = () => {
 
     return (
         <>
-            <MainLayout className='overflow-x-hidden'>
+            {/* <MainLayout className='overflow-x-hidden'> */}
 
                 <Introduce />
 
@@ -119,7 +119,7 @@ const Login = () => {
                 {/* <div>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias sequi tempore tenetur ad harum culpa, recusandae dicta dignissimos voluptatibus voluptate accusamus corrupti minus hic atque explicabo laboriosam incidunt dolores nulla.
                 </div> */}
-            </MainLayout >
+            {/* </MainLayout > */}
         </>
 
     );
