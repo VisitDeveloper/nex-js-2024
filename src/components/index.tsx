@@ -33,7 +33,14 @@ export { default as SwitchSimpleTheme } from 'components/pure-elements/switch/in
 export { default as Button } from 'components/pure-elements/button/index'
 export { default as Card } from 'components/pure-elements/card/index'
 export { default as Carousel } from 'components/pure-elements/carousel-slider/index'
-
+export { default as Input } from 'components/pure-elements/input/index'
+export { default as Textarea } from 'components/pure-elements/textarea/index'
+export { default as Label } from 'components/pure-elements/label/index'
 // specific_elements
 export { default as ProgressItems } from 'components/specific_elements/main-page/progress-items'
 export { default as SlideShow } from 'components/specific_elements/main-page/slide-show'
+export { default as Introduce } from 'components/specific_elements/main-page/introduce'
+export { default as ThreeElement } from 'components/specific_elements/main-page/three-element'
+export { default as RightHalfContact } from 'components/specific_elements/contact-us/right-half'
+export { default as LeftHalfContact } from 'components/specific_elements/contact-us/left-half'
+export { default as ContactForm } from 'components/specific_elements/contact-us/contact-form'
