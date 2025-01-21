@@ -8,7 +8,7 @@ html {
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  
+
 }
 
 
@@ -26,12 +26,12 @@ body {
   /* also we can use tailwind css in colors */
   :root {
 
-    --background-main : 	0, 0%, 100%;
-    --background-mini : 240, 11%, 96%;
+    --background-main: 0, 0%, 100%;
+    --background-mini: 240, 11%, 96%;
 
-    --icon-color : 14, 100%, 70%;
-
-
+    --icon-color: 14, 100%, 70%;
+    --background-form-item: 240, 3%, 86%;
+    
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -61,10 +61,11 @@ body {
 
   .dark {
 
-    --background-main : 	0, 0%, 7%;
-    --background-mini : 0, 0%, 10%;
-    
-    --icon-color : 156, 81%, 55%;
+    --background-main: 0, 0%, 7%;
+    --background-mini: 0, 0%, 10%;
+
+    --icon-color: 156, 81%, 55%;
+    --background-form-item: 0, 0%, 19%;
 
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
@@ -104,14 +105,14 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.header-glass-dark{
-/* From https://css.glass */
-background: rgba(39, 39, 39, 1);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
-border: 1px solid rgba(39, 39, 39, 0.3);
+.header-glass-dark {
+  /* From https://css.glass */
+  background: rgba(39, 39, 39, 1);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(39, 39, 39, 0.3);
 }
 
 @layer base {
@@ -142,13 +143,35 @@ border: 1px solid rgba(39, 39, 39, 0.3);
 }
 
 @keyframes autoplay2 {
-  0% {top: 100%}
-  4% {top: 0%}
-  33.33% {top: 0%}
-  37.33% {top: -100%}
-  100% {top: -100%}
+  0% {
+    top: 100%
+  }
+
+  4% {
+    top: 0%
+  }
+
+  33.33% {
+    top: 0%
+  }
+
+  37.33% {
+    top: -100%
+  }
+
+  100% {
+    top: -100%
+  }
 }
 
-#slideset1 > *:nth-child(1) {animation-delay: 0s}
-#slideset1 > *:nth-child(2) {animation-delay: 4s}
-#slideset1 > *:nth-child(3) {animation-delay: 8s}
+#slideset1>*:nth-child(1) {
+  animation-delay: 0s
+}
+
+#slideset1>*:nth-child(2) {
+  animation-delay: 4s
+}
+
+#slideset1>*:nth-child(3) {
+  animation-delay: 8s
+}

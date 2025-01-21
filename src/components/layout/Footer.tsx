@@ -5,9 +5,45 @@ import { Span } from 'components/index';
 import React from 'react'
 import Link from 'next/link';
 import { Call, Facebook, Home, InfoCircle, Instagram, Location, MessageEdit, MobileProgramming, NoteText, Send2, Sms, Whatsapp } from 'iconsax-react';
+import { RouteHeader } from './Header';
+
+
 
 
 export default function FooterLayout({ ...props }) {
+
+  const ArrayRouteFooter: Array<RouteHeader> = [
+    {
+      name: 'Home',
+      route: `/`,
+      icon: <Home size="20" className="text-iconColor" />
+    },
+    {
+      name: 'Weblog',
+      route: `/`,
+      icon: <MessageEdit size="20" className='text-iconColor' />
+    },
+    {
+      name: 'Applications',
+      route: `/`,
+      icon: <MobileProgramming size="20" className='text-iconColor' />
+
+    },
+    {
+      name: 'About',
+      route: `/about`,
+      icon: <InfoCircle size="20" className='text-iconColor' />
+
+    },
+    {
+      name: 'Contact',
+      route: '/contact-us',
+      icon: <NoteText size="20" className='text-iconColor' />
+
+    },
+
+  ]
+
   return (
     <>
       <Footer {...props} className='mb-24'>
@@ -64,7 +100,23 @@ export default function FooterLayout({ ...props }) {
                 </div>
                 <Span className='w-full h-[2px] dark:bg-slate-700  bg-slate-200  mt-[-18px]'></Span>
 
-                <Link href={`/en`} className="flex flex-row items-center gap-2">
+                {ArrayRouteFooter.length !== 0 && ArrayRouteFooter.map((item: RouteHeader) => {
+                  return (
+                    <>
+                      <Link href={`${item.route}`} className="flex flex-row items-center gap-2">
+                        {item.icon}
+                        <div className="flex flex-col">
+                          <span className="relative group">
+                            {item.name}
+                            <span className="absolute left-0 bottom-0 h-[1px] w-0 bg-iconColor transition-all duration-500 group-hover:w-full" />
+                          </span>
+                        </div>
+                      </Link>
+                    </>
+                  )
+                })}
+
+                {/* <Link href={`/`} className="flex flex-row items-center gap-2">
                   <Home size="20" className="text-iconColor" />
                   <div className="flex flex-col">
                     <span className="relative group">
@@ -74,7 +126,7 @@ export default function FooterLayout({ ...props }) {
                   </div>
                 </Link>
 
-                <Link href={`/en`} className="flex flex-row items-center gap-2">
+                <Link href={`/`} className="flex flex-row items-center gap-2">
                   <MessageEdit size="20" className='text-iconColor' />
                   <div className="flex flex-col">
                     <span className="relative group">
@@ -84,7 +136,7 @@ export default function FooterLayout({ ...props }) {
                   </div>
                 </Link>
 
-                <Link href={`/en`} className="flex flex-row items-center gap-2">
+                <Link href={`/`} className="flex flex-row items-center gap-2">
                   <MobileProgramming size="20" className='text-iconColor' />
                   <div className="flex flex-col">
                     <span className="relative group">
@@ -94,7 +146,7 @@ export default function FooterLayout({ ...props }) {
                   </div>
                 </Link>
 
-                <Link href={`/en`} className="flex flex-row items-center gap-2">
+                <Link href={`/about`} className="flex flex-row items-center gap-2">
                   <InfoCircle size="20" className='text-iconColor' />
                   <div className="flex flex-col">
                     <span className="relative group">
@@ -104,7 +156,7 @@ export default function FooterLayout({ ...props }) {
                   </div>
                 </Link>
 
-                <Link href={`/en`} className="flex flex-row items-center gap-2">
+                <Link href={`/`} className="flex flex-row items-center gap-2">
                   <NoteText size="20" className='text-iconColor' />
                   <div className="flex flex-col">
                     <span className="relative group">
@@ -112,7 +164,7 @@ export default function FooterLayout({ ...props }) {
                       <span className="absolute left-0 bottom-0 h-[1px] w-0 bg-iconColor transition-all duration-500 group-hover:w-full" />
                     </span>
                   </div>
-                </Link>
+                </Link> */}
 
               </ListSetup>
 
@@ -133,8 +185,8 @@ export default function FooterLayout({ ...props }) {
           </Row>
 
           <div className='flex flex-col md:flex-row-reverse justify-between items-center '>
-            
-            
+
+
             <div className='px-10 gap-2 mt-8 flex flex-row-reverse '>
               <Span>
                 - Social Media
