@@ -11,6 +11,7 @@ import { useTheme } from 'next-themes';
 
 
 export interface RouteHeader {
+  id:number;
   name: string;
   route: string;
   icon: React.ReactElement | JSX.Element | React.ReactNode;
@@ -23,28 +24,33 @@ export default function HeaderLayout({ ...props }) {
 
   const ArrayRouteHeader: Array<RouteHeader> = [
     {
+      id:0,
       name: 'Home',
       route: `/`,
       icon: <Home size="20" className="text-iconColor" />
     },
     {
+      id:1,
       name: 'Weblog',
       route: `/`,
       icon: <MessageEdit size="20" className='text-iconColor' />
     },
     {
+      id:2,
       name: 'Applications',
       route: `/`,
       icon: <MobileProgramming size="20" className='text-iconColor' />
 
     },
     {
+      id:3,
       name: 'About',
       route: `/about`,
       icon: <InfoCircle size="20" className='text-iconColor' />
 
     },
     {
+      id:4,
       name: 'Contact',
       route: `/contact-us`,
       icon: <NoteText size="20" className='text-iconColor' />
@@ -55,7 +61,8 @@ export default function HeaderLayout({ ...props }) {
   const { theme } = useTheme()
   return (
     <>
-      <Div className="mb-[100px] z-50 rounded-3xl mx-10 hidden md:block">
+    {/* mb-[100px] */}
+      <Div className=" z-50 rounded-3xl mx-10 hidden md:block">
         <Header {...props}
           style={{ backgroundColor: theme === 'dark' ? "rgba(15, 15, 15, 0.6)" : 'rgba(255, 255, 255, 0.32)', border: theme === 'dark' ? '1px solid #2fe99f' : '1px solid #FF8A65' }}
 
@@ -69,7 +76,7 @@ export default function HeaderLayout({ ...props }) {
             {ArrayRouteHeader.map((item: RouteHeader) => {
               return (
                 <>
-                  <Link href={`${item.route}`} key={item.name} className="flex flex-row items-center gap-2">
+                  <Link href={`${item.route}`} key={item.id} className="flex flex-row items-center gap-2">
                     {item.icon}
                     <div className="flex flex-col">
                       <span className="relative group  text-sm">

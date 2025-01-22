@@ -36,6 +36,8 @@ export { default as Carousel } from 'components/pure-elements/carousel-slider/in
 export { default as Input } from 'components/pure-elements/input/index'
 export { default as Textarea } from 'components/pure-elements/textarea/index'
 export { default as Label } from 'components/pure-elements/label/index'
+
+
 // specific_elements
 export { default as ProgressItems } from 'components/specific_elements/main-page/progress-items'
 export { default as SlideShow } from 'components/specific_elements/main-page/slide-show'
@@ -44,3 +46,6 @@ export { default as ThreeElement } from 'components/specific_elements/main-page/
 export { default as RightHalfContact } from 'components/specific_elements/contact-us/right-half'
 export { default as LeftHalfContact } from 'components/specific_elements/contact-us/left-half'
 export { default as ContactForm } from 'components/specific_elements/contact-us/contact-form'
+export { default as OurTeam } from 'components/specific_elements/main-page/our-team'
+export { default as WhoWeAre } from 'components/specific_elements/main-page/who-we-are'
+export { default as TextSlider } from 'components/specific_elements/main-page/text-slider'

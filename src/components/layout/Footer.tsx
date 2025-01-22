@@ -4,38 +4,41 @@ import Row from 'components/wrapper-elements/Row';
 import { Span } from 'components/index';
 import React from 'react'
 import Link from 'next/link';
-import { Call, Facebook, Home, InfoCircle, Instagram, Location, MessageEdit, MobileProgramming, NoteText, Send2, Sms, Whatsapp } from 'iconsax-react';
+import { Call, Clock, Facebook, Home, InfoCircle, Instagram, Location, MessageEdit, MobileProgramming, NoteText, Send2, Sms, Whatsapp } from 'iconsax-react';
 import { RouteHeader } from './Header';
-
-
 
 
 export default function FooterLayout({ ...props }) {
 
   const ArrayRouteFooter: Array<RouteHeader> = [
     {
+      id: 0,
       name: 'Home',
       route: `/`,
       icon: <Home size="20" className="text-iconColor" />
     },
     {
+      id: 1,
       name: 'Weblog',
       route: `/`,
       icon: <MessageEdit size="20" className='text-iconColor' />
     },
     {
+      id: 2,
       name: 'Applications',
       route: `/`,
       icon: <MobileProgramming size="20" className='text-iconColor' />
 
     },
     {
+      id: 3,
       name: 'About',
       route: `/about`,
       icon: <InfoCircle size="20" className='text-iconColor' />
 
     },
     {
+      id: 4,
       name: 'Contact',
       route: '/contact-us',
       icon: <NoteText size="20" className='text-iconColor' />
@@ -90,6 +93,18 @@ export default function FooterLayout({ ...props }) {
                   </span>
                 </ListSetup>
 
+                <ListSetup direction='col' justifyContent='start' alignItems='start'>
+                  <ListSetup direction='row' justifyContent='start' alignItems='center' className='gap-2'>
+                    <Clock size="20" className='text-iconColor' />
+                    <div className='text-lg '>
+                      Working-Hours
+                    </div>
+                  </ListSetup>
+                  <span className='text-sm text-[#8d8d8e]'>
+                    Mon - Fri 9:00 PM - 17:00 AM
+                  </span>
+                </ListSetup>
+
               </ListSetup>
             </div>
 
@@ -103,7 +118,7 @@ export default function FooterLayout({ ...props }) {
                 {ArrayRouteFooter.length !== 0 && ArrayRouteFooter.map((item: RouteHeader) => {
                   return (
                     <>
-                      <Link href={`${item.route}`} className="flex flex-row items-center gap-2">
+                      <Link href={`${item.route}`} key={item.id} className="flex flex-row items-center gap-2">
                         {item.icon}
                         <div className="flex flex-col">
                           <span className="relative group">
@@ -116,55 +131,6 @@ export default function FooterLayout({ ...props }) {
                   )
                 })}
 
-                {/* <Link href={`/`} className="flex flex-row items-center gap-2">
-                  <Home size="20" className="text-iconColor" />
-                  <div className="flex flex-col">
-                    <span className="relative group">
-                      Home
-                      <span className="absolute left-0 bottom-0 h-[1px] w-0 bg-iconColor transition-all duration-500 group-hover:w-full" />
-                    </span>
-                  </div>
-                </Link>
-
-                <Link href={`/`} className="flex flex-row items-center gap-2">
-                  <MessageEdit size="20" className='text-iconColor' />
-                  <div className="flex flex-col">
-                    <span className="relative group">
-                      Weblog
-                      <span className="absolute left-0 bottom-0 h-[1px] w-0 bg-iconColor transition-all duration-500 group-hover:w-full" />
-                    </span>
-                  </div>
-                </Link>
-
-                <Link href={`/`} className="flex flex-row items-center gap-2">
-                  <MobileProgramming size="20" className='text-iconColor' />
-                  <div className="flex flex-col">
-                    <span className="relative group">
-                      Applications
-                      <span className="absolute left-0 bottom-0 h-[1px] w-0 bg-iconColor transition-all duration-500 group-hover:w-full" />
-                    </span>
-                  </div>
-                </Link>
-
-                <Link href={`/about`} className="flex flex-row items-center gap-2">
-                  <InfoCircle size="20" className='text-iconColor' />
-                  <div className="flex flex-col">
-                    <span className="relative group">
-                      About
-                      <span className="absolute left-0 bottom-0 h-[1px] w-0 bg-iconColor transition-all duration-500 group-hover:w-full" />
-                    </span>
-                  </div>
-                </Link>
-
-                <Link href={`/`} className="flex flex-row items-center gap-2">
-                  <NoteText size="20" className='text-iconColor' />
-                  <div className="flex flex-col">
-                    <span className="relative group">
-                      Contact
-                      <span className="absolute left-0 bottom-0 h-[1px] w-0 bg-iconColor transition-all duration-500 group-hover:w-full" />
-                    </span>
-                  </div>
-                </Link> */}
 
               </ListSetup>
 
@@ -207,7 +173,7 @@ export default function FooterLayout({ ...props }) {
               </ListSetup>
             </div>
             <div className='px-10 gap-2 mt-8 text-xs font-bold'>
-              © 2025 Stroy Reader. All rights reserved.
+              © 2025 Brainwave. All rights reserved.
             </div>
           </div>
 
