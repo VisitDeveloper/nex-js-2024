@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
 import { threeElementsVariants, ThreeElementitemVariants } from 'config/animation'
 import { Div, H1, P, Span } from 'components';
@@ -7,26 +7,43 @@ import { useScroll } from 'hooks/useScroll';
 import { MessageQuestion } from 'iconsax-react';
 import { Typewriter } from 'react-simple-typewriter';
 import { useTheme } from 'next-themes';
+import ReactTextTransition, { presets } from "react-text-transition";
+import getRandomNumber from "tools/getRandomNumber";
 
 export default function ThreeElement() {
     const [element2, controls2] = useScroll();
     const { theme } = useTheme()
 
-    return (
-        <div className='md:mx-10 '>
-            <motion.div
-                variants={threeElementsVariants}
-                ref={element2}
-                initial="hidden"
-                animate={controls2}
-                className="grid grid-cols-12 gap-10 items-center justify-between mt-28 w-[90%] md:w-full mx-auto">
+    const texts = [
+        "Mental",
+        "Scalable",
+        "Creative",
+        "Special",
+    ];
 
-                <motion.div
-                    variants={ThreeElementitemVariants}
-                    className="w-[92%] ml-0 lg:w-full mx-auto shadow-lg bg-miniBackground dark:bg-darkBackground col-span-12 lg:col-span-4 px-5 py-5 my-4 rounded-3xl h-[202px]">
-                    <Div
-                        id="slideset1"
-                    >
+    const [textIndex, setTextIndex] = useState<number>(0);
+
+    useEffect(() => {
+        let interval = setInterval(() => {
+            // setRandomIndex(getRandomNumber(0, numbers.length));
+            setTextIndex(getRandomNumber(0, texts.length));
+            // setParagraphIndex(getRandomNumber(0, paragraphs.length));
+            // setTextFastIndex(getRandomNumber(0, paragraphs.length));
+        }, 4000);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
+
+    return (
+        <div className='mt-10 lg:mt-20'>
+            <motion.div variants={threeElementsVariants}
+                animate={"show"}
+                initial="hidden" className='lg:mx-5 mx-10 flex flex-col gap-4 lg:flex-row lg:gap-2 my-5 '>
+
+                <motion.div variants={ThreeElementitemVariants} className='w-full rounded-3xl bg-miniBackground shadow-lg mx-1 h-[202px]'>
+                    <Div id='slideset1'>
                         <Div>
                             <div className='font-thin text-lg'>
                                 Address
@@ -61,33 +78,27 @@ export default function ThreeElement() {
                     </Div>
                 </motion.div>
 
-                {/* <motion.div variants={ThreeElementitemVariants}
-                    className="w-[92%] ml-0 lg:w-full mx-auto  shadow-lg flex flex-col bg-miniBackground dark:bg-darkBackground col-span-12 lg:col-span-4 my-5y px-5 py-2 rounded-3xl h-[202px]">
-                    <div className='flex flex-row gap-2 items-center mt-4'>
-                        <span>
-                            <MessageQuestion size="25" className="text-iconColor" />
-                        </span>
-                        <span className="font-thin text-2xl ">
-                            Who are we?
-                        </span>
+                <motion.div variants={ThreeElementitemVariants} className='w-full rounded-3xl bg-miniBackground shadow-lg mx-1 flex flw-row  gap-1 items-center justify-center h-[202px] px-2'>
+                    <section className="inline">
+                        Create
+                        <ReactTextTransition
+                            springConfig={presets.gentle}
+                            style={{ margin: "0 6px" }}
+                            className='text-iconColor font-bold'
+                            inline
+                        >
+                            {texts[textIndex]}
+                        </ReactTextTransition>
+                        Innovation
+                    </section>
+                </motion.div>
 
-                    </div>
-                    <Span className='w-full h-[2px] dark:bg-slate-700  bg-slate-200 mt-0 mb-2'></Span>
-                    <div className="mb-1 text-justify hyphens-auto	break-words">
-                        At Brainwave Education, we specialize in creating inspiring and imaginative stories for children.
-                        Our mission is to spark creativity and nurture young minds by
-
-                    </div>
-                </motion.div> */}
-
-                <motion.div variants={ThreeElementitemVariants}
-                    className="w-[92%] ml-0 lg:w-full mx-auto  shadow-lg items-center justify-center flex flex-row text-2xl text-iconColor bg-miniBackground col-span-12 lg:col-span-4 my-4 px-5 py-5 rounded-3xl h-[202px]">
+                <motion.div variants={ThreeElementitemVariants} className='w-full rounded-3xl bg-miniBackground shadow-lg mx-1 items-center justify-center flex flex-row text-2xl text-iconColor h-[202px]'>
                     <Typewriter
                         words={["Brainwave Education",
                             "Imagination Unleashed for Every Child.",
                             "Creating Stories, Shaping Futures.",
                             "Fueling Young Dreams with Every Tale.",
-                            "Building a Brighter Tomorrow Through Stories."
                         ]}
                         loop={0}
                         cursor
