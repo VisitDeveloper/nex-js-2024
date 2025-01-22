@@ -175,3 +175,13 @@ body {
 #slideset1>*:nth-child(3) {
   animation-delay: 8s
 }
+
+.background-first {
+  background: rgb(255,138,102);
+background: linear-gradient(29deg, rgba(255,138,102,1) 4%, rgba(47,233,159,1) 100%);
+}
+
+.back-dark{
+  background: rgb(63,94,251);
+background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+}

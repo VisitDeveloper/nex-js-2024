@@ -1,11 +1,13 @@
 
-import { Button, ListSetup } from 'components'
+import { Button } from 'components'
 import React from 'react'
 import { motion } from 'motion/react'
 import { introduceVariants, fadeAnime, introduceitemVariants, photoAnime } from 'config/animation'
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function Introduce() {
+    const router= useRouter()
     return (
         <>
             <div className='flex lg:flex-row flex-col-reverse items-center justify-between gap-4 mx-10 mt-10'>
@@ -34,7 +36,7 @@ export default function Introduce() {
                     <motion.div className="pl-3 mb-10 w-[100px]" whileTap={{
                         scale: 1.1
                     }}>
-                        <Button variant={"secondary"} size={"sm"}> Contact</Button>
+                        <Button variant={"secondary"} size={"sm"} onClick={() => router.push('/contact-us')}> Contact</Button>
                     </motion.div>
 
 

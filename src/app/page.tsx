@@ -1,7 +1,9 @@
 
 'use client';
 import React from 'react';
-import { MainLayout, ProgressItems, SlideShow , Carousel , Introduce , ThreeElement } from "components";
+import { ProgressItems, SlideShow, Carousel, Introduce, ThreeElement, Span, OurTeam, WhoWeAre, TextSlider } from "components";
+import Image from 'next/image';
+import { MessageQuestion } from 'iconsax-react';
 // import Carousel from "components/pure-elements/carousel-slider";
 // import Introduce from 'components/specific_elements/main-page/introduce';
 // import ThreeElement from 'components/specific_elements/main-page/three-element';
@@ -60,51 +62,45 @@ const Login = () => {
 
     return (
         <>
-            {/* <MainLayout className='overflow-x-hidden'> */}
+            <div className='mx-0 lg:mx-10 lg:rounded-3xl shadow-lg  lg:mt-2  h-[98vh]  back-dark '>
+                <div className='invisible'>
+                    t
+                </div>
+                <div className='hidden lg:block'>
+                    <ThreeElement />
+                </div>
 
-                <Introduce />
+                <div className='flex flex-col gap-4 justify-center items-center lg:h-auto h-full'>
+                    <TextSlider />
 
+                </div>
+            </div>
+
+
+            <div className='lg:hidden block'>
                 <ThreeElement />
+            </div>
 
-                {/* desktop */}
-                <Carousel />
-
-                {/* mobile */}
-                <SlideShow />
+            <ProgressItems />
 
 
+            <Introduce />
+            {/* desktop */}
+            <Carousel />
+
+            {/* mobile */}
+            <SlideShow />
 
 
-                {/* <div className='mt-64 flex flex-row gap-2 px-10'>
-                    <div className='w-2/5'>
-                        <Image width={500} height={200} src={'/theme.png'} alt="image cover" className="rounded-3xl shadow-lg" />
-                    </div>
+            {/* <ProgressItems /> */}
 
-                    <div className='flex flex-col gap-4 w-3/5'>
-                        <div className='flex flex-row gap-2 items-center mt-4 w-full'>
-                            <span>
-                                <MessageQuestion size="25" className="text-iconColor" />
-                            </span>
-                            <span className="font-thin text-2xl text-black dark:text-white">
-                                Who we are ?
-                            </span>
-                        </div>
-                        <Span className='w-full h-[2px] dark:bg-slate-700  bg-slate-200 mt-0 mb-2'></Span>
-                        <div className="mb-1 text-justify text-black dark:text-white">
-                            At Brainwave Education, we specialize in creating inspiring and imaginative stories for children.
-                            Our mission is to spark creativity and nurture young minds by
-                            providing engaging content that encourages learning and exploration.
-                            We believe every story has the power to shape a brighter future.
-                        </div>
+            <WhoWeAre />
 
-                    </div>
-                </div> */}
+            <OurTeam />
 
-                <ProgressItems />
+            {/* {t("signIn")} */}
 
-                {/* {t("signIn")} */}
-
-                {/* <div>
+            {/* <div>
                     {loading && <>... loading </>}
                     {dataPost?.map((item: any) => {
                         return (
@@ -116,10 +112,10 @@ const Login = () => {
                     {error && <> Error </>}
                 </div> */}
 
-                {/* <div>
+            {/* <div>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias sequi tempore tenetur ad harum culpa, recusandae dicta dignissimos voluptatibus voluptate accusamus corrupti minus hic atque explicabo laboriosam incidunt dolores nulla.
                 </div> */}
-            {/* </MainLayout > */}
+
         </>
 
     );
