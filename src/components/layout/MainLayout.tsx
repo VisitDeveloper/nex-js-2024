@@ -10,7 +10,7 @@ export interface MainLayoutProps {
 
 export default function MainLayout(props: MainLayoutProps) {
   return (
-    <Section className={`${props.className}`}>
+    <Section className={`${props.className} `}>
       <motion.div
         initial={{
           opacity: 0

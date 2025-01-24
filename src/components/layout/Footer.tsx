@@ -49,7 +49,7 @@ export default function FooterLayout({ ...props }) {
 
   return (
     <>
-      <Footer {...props} className='mb-24'>
+      <Footer {...props} className='mb-24 lg:mb-8'>
         <div className=' dark:text-white  bg-miniBackground  text-black h-auto py-8 mx-10 shadow-lg rounded-3xl'>
           <Row className='px-10 gap-4'>
             <div className='md:col-span-4 col-span-12'>
