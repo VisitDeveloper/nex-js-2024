@@ -15,10 +15,15 @@ import Autoplay from "embla-carousel-autoplay"
 
 export default function TextSlider() {
     return (
-        <Carousel className="w-full max-w-xs" plugins={[
+        <Carousel opts={{
+            align: "start",
+            loop: true,
+        }} className="w-full max-w-xs" plugins={[
             Autoplay({
                 delay: 2000,
+
             }),
+
         ]}>
             <CarouselContent>
                 {Array.from({ length: 5 }).map((_, index) => (
