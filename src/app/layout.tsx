@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang='en' dir='ltr'>
       <body
-        className={`antialiased bg-mainBackground overflow-x-hidden`}
+        className={`antialiased bg-mainBackground overflow-x-hidden  `}
       >
         <ThemeProvider
           attribute="class"
@@ -28,7 +28,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <DynamicObjectLiterals type='HeaderLayout' />
+
           <AnimatePresence mode="popLayout" >
             {/* <motion.div key={pathname}
               initial={{ opacity: 0 }}
@@ -42,12 +42,12 @@ export default function RootLayout({
               }}
               className="bg-mainBackground"> */}
             {/* </motion.div> */}
-            <MainLayout className='overflow-x-hidden'>
-
+            <MainLayout className='overflow-x-hidden max-h-screen'>
+              <DynamicObjectLiterals type='HeaderLayout' />
               {children}
+              <DynamicObjectLiterals type='FooterLayout' />
             </MainLayout>
           </AnimatePresence>
-          <DynamicObjectLiterals type='FooterLayout' />
         </ThemeProvider>
       </body>
     </html>

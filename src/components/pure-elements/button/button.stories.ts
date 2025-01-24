@@ -48,7 +48,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
-        variant: "outline",
+        variant: "secondary",
         size: "sm",
         disabled: false,
         onClick: action('click '),
