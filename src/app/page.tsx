@@ -2,8 +2,8 @@
 'use client';
 import React from 'react';
 import { ProgressItems, SlideShow, Carousel, Introduce, ThreeElement, Span, OurTeam, WhoWeAre, TextSlider } from "components";
-import Image from 'next/image';
-import { MessageQuestion } from 'iconsax-react';
+// import Image from 'next/image';
+// import { MessageQuestion } from 'iconsax-react';
 // import Carousel from "components/pure-elements/carousel-slider";
 // import Introduce from 'components/specific_elements/main-page/introduce';
 // import ThreeElement from 'components/specific_elements/main-page/three-element';
@@ -62,7 +62,7 @@ const Login = () => {
 
     return (
         <>
-            <div className='mx-0 lg:mx-10 lg:rounded-3xl shadow-lg  lg:mt-2  h-[98vh]  back-dark '>
+            <div  className='mx-0 lg:mx-10 lg:rounded-3xl shadow-lg  lg:mt-2  h-[98vh]  back-dark'>
                 <div className='invisible'>
                     t
                 </div>
