@@ -26,7 +26,7 @@ export default function FooterLayout({ ...props }) {
     {
       id: 2,
       name: 'Applications',
-      route: `/`,
+      route: `/application-page`,
       icon: <MobileProgramming size="20" className='text-iconColor' />
 
     },

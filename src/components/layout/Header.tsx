@@ -35,7 +35,7 @@ export default function HeaderLayout({ ...props }) {
     {
       id: 2,
       name: 'Applications',
-      route: `/`,
+      route: `/application-page`,
       icon: <MobileProgramming size="20" className='text-iconColor' />
 
     },
@@ -64,7 +64,7 @@ export default function HeaderLayout({ ...props }) {
         <Header {...props}
           style={{ backgroundColor: theme === 'dark' ? "rgba(15, 15, 15, 0.6)" : 'rgba(255, 255, 255, 0.32)', }}
 
-          className="backdrop-blur-sm fixed top-0 right-0 left-0 rounded-3xl mt-2 h-[70px] flex
+          className="backdrop-blur-sm fixed top-0 right-0 lg:right-[17px] left-0 rounded-3xl mt-2 h-[70px] flex
           justify-between items-center px-5 lg:px-10 z-50  mx-5 lg:mx-10 border-2 border-solid border-iconColor">
           <ListSetup alignItems="center" direction="row" justifyContent="start" className="gap-2 lg:gap-5">
             <span className="lg:text-4xl text-2xl font-thin">
