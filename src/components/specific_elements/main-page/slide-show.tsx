@@ -1,4 +1,5 @@
 // import { Box } from "@chakra-ui/react";
+'use client'
 import { motion } from "motion/react";
 import React, { useEffect, useState } from "react";
 import { Button } from 'components'
