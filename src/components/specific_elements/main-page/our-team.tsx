@@ -1,3 +1,4 @@
+'use client'
 import ListSetup from 'components/wrapper-elements/ListSetup'
 import { useScroll } from 'hooks/useScroll';
 import { Facebook, Instagram, Send2, Whatsapp } from 'iconsax-react'

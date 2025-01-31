@@ -1,3 +1,4 @@
+'use client'
 import { useScroll } from 'hooks/useScroll';
 import React from 'react'
 import { motion } from 'motion/react'

@@ -1,7 +1,7 @@
-'use client'
+
 import Tooltip from 'components/pure-elements/toltip'
 import ListSetup from 'components/wrapper-elements/ListSetup'
-import { Home, InfoCircle, MessageEdit, NoteText, Setting3 } from 'iconsax-react'
+import { Home, InfoCircle, MessageEdit, MobileProgramming, NoteText } from 'iconsax-react'
 import { useTheme } from 'next-themes'
 import Link from 'next/link'
 import React, { JSX } from 'react'
@@ -14,7 +14,6 @@ interface MobileNavigationArray {
 }
 
 function MobileNavigation() {
-    const { theme } = useTheme();
 
     const ArrayNavigation: Array<MobileNavigationArray> = [
         {
@@ -43,17 +42,22 @@ function MobileNavigation() {
         },
         {
             id: 4,
-            tooltipText: 'Setting',
-            route: '/',
-            icon: <Setting3 size="35" className='text-iconColor' />
+            tooltipText: 'Application',
+            route: '/application-page',
+            icon: <MobileProgramming size="35" className='text-iconColor' />
+
         }
     ]
 
     return (
         <>
             <div
-                style={{ backgroundColor: theme === 'dark' ? "rgba(15, 15, 15, 0.6)" : '', border: theme === 'dark' ? '1px solid #2fe99f' : '1px solid #FF8A65' }}
-                className="backdrop-blur-sm border-2 border-solid border-miniBackground flex justify-between items-center w-[350px]  sm:w-[420px] mx-auto rounded-3xl h-[80px] fixed bottom-2 right-0 left-0 z-10 md:hidden"
+                className="backdrop-blur-sm
+                    dark:bg-blackRgba
+                border-2 border-solid border-iconColor flex 
+                justify-between items-center w-[350px]  sm:w-[420px] mx-auto rounded-3xl h-[80px] 
+                fixed bottom-2 right-0 left-0 z-10 md:hidden"
+
             >
                 <ListSetup className='gap-0 sm:gap-2 w-full sm:p-4 p-2' alignItems='center' direction='row' justifyContent='between'>
 

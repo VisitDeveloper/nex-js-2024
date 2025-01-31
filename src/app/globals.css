@@ -24,6 +24,7 @@ body {
   /* hsl */
   /* we should change hex to hsl */
   /* also we can use tailwind css in colors */
+  /* rgba(15, 15, 15, 0.6) */
   :root {
 
     --background-main: 0, 0%, 100%;
