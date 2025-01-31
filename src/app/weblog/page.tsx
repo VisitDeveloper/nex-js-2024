@@ -57,8 +57,6 @@ export default function Weblog() {
                             item 1
                         </div>
 
-
-
                     </div>
                 </div>
             </div>
