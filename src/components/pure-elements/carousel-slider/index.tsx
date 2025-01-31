@@ -1,4 +1,5 @@
 
+'use client'
 import React, { useEffect, useState } from 'react';
 import { animate, motion, useMotionValue } from 'motion/react';
 import { fadeAnime } from 'config/animation';

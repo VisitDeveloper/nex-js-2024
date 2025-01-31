@@ -16,6 +16,9 @@ const config: Config = {
 				iconColor: 'hsl(var(--icon-color))',
 				itemFormBackground: 'hsl(var(--background-form-item))',
 
+				// special rgba 
+				blackRgba: 'rgba(15, 15, 15, 0.6)',
+
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				card: {
@@ -55,7 +58,8 @@ const config: Config = {
 					'3': 'hsl(var(--chart-3))',
 					'4': 'hsl(var(--chart-4))',
 					'5': 'hsl(var(--chart-5))'
-				}
+				},
+
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
