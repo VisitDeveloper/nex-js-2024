@@ -32,7 +32,7 @@ body {
 
     --icon-color: 14, 100%, 70%;
     --background-form-item: 240, 3%, 86%;
-    
+
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -178,11 +178,18 @@ body {
 }
 
 .background-first {
-  background: rgb(255,138,102);
-background: linear-gradient(29deg, rgba(255,138,102,1) 4%, rgba(47,233,159,1) 100%);
+  background: rgb(255, 138, 102);
+  background: linear-gradient(29deg, rgba(255, 138, 102, 1) 4%, rgba(47, 233, 159, 1) 100%);
 }
 
-.back-dark{
-  background: rgb(63,94,251);
-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+.back-dark {
+  background: rgb(63, 94, 251);
+  background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+}
+
+.back-login {
+  background: url('../../public/log.jpg');
+  background-position: center center;
+  background-attachment:fixed ;
+  background-size: cover;
 }
