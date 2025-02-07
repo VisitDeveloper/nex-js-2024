@@ -7,7 +7,7 @@ export default async function AuthLayout({
 }) {
   return (
     // back-login
-    <div className="w-full   min-h-svh flex justify-center items-center">
+    <div className="w-full back-login  min-h-svh flex justify-center items-center">
       {children}
     </div>
   );
