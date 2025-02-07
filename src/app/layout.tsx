@@ -47,7 +47,7 @@ export default function RootLayout({
               className="bg-mainBackground"> */}
             {/* </motion.div> */}
             <MainLayout className='overflow-x-hidden max-h-screen'>
-              <DynamicObjectLiterals type='HeaderLayout' />
+              {!isAuthPage && <DynamicObjectLiterals type='HeaderLayout' />}
               {children}
               {!isAuthPage && <DynamicObjectLiterals type='FooterLayout' />}
             </MainLayout>
