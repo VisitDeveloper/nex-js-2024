@@ -5,20 +5,32 @@ import { ThemeProvider } from "provider/ThemeProvider";
 import { dir } from "i18next";
 import { AnimatePresence } from "motion/react";
 import { DynamicObjectLiterals, MainLayout } from "components";
+import { usePathname } from 'next/navigation';
+import Head from 'next/head';
 
 export default function RootLayout({
   children,
-  // params: { lng },
+  // params
 }: Readonly<{
   children: React.ReactNode;
-  // params: {
-  //   lng: string
-  // }
+  // params: any;
 }>) {
 
   // lang={lng} dir={dir(lng)}
+  const pathname = usePathname();
+  const isAuthPage = pathname.startsWith('/auth');
+  const isAdminPage = pathname.startsWith('/admin');
+  console.log('pathname ', pathname.split('/').filter(Boolean)[0]);
+  const routeObjectWithOutLayout: any = {
+    auth: '/auth',
+    admin: '/admin',
+  }
+
   return (
     <html lang='en' dir='ltr'>
+      <Head>
+        <title>My Page Title</title>
+      </Head>
       <body
         className={`antialiased bg-mainBackground overflow-x-hidden  `}
       >
@@ -30,23 +42,13 @@ export default function RootLayout({
         >
 
           <AnimatePresence mode="popLayout" >
-            {/* <motion.div key={pathname}
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: 1,
-              }}
 
-              exit={{ opacity: 0 }}
-              transition={{
-                duration: 0.5
-              }}
-              className="bg-mainBackground"> */}
-            {/* </motion.div> */}
             <MainLayout className='overflow-x-hidden max-h-screen'>
-              <DynamicObjectLiterals type='HeaderLayout' />
+              {!routeObjectWithOutLayout[pathname.split('/').filter(Boolean)[0]] && <DynamicObjectLiterals type='HeaderLayout' />}
               {children}
-              <DynamicObjectLiterals type='FooterLayout' />
+              {!routeObjectWithOutLayout[pathname.split('/').filter(Boolean)[0]] && <DynamicObjectLiterals type='FooterLayout' />}
             </MainLayout>
+
           </AnimatePresence>
         </ThemeProvider>
       </body>

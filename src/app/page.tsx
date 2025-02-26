@@ -52,6 +52,16 @@ const Login = () => {
     // })
 
 
+    // const postrequest = async () => {
+    //     try {
+    //         const data = await post.read()
+    //     } catch (error) {
+            
+    //     }
+
+    // }
+
+
 
 
 
