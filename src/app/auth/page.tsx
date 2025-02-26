@@ -241,7 +241,61 @@ export default function Auth() {
           </Form>
         </div> :
           <div className=''>
-            the form sign up
+            <h1 className='text-3xl mt-2 ml-0'>
+              Sign Up
+            </h1>
+            <Form {...form} >
+              <form onSubmit={form.handleSubmit(onSubmit)} className="w-[320px] h-[380px] mt-[-20px] space-y-6 flex flex-col items-center justify-center mx-auto">
+
+
+                <FormField
+                  control={form.control}
+                  name="email"
+
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm">Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          className="border-iconColor bg-itemFormBackground w-[320px]"
+                          placeholder="Email"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-[10px] text-red-600" />
+                    </FormItem>
+                  )} />
+
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm">Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          type='password'
+                          className="border-iconColor bg-itemFormBackground w-[320px]"
+                          placeholder="Password"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage className="text-[10px] text-red-600" />
+                    </FormItem>
+                  )} />
+
+                <Button
+                  className='w-full space-y-2'
+                  type="submit"
+                  variant={"secondary"}>
+                  Send
+                </Button>
+                <Button onClick={() => router.push('/')} variant={'link'} className='mt-10' style={{ color: '#1f75cb' }}>
+                  Forget your password ?
+                </Button>
+              </form>
+
+            </Form>
           </div>
         }
 
