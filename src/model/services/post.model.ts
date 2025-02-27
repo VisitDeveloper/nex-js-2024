@@ -6,3 +6,4 @@ export interface PostModel {
 }
 
 export type ArticleModel = any;
+export type CategoryModel = any;
