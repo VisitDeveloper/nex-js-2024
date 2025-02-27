@@ -51,7 +51,7 @@ const Blog = async ({ params: { slug } }: { params: Params }) => {
         )}
         {data && data.data.length > 0 && (
           <div className="flex flex-col h-inherit grow justify-between">
-            <div className="max-w-(--breakpoint-xl) px-4 2xl:px-0 w-full pb-8 mx-auto flex flex-col justify-between gap-4">
+            <div className="max-w-(--breakpoint-xl) 2xl:px-0 w-full pb-8 mx-auto flex flex-col justify-between gap-4">
               {[...(data?.data || [])].map((article) => (
                 <div
                   key={article.id}

@@ -33,7 +33,7 @@ function Quote({ data }: QuoteProps) {
           <path d="M232,16H193.6L16,185.143V416H232ZM200,384H48V198.857L200,54.1Z"></path>
         </svg>
       </div>
-      <span className="w-12 h-1 my-2 rounded-lg dark:bg-violet-400"></span>
+      <span className="w-12 h-1 my-2 rounded-lg bg-iconColor"></span>
       {author ? <p>{author}</p> : "unknown"}
     </div>
   );
