@@ -9,6 +9,7 @@ import { ArticleModel } from "model/services/post.model";
 import { ArticleService } from "services/article.service";
 import Image from "next/image";
 import Link from "next/link";
+import { cn } from "lib/utils";
 import { useFetch } from "hooks/useFetch";
 
 const articleServices = new ArticleService();
@@ -106,46 +107,73 @@ export default function Weblog({
         </div>
 
         {/* content */}
-        <div className="rounded-3xl shadow-lg px-4 py-2 bg-miniBackground">
+        <div className="rounded-3xl shadow-lg px-4 py-4 bg-miniBackground">
           <div
             className={`${
               listOrCardActivate === true ? "flex-col" : "flex-row"
             } w-full flex`}
           >
             {[...(data?.data || [])].map((article: ArticleModel) => (
-              <div key={article.id} className="overflow-hidden">
+              <div
+                key={article.id}
+                className={cn(
+                  "overflow-hidden rounded-lg border bg-card text-card-foreground shadow-xs",
+                  {
+                    "flex flex-row items-stretch": listOrCardActivate === true,
+                  }
+                )}
+              >
                 <Image
                   src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${article?.attributes.cover?.data.attributes.url}`}
                   alt={article?.attributes.cover?.data.attributes?.name}
                   width={600}
                   height={400}
-                  className="w-full h-64 object-cover"
+                  className={cn("w-full h-64 object-cover", {
+                    "max-w-44 h-44": listOrCardActivate === true,
+                  })}
                   style={{ aspectRatio: "600/400", objectFit: "cover" }}
                 />
-                <div>
-                  <div>{article.attributes.title}</div>
-                  <div>{article.attributes.description}</div>
-                </div>
-                <div className="flex items-center gap-4 justify-between">
-                  <Link href={`/weblog/${article.attributes.slug}`}>
-                    <Button type="button" variant="default">
-                      Load More
-                    </Button>
-                  </Link>
+                <div
+                  className={cn("flex flex-col h-full w-full", {
+                    "h-44": listOrCardActivate === true,
+                  })}
+                >
+                  <div
+                    className={cn("flex flex-col space-y-1.5 p-6", {
+                      "flex-grow": listOrCardActivate === true,
+                    })}
+                  >
+                    <div className="text-2xl font-semibold leading-none tracking-tight">
+                      {article.attributes.title}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      {article.attributes.description}
+                    </div>
+                  </div>
+                  <div className="flex items-center p-6 pt-0 gap-4 justify-between">
+                    <Link
+                      href={`/weblog/${article.attributes.slug}`}
+                      className=""
+                    >
+                      <Button type="button" variant="secondary" size="sm">
+                        Load More
+                      </Button>
+                    </Link>
 
-                  <div className="flex items-center gap-2 text-sm text-neutral-500">
-                    <span>
-                      {new Date(
-                        article.attributes.publishedAt
-                      ).toLocaleDateString()}
-                    </span>
-                    <i className="bg-neutral-600 rounded-full w-1 h-1"></i>
-                    <span>
-                      {(article.attributes?.authorsBio?.data?.attributes &&
-                        article.attributes?.authorsBio?.data?.attributes
-                          ?.name) ||
-                        "unknown"}
-                    </span>
+                    <div className="flex items-center gap-2 text-sm text-neutral-500">
+                      <span>
+                        {new Date(
+                          article.attributes.publishedAt
+                        ).toLocaleDateString()}
+                      </span>
+                      <i className="bg-neutral-600 rounded-full w-1 h-1"></i>
+                      <span>
+                        {(article.attributes?.authorsBio?.data?.attributes &&
+                          article.attributes?.authorsBio?.data?.attributes
+                            ?.name) ||
+                          "unknown"}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
