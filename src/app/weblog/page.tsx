@@ -108,6 +108,13 @@ export default function Weblog({
 
         {/* content */}
         <div className="rounded-3xl shadow-lg px-4 py-4 bg-miniBackground">
+          {loading && <div>Loading...</div>}
+          {error && <div>{error}</div>}
+          {data && data.data.length === 0 && (
+            <div className="p-16 flex justify-center items-center">
+              Not found
+            </div>
+          )}
           <div
             className={`${
               listOrCardActivate === true ? "flex-col" : "flex-row"
