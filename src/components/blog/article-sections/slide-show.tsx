@@ -1,5 +1,7 @@
 "use client";
 
+import "react-slideshow-image/dist/styles.css";
+
 import { Fade } from "react-slideshow-image";
 import Image from "next/image";
 
