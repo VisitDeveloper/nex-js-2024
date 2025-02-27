@@ -27,14 +27,6 @@ export default function Weblog({
 
   const [listOrCardActivate, setListOrCardActivate] = useState<boolean>(false);
 
-  const {
-    loading: loadingCategories,
-    data: categories,
-    error: errorCategories,
-  } = useFetch<{ data: Array<CategoryModel> }>({
-    service: categoryServices.read.bind(categoryServices),
-  });
-
   const { loading, data, error } = useFetch<{ data: Array<ArticleModel> }>({
     service: articleServices.read.bind(articleServices),
     options: {
@@ -54,6 +46,11 @@ export default function Weblog({
             populate: "*",
           },
         },
+        filters: {
+          category: {
+            slug: { $eq: params.slug },
+          },
+        },
       },
     },
   });
@@ -64,36 +61,7 @@ export default function Weblog({
 
   return (
     <div className="mt-[100px] flex flex-row gap-4  mb-10 mx-10 ">
-      <div className="w-1/3 sticky top-[100px] left-10 h-[500px] bg-miniBackground rounded-3xl shadow-lg px-4">
-        {loadingCategories && (
-          <div className="p-16 flex justify-center items-center">
-            Loading...
-          </div>
-        )}
-        {errorCategories && (
-          <div className="p-16 flex justify-center items-center">
-            {errorCategories}
-          </div>
-        )}
-        {categories && categories.data.length === 0 && (
-          <div className="p-16 flex justify-center items-center">Not found</div>
-        )}
-        {categories && categories.data.length > 0 && (
-          <div className="flex flex-col gap-4 py-4">
-            {categories.data.map((category) => (
-              <Link
-                href={`/weblog/category/${category.attributes.slug}`}
-                key={category.id}
-                className="text-lg font-semibold text-card-foreground"
-              >
-                {category.attributes.name}
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
-
-      <div className="flex flex-col gap-4 w-2/3">
+      <div className="flex flex-col gap-4 w-full">
         {/* upper search  */}
         <div className="flex flex-col rounded-3xl shadow-lg px-4 py-2 bg-miniBackground">
           <Input
