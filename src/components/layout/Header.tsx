@@ -1,8 +1,10 @@
 'use client';
-import Header from 'components/elements/header';
-import { ListSetup, SwitchSimpleTheme, Button } from 'components';
-import React, { JSX } from 'react'
+
+import { Button, ListSetup, SwitchSimpleTheme } from 'components';
 import { Home, InfoCircle, MessageEdit, MobileProgramming, NoteText } from 'iconsax-react';
+import React, { JSX } from 'react'
+
+import Header from 'components/elements/header';
 import Link from 'next/link';
 
 export interface RouteHeader {
@@ -89,7 +91,7 @@ export default function HeaderLayout({ ...props }) {
             <span>
               <SwitchSimpleTheme />
             </span>
-            <Link href={'/auth'} className='h-8 px-3 text-xs inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border-solid border-[1px] border-iconColor bg-secondary text-secondary-foreground shadow-sm hover:bg-itemFormBackground '>Login</Link>
+            {/* <Link href={'/auth'} className='h-8 px-3 text-xs inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border-solid border-[1px] border-iconColor bg-secondary text-secondary-foreground shadow-sm hover:bg-itemFormBackground '>Login</Link> */}
           </ListSetup>
 
         </Header>
@@ -107,7 +109,7 @@ export default function HeaderLayout({ ...props }) {
             <span>
               <SwitchSimpleTheme />
             </span>
-            <Link href={'/auth'} className='h-8 px-3 text-xs inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border-solid border-[1px] border-iconColor bg-secondary text-secondary-foreground shadow-sm hover:bg-itemFormBackground '>Login</Link>
+            {/* <Link href={'/auth'} className='h-8 px-3 text-xs inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border-solid border-[1px] border-iconColor bg-secondary text-secondary-foreground shadow-sm hover:bg-itemFormBackground '>Login</Link> */}
           </div>
         </ListSetup>
       </div>
