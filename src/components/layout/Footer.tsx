@@ -84,12 +84,13 @@ export default function FooterLayout({ ...props }) {
           "py-48",
           // "py-16",
           "pb-16",
+          "px-5 2xl:px-0",
           "before:absolute before:z-[1] before:content-[''] before:bg-[url('/pattern-wave.png')] before:bg-repeat-x before:w-full before:bottom-8 before:left-0 before:h-6"
         )}
       >
         <div className="h-auto py-8 max-w-screen-2xl mx-auto">
           <Row className="gap-x-16 gap-8">
-            <div className="md:col-span-4 col-span-12 flex flex-col w-full items-start gap-8">
+            <div className="lg:col-span-4 col-span-12 flex flex-col w-full items-start gap-8">
               <ListSetup
                 className="gap-4"
                 alignItems="start"
@@ -132,11 +133,11 @@ export default function FooterLayout({ ...props }) {
               </ListSetup>
             </div>
 
-            <div className="md:col-span-8 col-span-12 flex flex-col w-full pt-5">
+            <div className="lg:col-span-8 col-span-12 flex flex-col w-full pt-5">
               <div className="text-3xl font-bold">Quick Links</div>
 
               <Row className="gap-16 mt-8">
-                <div className="md:col-span-4 col-span-12">
+                <div className="lg:col-span-4 md:col-span-6 col-span-12">
                   <ListSetup
                     className="gap-4"
                     alignItems="start"
@@ -165,7 +166,7 @@ export default function FooterLayout({ ...props }) {
                   </ListSetup>
                 </div>
 
-                <div className="md:col-span-4 col-span-12">
+                <div className="lg:col-span-4 md:col-span-6 col-span-12">
                   <ListSetup
                     className="gap-4"
                     alignItems="start"
@@ -194,7 +195,7 @@ export default function FooterLayout({ ...props }) {
                   </ListSetup>
                 </div>
 
-                <div className="md:col-span-4 col-span-12">
+                <div className="lg:col-span-4 col-span-12">
                   <ListSetup
                     className="gap-6"
                     alignItems="start"
@@ -276,7 +277,7 @@ export default function FooterLayout({ ...props }) {
             </div>
           </Row>
 
-          <div className="flex flex-col md:flex-row justify-center items-center ">
+          <div className="flex flex-col lg:flex-row justify-center items-center ">
             <div className="gap-2 mt-8 text-xs font-bold">
               © 2025 Brainwave. All rights reserved.
             </div>
