@@ -35,7 +35,7 @@ Readonly<{
   return (
     <html lang="en" dir="ltr">
       <Head>
-        <title>Brain Wave Children</title>
+        <title>BrainWave</title>
       </Head>
       <body
         className={cn(
@@ -49,9 +49,9 @@ Readonly<{
           enableSystem
           disableTransitionOnChange
         >
-          <div className="bg-[#02E3C6] sticky top-0 z-10 flex items-center justify-center h-12">
+          {/* <div className="bg-[#02E3C6] sticky top-0 z-10 flex items-center justify-center h-12">
             <span>Applications open Summer-25 April!!!</span>
-          </div>
+          </div> */}
           <AnimatePresence mode="popLayout">
             <MainLayout className="">
               {!routeObjectWithOutLayout[

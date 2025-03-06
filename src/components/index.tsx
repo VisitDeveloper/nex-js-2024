@@ -49,4 +49,8 @@ export { default as ContactForm } from 'components/specific_elements/contact-us/
 export { default as OurTeam } from 'components/specific_elements/main-page/our-team'
 export { default as WhoWeAre } from 'components/specific_elements/main-page/who-we-are'
 export { default as TextSlider } from 'components/specific_elements/main-page/text-slider'
+export { default as Hero } from 'components/specific_elements/main-page/hero'
+export { default as Newsletter } from 'components/specific_elements/main-page/newsletter'
+export { default as NewsSlider } from 'components/specific_elements/main-page/news-slider'
+export { default as ParentFeedback } from 'components/specific_elements/main-page/parent-feedback'
 export { default as AppSlider } from 'components/specific_elements/main-page/app-slider'
