@@ -1,8 +1,8 @@
+import React, { JSX } from "react";
 
-import Section from 'components/elements/section';
-import React, { JSX } from 'react'
-import MobileNavigation from './MobileNavigation';
-import { motion } from 'motion/react'
+import Section from "components/elements/section";
+import { motion } from "motion/react";
+
 export interface MainLayoutProps {
   children?: React.ReactNode | JSX.Element | React.ReactElement;
   className?: string;
@@ -13,20 +13,19 @@ export default function MainLayout(props: MainLayoutProps) {
     <Section className={`${props.className} `}>
       <motion.div
         initial={{
-          opacity: 0
+          opacity: 0,
         }}
         animate={{
           opacity: 1,
-          y: 0
+          y: 0,
         }}
-
         exit={{ opacity: 0 }}
         transition={{
-          duration: 1
-        }}>
+          duration: 1,
+        }}
+      >
         {props.children}
       </motion.div>
-      <MobileNavigation />
     </Section>
-  )
+  );
 }

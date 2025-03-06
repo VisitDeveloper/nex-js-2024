@@ -49,9 +49,9 @@ export default function AppSlider() {
       className="w-full max-w-screen-sm mx-auto space-y-8"
       plugins={[]}
     >
-      <CarouselContent className="items-stretch">
+      <CarouselContent className="items-stretch px-5">
         {applications.map((_, index) => (
-          <CarouselItem key={index} className="text-center basis-1/2 h-full">
+          <CarouselItem key={index} className="text-center basis-[90%] sm:basis-1/2 h-full">
             <div className="border border-dashed border-iconColor h-full rounded-2xl p-8 px-6 flex flex-col gap-4 justify-center">
               <div className="flex justify-center">
                 <div className="bg-[#FEF8EC] rounded-full size-20 text-[#FEA439] flex justify-center items-center">
