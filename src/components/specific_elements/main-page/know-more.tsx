@@ -19,7 +19,7 @@ const KnowMore = () => {
         "relative flex justify-center items-center gap-12 py-12"
       )}
     >
-      <div className="h-full flex-col lg:flex-row 2xl:flex-row gap-y-16 items-stretch w-full max-w-screen-2xl">
+      <div className="h-full flex flex-col lg:flex-row gap-y-16 items-stretch w-full max-w-screen-2xl mx-auto">
         <div className="basis-full lg:basis-1/2 flex flex-grow items-start flex-shrink-0 flex-col justify-center gap-8">
           <h5 className="font-bold text-5xl">Know more about BrainWave</h5>
 
@@ -79,6 +79,7 @@ const KnowMore = () => {
             </Accordion>
           </div>
         </div>
+        
         <div className="basis-full lg:basis-1/2 relative flex-grow flex-shrink-0 h-full flex justify-center items-center">
           <div className="relative aspect-square w-full max-w-screen-sm">
             <Image alt="hero" fill src="/bg-knows.svg" />
