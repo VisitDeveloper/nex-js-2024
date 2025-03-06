@@ -2,6 +2,11 @@
 
 import { Button, ListSetup, SwitchSimpleTheme } from "components";
 import {
+  Drawer,
+  DrawerContent,
+  DrawerTrigger,
+} from "components/pure-elements/drawer";
+import {
   Home,
   InfoCircle,
   MessageEdit,
@@ -56,12 +61,10 @@ export default function HeaderLayout({ ...props }) {
   ];
   return (
     <>
-      {/* mb-[100px] */}
-      {/* Desktop */}
-      <div className="top-0 sticky z-[11] hidden md:block">
+      <div className="top-0 sticky z-[11] block">
         <Header
           {...props}
-          className="bg-white w-full dark:bg-blackRgba h-20 px-5 lg:px-10 z-50 flex items-center border-b border-solid border-iconColor"
+          className="bg-white w-full dark:bg-blackRgba h-20 px-5 2xl:px-0 z-50 flex items-center border-b border-solid border-iconColor"
         >
           <div className="max-w-screen-2xl mx-auto flex justify-between items-center w-full">
             <ListSetup
@@ -87,7 +90,7 @@ export default function HeaderLayout({ ...props }) {
               alignItems="center"
               direction="row"
               justifyContent="start"
-              className="gap-2 lg:gap-10"
+              className="gap-10 hidden lg:flex"
             >
               {ArrayRouteHeader.map((item: RouteHeader) => {
                 return (
@@ -121,30 +124,13 @@ export default function HeaderLayout({ ...props }) {
               >
                 Login
               </Link>
+
               {/* <span>
                 <SwitchSimpleTheme />
               </span> */}
             </ListSetup>
           </div>
         </Header>
-      </div>
-
-      {/* Mobile */}
-      <div className="md:hidden dark:bg-blackRgba block z-50 backdrop-blur-sm fixed top-0 right-0 left-0 h-[60px] px-5">
-        <ListSetup
-          alignItems="center"
-          direction="row"
-          justifyContent="between"
-          className="gap-4 h-[60px]"
-        >
-          <span className="lg:text-4xl text-2xl font-thin">Logo</span>
-          <div className="flex flex-row gap-2 items-center justify-center">
-            <span>
-              <SwitchSimpleTheme />
-            </span>
-            {/* <Link href={'/auth'} className='h-8 px-3 text-xs inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border-solid border-[1px] border-iconColor bg-secondary text-secondary-foreground shadow-sm hover:bg-itemFormBackground '>Login</Link> */}
-          </div>
-        </ListSetup>
       </div>
     </>
   );
