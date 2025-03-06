@@ -57,8 +57,12 @@ const ParentFeedback = () => {
   const { selectedIndex } = useDotButton(api);
 
   return (
-    <div className="flex items-stretch min-h-[calc(80dvh)] w-full text-white relative">
-      <div className="flex-grow flex-shrink-0 basis-1/2 flex justify-center items-center relative bg-[#969693]">
+    <div
+      className={cn(
+        "flex flex-col lg:flex-row items-stretch min-h-[calc(80dvh)] w-full text-white relative"
+      )}
+    >
+      <div className="flex-grow flex-shrink-0 basis-full lg:basis-1/2 flex justify-center items-center relative bg-[#969693]">
         <video
           poster="bg-video.jpg"
           className="object-cover h-full w-inherinet"
@@ -76,7 +80,7 @@ const ParentFeedback = () => {
       </div>
       <div
         className={cn(
-          "flex-grow flex-shrink-0 basis-1/2 w-1/2 bg-[#2CC4B9]/80 relative flex items-center py-16",
+          "flex-grow flex-shrink-0 basis-full lg:basis-1/2 w-full lg:w-1/2 bg-[#2CC4B9]/80 relative flex items-center py-16",
           "before:bg-[url('/bg-newsletter.png')] before:bg-cover before:content-[''] before:w-full before:h-full before:-z-10 before:absolute before:inset-0"
         )}
       >
@@ -87,7 +91,7 @@ const ParentFeedback = () => {
           }}
           setApi={(api) => setApi(api)}
           className={cn(
-            "w-full relative h-full min-h-[calc(60dvh)] px-24 gap-8 flex flex-col justify-center"
+            "w-full relative h-full min-h-[calc(60dvh)] lg:px-24 gap-8 flex flex-col justify-center"
           )}
           plugins={[
             Autoplay({
@@ -95,7 +99,7 @@ const ParentFeedback = () => {
             }),
           ]}
         >
-          <CarouselContent className="items-stretch">
+          <CarouselContent className="items-stretch px-5">
             {feedbacks.slice(0, 3).map((_, index) => (
               <CarouselItem
                 key={index}
@@ -130,7 +134,7 @@ const ParentFeedback = () => {
             ))}
           </CarouselContent>
 
-          <div className="flex gap-1 items-center">
+          <div className="flex gap-1 items-center px-5 lg:px-0">
             {feedbacks.slice(0, 3).map((_, index) => (
               <DotButton
                 key={index}

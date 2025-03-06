@@ -6,16 +6,17 @@ const OurProgram = () => {
   return (
     <div
       className={cn(
-       "bg-gradient-to-br from-[#FEF6EC] to-[#EDFEFC] relative flex justify-center items-center gap-12 py-12"
+        "px-5 2xl:px-0",
+        "bg-gradient-to-br from-[#FEF6EC] to-[#EDFEFC] relative flex justify-center items-center gap-12 py-12"
       )}
     >
-      <div className="h-full flex items-stretch w-full max-w-screen-2xl">
-        <div className="basis-1/2 relative flex-grow flex-shrink-0 h-full flex justify-center items-center">
+      <div className="h-full flex flex-col 2xl:flex-row gap-y-16 items-stretch w-full max-w-screen-2xl">
+        <div className="basis-full lg:basis-1/2 relative flex-grow flex-shrink-0 h-full flex justify-center items-center">
           <div className="relative aspect-square w-full max-w-screen-sm">
             <Image alt="out-program" fill src="/bg-program.svg" />
           </div>
         </div>
-        <div className="basis-1/2 flex flex-grow items-start flex-shrink-0 flex-col justify-center gap-8">
+        <div className="basis-full lg:basis-1/2 flex flex-grow items-start flex-shrink-0 flex-col justify-center gap-8">
           <h5 className="font-bold text-5xl">BrainWave Program</h5>
 
           <p className="">
@@ -40,7 +41,7 @@ const OurProgram = () => {
           </div>
 
           <ul className="flex flex-col w-full gap-2">
-            <li className="flex items-center gap-2">
+            <li className="flex items-start gap-2">
               <svg
                 className="size-6"
                 viewBox="0 0 33 33"
@@ -56,7 +57,7 @@ const OurProgram = () => {
 
               <span>We believe every child is intelligent so we care.</span>
             </li>
-            <li className="flex items-center gap-2">
+            <li className="flex items-start gap-2">
               <svg
                 className="size-6"
                 viewBox="0 0 33 33"
