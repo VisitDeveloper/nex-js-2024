@@ -1,7 +1,9 @@
 
 'use client';
+
+import { Carousel, Introduce, OurTeam, ProgressItems, SlideShow, Span, TextSlider, ThreeElement, WhoWeAre } from "components";
+
 import React from 'react';
-import { ProgressItems, SlideShow, Carousel, Introduce, ThreeElement, Span, OurTeam, WhoWeAre, TextSlider } from "components";
 // import Image from 'next/image';
 // import { MessageQuestion } from 'iconsax-react';
 // import Carousel from "components/pure-elements/carousel-slider";
@@ -90,6 +92,7 @@ const Login = () => {
             <div className='lg:hidden block'>
                 <ThreeElement />
             </div>
+
 
             <ProgressItems />
 
