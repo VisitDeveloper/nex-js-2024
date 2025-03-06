@@ -11,6 +11,7 @@ import {
 import KnowMore from "components/specific_elements/main-page/know-more";
 import OurProgram from "components/specific_elements/main-page/our-program";
 import React from "react";
+import { cn } from "lib/utils";
 
 // import Image from 'next/image';
 // import { MessageQuestion } from 'iconsax-react';
@@ -72,12 +73,23 @@ const Login = () => {
     <>
       <Hero />
 
-      <div className="h-full flex flex-col justify-center items-center w-full max-w-screen-2xl gap-8 py-32 mx-auto">
-        <h2 className="font-bold text-5xl">Our Programs</h2>
-        <p className="max-w-screen-sm text-xl text-center">
-          Our multi-level kindergarten cater to the age groups 2-5 years with a
-          curriculum focussing children.
-        </p>
+      <div
+        className={cn(
+          "h-full flex flex-col justify-center items-center w-full lg:max-w-screen-2xl gap-8 py-32 mx-auto"
+        )}
+      >
+        <div
+          className={cn(
+            "px-5 2xl:px-0",
+            "flex flex-col justify-center items-center gap-8 mx-auto"
+          )}
+        >
+          <h2 className="font-bold text-5xl">Our Programs</h2>
+          <p className="max-w-screen-sm text-xl text-center">
+            Our multi-level kindergarten cater to the age groups 2-5 years with
+            a curriculum focussing children.
+          </p>
+        </div>
 
         <div className="w-full">
           <AppSlider />
@@ -87,7 +99,7 @@ const Login = () => {
       <OurProgram />
 
       <KnowMore />
-      
+
       <ParentFeedback />
 
       <NewsSlider />

@@ -10,12 +10,14 @@ import { cn } from "lib/utils";
 
 const NewsSlider = () => {
   return (
-    <div className="max-w-screen-2xl mx-auto flex flex-col gap-8 my-32">
-      <h3 className="font-bold text-3xl">BrainWave News</h3>
-      <p className="">
-        It is our goal to provide age appropriate opportunity for every child
-        enrolled in BrainWave Kids Club enrichment classes.
-      </p>
+    <div className={cn("max-w-screen-2xl mx-auto flex flex-col gap-8 my-32")}>
+      <div className={cn("px-5 2xl:px-0", "flex flex-col gap-8")}>
+        <h3 className="font-bold text-3xl">BrainWave News</h3>
+        <p className="">
+          It is our goal to provide age appropriate opportunity for every child
+          enrolled in BrainWave Kids Club enrichment classes.
+        </p>
+      </div>
 
       <div className="w-full">
         <Carousel
@@ -69,7 +71,7 @@ const NewsSlider = () => {
             ].map((_, index) => (
               <CarouselItem
                 key={index}
-                className="text-center basis-[22%] h-full"
+                className="text-center basis-[90%] px-5 lg:px-3 md:basis-[44%] lg:basis-[28%] 2xl:basis-[20%] h-full"
               >
                 <NewsCard item={_} />
               </CarouselItem>
