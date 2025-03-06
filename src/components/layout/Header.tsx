@@ -18,7 +18,7 @@ export interface RouteHeader {
   id: number;
   name: string;
   route: string;
-  icon: React.ReactElement | JSX.Element | React.ReactNode;
+  icon?: React.ReactElement | JSX.Element | React.ReactNode;
 }
 
 export default function HeaderLayout({ ...props }) {
@@ -31,7 +31,7 @@ export default function HeaderLayout({ ...props }) {
     },
     {
       id: 1,
-      name: "Weblog",
+      name: "Blog",
       route: `/weblog`,
       icon: <MessageEdit size="20" className="text-iconColor" />,
     },
@@ -68,16 +68,18 @@ export default function HeaderLayout({ ...props }) {
               alignItems="center"
               direction="row"
               justifyContent="start"
-              className="gap-2 lg:gap-5"
+              className="gap-2"
             >
-              <span className="lg:text-4xl text-2xl font-thin">
-                <Image
-                  src="/logo.png"
-                  className=""
-                  width={64}
-                  height={64}
-                  alt="logo"
-                />
+              <Image
+                src="/logo.png"
+                className=""
+                width={56}
+                height={56}
+                alt="logo"
+              />
+
+              <span className="text-2xl text-[#19C1B6] font-bold">
+                BrainWave
               </span>
             </ListSetup>
 
@@ -119,9 +121,9 @@ export default function HeaderLayout({ ...props }) {
               >
                 Login
               </Link>
-              <span>
+              {/* <span>
                 <SwitchSimpleTheme />
-              </span>
+              </span> */}
             </ListSetup>
           </div>
         </Header>
