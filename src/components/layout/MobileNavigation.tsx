@@ -1,10 +1,10 @@
-
-import Tooltip from 'components/pure-elements/toltip'
-import ListSetup from 'components/wrapper-elements/ListSetup'
 import { Home, InfoCircle, MessageEdit, MobileProgramming, NoteText } from 'iconsax-react'
-import { useTheme } from 'next-themes'
-import Link from 'next/link'
 import React, { JSX } from 'react'
+
+import Link from 'next/link'
+import ListSetup from 'components/wrapper-elements/ListSetup'
+import Tooltip from 'components/pure-elements/toltip'
+import { useTheme } from 'next-themes'
 
 interface MobileNavigationArray {
     id: number;
@@ -36,7 +36,7 @@ function MobileNavigation() {
         },
         {
             id: 3,
-            tooltipText: 'Weblog',
+            tooltipText: 'WBlog',
             route: '/weblog',
             icon: <MessageEdit size="35" className='text-iconColor' />
         },
