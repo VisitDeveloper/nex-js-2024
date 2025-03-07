@@ -88,7 +88,7 @@ export default function FooterLayout({ ...props }) {
           "before:absolute before:z-[1] before:content-[''] before:bg-[url('/pattern-wave.png')] before:bg-repeat-x before:w-full before:bottom-8 before:left-0 before:h-6"
         )}
       >
-        <div className="h-auto py-8 max-w-screen-2xl mx-auto">
+        <div className="h-auto py-8 max-w-screen-2xl mx-auto overflow-hidden">
           <Row className="gap-x-16 gap-8">
             <div className="lg:col-span-4 col-span-12 flex flex-col w-full items-start gap-8">
               <ListSetup
