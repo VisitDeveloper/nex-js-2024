@@ -25,7 +25,7 @@ const OurProgram = () => {
             in a lesson when you’re simply really trying new.
           </p>
 
-          <div className="bg-[#19C1B6] rounded-3xl flex divide-x-2 divide-[#50D6CD] w-full p-8 px-4 text-white">
+          <div className="bg-[#19C1B6] rounded-3xl flex divide-x-2 divide-[#50D6CD] w-full p-8 px-4 text-white text-center">
             <div className="basis-1/3 flex flex-col items-center justify-center p-4">
               <span className="font-bold text-2xl">14+</span>
               <span className="text-wrap font-thin">Years of experience</span>
