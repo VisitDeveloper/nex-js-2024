@@ -4,11 +4,40 @@ import {
   CarouselItem,
 } from "components/pure-elements/carousel/index";
 
+import { ArticleModel } from "model/services/post.model";
+import { ArticleService } from "services/article.service";
 import Image from "next/image";
+import Link from "next/link";
 import { User } from "lucide-react";
 import { cn } from "lib/utils";
+import { useFetch } from "hooks/useFetch";
+
+const articleServices = new ArticleService();
 
 const NewsSlider = () => {
+  const { loading, data, error } = useFetch<{ data: Array<ArticleModel> }>({
+    service: articleServices.read.bind(articleServices),
+    options: {
+      params: {
+        sort: { createdAt: "desc" },
+        pagination: {
+          page: 1,
+          pageSize: 10,
+        },
+        populate: {
+          cover: { fields: ["name", "url"] },
+          category: { populate: "*" },
+          authorsBio: {
+            populate: "*",
+          },
+          seo: {
+            populate: "*",
+          },
+        },
+      },
+    },
+  });
+
   return (
     <div className={cn("max-w-screen-2xl mx-auto flex flex-col gap-8 my-32")}>
       <div className={cn("px-5 2xl:px-0", "flex flex-col gap-8")}>
@@ -33,47 +62,26 @@ const NewsSlider = () => {
           plugins={[]}
         >
           <CarouselContent className="items-stretch">
-            {[
-              {
-                banner: "http://loremflickr.com/400/400/education",
-                title: "Qui nostrum rem odit expedita similique.",
-                link: "/#",
-              },
-              {
-                banner: "http://loremflickr.com/400/400/child",
-                title:
-                  "Aliquam necessitatibus magnam et voluptatem nisi saepe quia ipsam non.",
-                link: "/#",
-              },
-              {
-                banner: "http://loremflickr.com/400/400/children",
-                title: "Fuga amet voluptatem aliquam saepe.",
-                link: "/#",
-              },
-              {
-                banner: "http://loremflickr.com/400/400/education",
-                title:
-                  "Nisi omnis modi natus voluptatem voluptatem veritatis optio aut. Voluptatem voluptatum fuga sunt alias explicabo. Minus debitis mollitia consectetur ullam assumenda aliquam. Repellendus sit consequatur corporis quisquam iusto repellat laborum temporibus omnis.",
-                link: "/#",
-              },
-              {
-                banner: "http://loremflickr.com/400/300/child",
-                title:
-                  "Eligendi qui possimus doloribus tempora aut dolor id quam. Reiciendis ut ut harum iste ea eveniet quia quod.",
-                link: "/#",
-              },
-              {
-                banner: "http://loremflickr.com/400/400/educationchildren",
-                title:
-                  "Eveniet quo eius voluptate sunt excepturi eius perferendis. Dolorum quia qui nisi praesentium sit quas.",
-                link: "/#",
-              },
-            ].map((_, index) => (
+            {[...(data?.data || [])].map((_, index) => (
               <CarouselItem
                 key={index}
                 className="text-center basis-[90%] px-5 lg:px-3 md:basis-[44%] lg:basis-[28%] 2xl:basis-[20%] h-full"
               >
-                <NewsCard item={_} />
+                <NewsCard
+                  item={{
+                    orientation: "VERTICAL",
+                    publishAt: new Date(
+                      _.attributes.publishedAt
+                    ).toLocaleDateString(),
+                    link: `/weblog/${_.attributes.slug}`,
+                    title: _.attributes.title,
+                    description: _.attributes.description,
+                    author: _.attributes?.authorsBio?.data?.attributes
+                      ? _.attributes?.authorsBio?.data?.attributes?.name
+                      : null,
+                    banner: `${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${_?.attributes.cover?.data.attributes.url}`,
+                  }}
+                />
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -85,29 +93,49 @@ const NewsSlider = () => {
 
 export default NewsSlider;
 
-function NewsCard({ item }: { item: any }) {
+export function NewsCard({ item }: { item: any }) {
   return (
-    <>
-      <div className="border border-[#666666] h-full rounded-2xl flex flex-col gap-4 overflow-hidden">
-        <div className="flex justify-center h-56 w-full overflow-hidden  object-contain relative">
-          <Image
-            src={item.banner}
-            fill
-            alt={item.title}
-            className="object-cover"
-          />
+    <Link
+      href={item.link}
+      className={cn(
+        "border border-[#666666] h-full rounded-2xl flex flex-col gap-4 overflow-hidden",
+        {
+          "flex-row": item.orientation === "HORIZONTAL",
+        }
+      )}
+    >
+      <div
+        className={cn(
+          "flex justify-center h-56 w-full overflow-hidden object-contain relative",
+          {
+            "w-56": item.orientation === "HORIZONTAL",
+          }
+        )}
+      >
+        <Image
+          src={item.banner}
+          fill
+          alt={item.title}
+          className="object-cover"
+        />
+      </div>
+      <div
+        className={cn("p-8 pt-2 px-8 flex flex-col gap-4", {
+          "pt-8 pl-2": item.orientation === "HORIZONTAL",
+        })}
+      >
+        <div className="flex items-center gap-2 text-xs">
+          <User className="text-[#19C1B6] size-4" />{" "}
+          <span>by {item.author || "unknown"}</span>
         </div>
-        <div className="p-8 pt-2 px-8 flex flex-col gap-4">
-          <div className="flex items-center gap-2 text-xs">
-            <User className="text-[#19C1B6] size-4" /> <span>by {"Admin"}</span>
-          </div>
-          <div className="h-20 max-h-20 text-left">
-            <p className="line-clamp-3 font-semibold text-xl text-[#333333]">
-              {item.title}
-            </p>
-          </div>
+        <div className="h-20 max-h-20 text-left">
+          <p className="line-clamp-3 font-semibold text-xl text-[#333333]">
+            {item.title}
+          </p>
+
+          <p className="line-clamp-3 text-neutral-500">{item.description}</p>
         </div>
       </div>
-    </>
+    </Link>
   );
 }
