@@ -39,8 +39,8 @@ const NewsSlider = () => {
   });
 
   return (
-    <div className={cn("max-w-screen-2xl mx-auto flex flex-col gap-8 my-32")}>
-      <div className={cn("px-5 2xl:px-0", "flex flex-col gap-8")}>
+    <div className={cn("max-w-screen-xl mx-auto flex flex-col gap-8 my-32")}>
+      <div className={cn("px-5 xl:px-0", "flex flex-col gap-8")}>
         <h3 className="font-bold text-3xl">BrainWave News</h3>
         <p className="">
           It is our goal to provide age appropriate opportunity for every child

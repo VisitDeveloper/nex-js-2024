@@ -67,7 +67,7 @@ export default function Weblog({
     <div className="flex flex-col gap-4 mb-16">
       <FeatureNews />
 
-      <div className="px-5 2xl:px-0 max-w-screen-2xl mx-auto space-y-16 w-full">
+      <div className="px-5 xl:px-0 max-w-screen-xl mx-auto space-y-16 w-full">
         <div className="space-y-8 w-full">
           <h3 className="font-bold text-black text-4xl mt-5 flex flex-row gap-2 items-center justify-start">
             All posts
@@ -251,7 +251,7 @@ export default function Weblog({
         <div
           className={cn(
             "flex flex-col justify-center items-center gap-8 text-white",
-            "bg-[#26BEB3]/80 w-full rounded-2xl mx-auto max-w-screen-2xl p-8 pb-24 lg:pb-8 h-96 relative overflow-hidden",
+            "bg-[#26BEB3]/80 w-full rounded-2xl mx-auto max-w-screen-xl p-8 pb-24 lg:pb-8 h-96 relative overflow-hidden",
             "before:content-[''] before:absolute before:-z-10 before:bg-[url('/bg-newsletter.png')] before:bg-cover before:w-full before:h-full before:inset-0"
           )}
         >

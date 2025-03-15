@@ -16,7 +16,7 @@ import { motion } from "motion/react";
 export default function About() {
   return (
     <>
-      <motion.div className="flex flex-col lg:flex-row gap-8 items-center justify-center lg:items-start lg:justify-between mx-auto my-16 max-w-screen-2xl px-5 2xl:px-0">
+      <motion.div className="flex flex-col lg:flex-row gap-8 items-center justify-center lg:items-start lg:justify-between mx-auto my-16 max-w-screen-xl px-5 xl:px-0">
         <motion.div
           initial="closed"
           animate="open"
