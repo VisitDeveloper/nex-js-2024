@@ -85,14 +85,14 @@ export default function FooterLayout({ ...props }) {
         "text-black bg-gradient-to-r from-[#FEF6EC] to-[#EDFEFC] relative",
         "py-8",
         "pb-16",
-        "px-5 2xl:px-0",
+        "px-5 xl:px-0",
         "before:absolute before:z-[1] before:content-[''] before:bg-[url('/pattern-wave.png')] before:bg-repeat-x before:w-full before:bottom-8 before:left-0 before:h-6",
         {
           "py-48": pathname === "/",
         }
       )}
     >
-      <div className="h-auto py-8 max-w-screen-2xl mx-auto overflow-hidden">
+      <div className="h-auto py-8 max-w-screen-xl mx-auto overflow-hidden">
         <Row className="gap-x-16 gap-8">
           <div className="lg:col-span-4 col-span-12 flex flex-col w-full items-start gap-8">
             <ListSetup

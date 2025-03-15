@@ -64,12 +64,12 @@ export default function Weblog({
     <div className="flex flex-col gap-16 mb-16">
       <div
         className={cn(
-          "px-5 2xl:px-0 py-32 2xl:py-32",
+          "px-5 xl:px-0 py-32 xl:py-32",
           "bg-gradient-to-br from-[#FEF6EC] to-[#EDFEFC] relative flex justify-center items-center gap-12",
           "before:absolute before:z-[1] before:content-[''] before:bg-[url('/pattern-wave.png')] before:bg-repeat-x bg-left before:w-full before:left-0 before:top-12 before:h-6"
         )}
       >
-        <div className="h-full flex flex-col items-center justify-center text-center w-full max-w-screen-2xl gap-y-4">
+        <div className="h-full flex flex-col items-center justify-center text-center w-full max-w-screen-xl gap-y-4">
           <h3 className="font-bold text-3xl">{params.slug}</h3>
           <p className="">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -78,7 +78,7 @@ export default function Weblog({
         </div>
       </div>
 
-      <div className="px-5 2xl:px-0 max-w-screen-2xl mx-auto space-y-16 w-full">
+      <div className="px-5 xl:px-0 max-w-screen-xl mx-auto space-y-16 w-full">
         <div className="flex flex-col gap-4 w-full">
           {/* upper search  */}
           {/* <div className="flex flex-col rounded-3xl shadow-lg px-4 py-2 bg-miniBackground">
@@ -176,7 +176,7 @@ export default function Weblog({
           <div
             className={cn(
               "flex flex-col justify-center items-center gap-8 text-white",
-              "bg-[#26BEB3]/80 w-full rounded-2xl mx-auto max-w-screen-2xl p-8 pb-24 lg:pb-8 h-96 relative overflow-hidden",
+              "bg-[#26BEB3]/80 w-full rounded-2xl mx-auto max-w-screen-xl p-8 pb-24 lg:pb-8 h-96 relative overflow-hidden",
               "before:content-[''] before:absolute before:-z-10 before:bg-[url('/bg-newsletter.png')] before:bg-cover before:w-full before:h-full before:inset-0"
             )}
           >
