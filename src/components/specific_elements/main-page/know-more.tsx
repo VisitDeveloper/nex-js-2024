@@ -15,11 +15,11 @@ const KnowMore = () => {
   return (
     <div
       className={cn(
-        "px-5 2xl:px-0",
-        "relative flex justify-center items-center gap-12 py-12"
+        "px-5 xl:px-0",
+        "relative flex justify-center items-center gap-12 py-16"
       )}
     >
-      <div className="h-full flex flex-col lg:flex-row gap-y-16 items-stretch w-full max-w-screen-2xl mx-auto">
+      <div className="h-full flex flex-col lg:flex-row gap-16 items-stretch w-full max-w-screen-xl mx-auto">
         <div className="basis-full lg:basis-1/2 flex flex-grow items-start flex-shrink-0 flex-col justify-center gap-8">
           <h5 className="font-bold text-5xl">Know more about BrainWave</h5>
 
@@ -33,23 +33,33 @@ const KnowMore = () => {
             >
               {[
                 {
-                  title: "Is it accessible?",
+                  title: "What is BrainWave?",
                   description:
-                    "Yes. It adheres to the WAI-ARIA design pattern.",
+                    "BrainWave is an innovative educational platform offering interactive app books and dyslexia-friendly tools to help children develop literacy skills in a fun and engaging way.",
                 },
                 {
-                  title: "Is it styled?",
-                  description: `Yes. It comes with default styles that matches the other
-                  components&apos; aesthetic.`,
+                  title: "⁠Who are BrainWave’s learning apps designed for?",
+                  description: `Our apps are designed for young learners aged 2-9 years, focusing on early literacy, reading comprehension, and dyslexia-friendly support.`,
                 },
                 {
-                  title: "Is it animated?",
-                  description: `Yes. It&apos;s animated by default, but you can disable it if
-                  you prefer.`,
+                  title:
+                    "How do BrainWave’s dyslexia-friendly tools help children?",
+                  description: `We use multi-sensory learning techniques, including text-to-speech, adjustable fonts, and interactive storytelling, making reading easier and more accessible for children with dyslexia.`,
+                },
+                {
+                  title:
+                    "Are the BrainWave apps accessible on different devices?",
+                  description: `Yes! Our apps work on tablets, smartphones, and computers, ensuring easy access anytime, anywhere.`,
+                },
+                {
+                  title:
+                    "How can parents and educators get started with BrainWave?",
+                  description: `Simply download our app, explore the free trial content, and customize the learning experience based on your child’s needs.`,
                 },
               ].map((item, index) => {
                 return (
                   <AccordionItem
+                    key={`item-${index}`}
                     value={`item-${index}`}
                     className="border border-[#DFDFDF] shadow rounded-2xl overflow-hidden"
                   >
@@ -79,7 +89,7 @@ const KnowMore = () => {
             </Accordion>
           </div>
         </div>
-        
+
         <div className="basis-full lg:basis-1/2 relative flex-grow flex-shrink-0 h-full flex justify-center items-center">
           <div className="relative aspect-square w-full max-w-screen-sm">
             <Image alt="hero" fill src="/bg-knows.svg" />

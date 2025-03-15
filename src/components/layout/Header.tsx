@@ -64,9 +64,9 @@ export default function HeaderLayout({ ...props }) {
       <div className="top-0 sticky z-[11] block">
         <Header
           {...props}
-          className="bg-white w-full dark:bg-blackRgba h-20 px-5 2xl:px-0 z-50 flex items-center border-b border-solid border-iconColor"
+          className="bg-white w-full dark:bg-blackRgba h-20 px-5 xl:px-0 z-50 flex items-center border-b border-solid border-iconColor"
         >
-          <div className="max-w-screen-2xl mx-auto flex justify-between items-center w-full">
+          <div className="max-w-screen-xl mx-auto flex justify-between items-center w-full">
             <ListSetup
               alignItems="center"
               direction="row"

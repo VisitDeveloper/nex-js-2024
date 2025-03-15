@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Carousel,
   CarouselContent,
@@ -95,15 +97,15 @@ const ParentFeedback = () => {
           )}
           plugins={[
             Autoplay({
-              delay: 2000,
+              delay: 4000,
             }),
           ]}
         >
-          <CarouselContent className="items-stretch px-5">
+          <CarouselContent className="items-stretch px-5 space-x-16">
             {feedbacks.slice(0, 3).map((_, index) => (
               <CarouselItem
-                key={index}
-                className="h-full gap-24 flex flex-col justify-between"
+                key={"item_" + index}
+                className="h-full basis-full gap-24 flex flex-col justify-between"
               >
                 <h1 className="font-bold text-5xl">Parent Says</h1>
 

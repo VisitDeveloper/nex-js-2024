@@ -45,8 +45,8 @@ const Blog = async ({ params: { slug } }: { params: Params }) => {
   return (
     <div className="py-12 flex flex-col items-center space-y-12">
      
-      <div className="h-full flex flex-col w-full max-w-screen-2xl mx-auto gap-y-16">
-        <div className="dark:text-white  w-full bg-miniBackground text-black h-auto shadow-lg rounded-3xl max-w-screen-2xl mx-auto">
+      <div className="h-full flex flex-col w-full max-w-screen-xl mx-auto gap-y-16">
+        <div className="dark:text-white  w-full bg-miniBackground text-black h-auto shadow-lg rounded-3xl max-w-screen-xl mx-auto">
           {loading && <div>Loading...</div>}
           {error && <div>{error}</div>}
           {data && data.data.length === 0 && (
@@ -165,7 +165,7 @@ const Blog = async ({ params: { slug } }: { params: Params }) => {
           <div
             className={cn(
               "flex flex-col justify-center items-center gap-8 text-white",
-              "bg-[#26BEB3]/80 w-full rounded-2xl mx-auto max-w-screen-2xl p-8 pb-24 lg:pb-8 h-96 relative overflow-hidden",
+              "bg-[#26BEB3]/80 w-full rounded-2xl mx-auto max-w-screen-xl p-8 pb-24 lg:pb-8 h-96 relative overflow-hidden",
               "before:content-[''] before:absolute before:-z-10 before:bg-[url('/bg-newsletter.png')] before:bg-cover before:w-full before:h-full before:inset-0"
             )}
           >

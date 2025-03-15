@@ -7,7 +7,7 @@ import { cn } from "lib/utils";
 
 export default function ContactUs() {
   return (
-    <div className="px-5 2xl:px-0 mx-auto max-w-screen-2xl my-16 space-y-8">
+    <div className="px-5 xl:px-0 mx-auto max-w-screen-xl my-16 space-y-8">
       <h3 className="w-full text-center text-3xl font-bold text-[#1DC1B6]">
         Contact Us
       </h3>
