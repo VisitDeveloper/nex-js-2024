@@ -34,7 +34,7 @@ export default function Application() {
   const { theme } = useTheme();
 
   return (
-    <div className="my-12 mx-auto max-w-screen-2xl px-5 2xl:px-0 space-y-8">
+    <div className="my-12 mx-auto max-w-screen-xl px-5 xl:px-0 space-y-8">
       <form className="flex flex-col sm:flex-row gap-2 items-center bg-miniBackground rounded-3xl p-4 shadow-lg">
         <div className="w-full sm:w-3/4 flex flex-row gap-2 items-center">
           <div className="sm:w-2/4 w-full">

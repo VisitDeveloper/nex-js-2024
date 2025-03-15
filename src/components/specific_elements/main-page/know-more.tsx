@@ -15,11 +15,11 @@ const KnowMore = () => {
   return (
     <div
       className={cn(
-        "px-5 2xl:px-0",
+        "px-5 xl:px-0",
         "relative flex justify-center items-center gap-12 py-12"
       )}
     >
-      <div className="h-full flex flex-col lg:flex-row gap-y-16 items-stretch w-full max-w-screen-2xl mx-auto">
+      <div className="h-full flex flex-col lg:flex-row gap-16 items-stretch w-full max-w-screen-xl mx-auto">
         <div className="basis-full lg:basis-1/2 flex flex-grow items-start flex-shrink-0 flex-col justify-center gap-8">
           <h5 className="font-bold text-5xl">Know more about BrainWave</h5>
 
