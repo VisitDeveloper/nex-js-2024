@@ -86,8 +86,8 @@ const Login = () => {
         >
           <h2 className="font-bold text-5xl">Our Programs</h2>
           <p className="max-w-screen-sm text-xl text-center">
-            Our multi-level kindergarten cater to the age groups 2-5 years with
-            a curriculum focussing children.
+            Empowering children with engaging app books and dyslexia-friendly
+            learning tools tailored for every stage of early education.
           </p>
         </div>
 
