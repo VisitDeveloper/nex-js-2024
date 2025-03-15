@@ -6,11 +6,11 @@ const OurProgram = () => {
   return (
     <div
       className={cn(
-        "px-5 2xl:px-0",
+        "px-5 xl:px-0",
         "bg-gradient-to-br from-[#FEF6EC] to-[#EDFEFC] relative flex justify-center items-center gap-12 py-12"
       )}
     >
-      <div className="h-full flex flex-col 2xl:flex-row gap-y-16 items-stretch w-full max-w-screen-2xl">
+      <div className="h-full flex flex-col xl:flex-row gap-16 items-stretch w-full max-w-screen-xl">
         <div className="basis-full lg:basis-1/2 relative flex-grow flex-shrink-0 h-full flex justify-center items-center">
           <div className="relative aspect-square w-full max-w-screen-sm">
             <Image alt="out-program" fill src="/bg-program.svg" />

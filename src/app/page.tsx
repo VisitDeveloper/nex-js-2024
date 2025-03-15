@@ -75,12 +75,12 @@ const Login = () => {
 
       <div
         className={cn(
-          "h-full flex flex-col justify-center items-center w-full lg:max-w-screen-2xl gap-8 py-32 mx-auto"
+          "h-full flex flex-col justify-center items-center w-full lg:max-w-screen-xl gap-8 py-32 mx-auto"
         )}
       >
         <div
           className={cn(
-            "px-5 2xl:px-0",
+            "px-5 xl:px-0",
             "flex flex-col justify-center items-center gap-8 mx-auto"
           )}
         >
