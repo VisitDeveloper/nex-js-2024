@@ -10,6 +10,7 @@ import React, { JSX } from "react";
 import Link from "next/link";
 import ListSetup from "components/wrapper-elements/ListSetup";
 import Tooltip from "components/pure-elements/toltip";
+import { cn } from "lib/utils";
 import { useTheme } from "next-themes";
 
 interface MobileNavigationArray {
@@ -56,11 +57,12 @@ function MobileNavigation() {
   return (
     <>
       <div
-        className="backdrop-blur-sm
-                    dark:bg-blackRgba
+        className={cn(`backdrop-blur-sm
                 border-2 border-solid border-iconColor flex 
                 justify-between items-center w-[350px]  sm:w-[420px] mx-auto rounded-3xl h-[80px] 
-                fixed bottom-2 right-0 left-0 z-10 md:hidden"
+                fixed bottom-2 right-0 left-0 z-10 md:hidden`)
+        // "dark:bg-blackRgba"
+        }
       >
         <ListSetup
           className="gap-0 sm:gap-2 w-full sm:p-4 p-2"

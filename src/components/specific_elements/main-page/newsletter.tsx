@@ -30,7 +30,7 @@ const Newsletter = () => {
           >
             <input
               type="email"
-              className="placeholder:text-[#747474] w-full outline-none text-black"
+              className="placeholder:text-[#747474] bg-white w-full outline-none text-black"
               placeholder="Your Email"
             />
             <Button
