@@ -60,7 +60,7 @@ export default function AppSlider() {
         align: "center",
         loop: true,
       }}
-      className="w-full max-w-screen-sm mx-auto space-y-8"
+      className="w-full max-w-screen-md mx-auto space-y-8"
       plugins={[]}
     >
       <CarouselContent className="items-stretch px-5">
