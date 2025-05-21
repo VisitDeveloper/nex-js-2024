@@ -67,7 +67,7 @@ export default function AppSlider() {
         {applications.map((_, index) => (
           <CarouselItem
             key={index}
-            className="text-center basis-[90%] sm:basis-1/2 h-full"
+            className="text-center basis-[90%] sm:basis-1/3 h-full"
           >
             <div className="border border-dashed border-iconColor h-full rounded-2xl p-8 px-6 flex flex-col gap-4 justify-center">
               <div className="flex justify-center">
