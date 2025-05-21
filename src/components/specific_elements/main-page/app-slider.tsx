@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import { Apple, GooglePlay } from "iconsax-react";
-import { BookOpenText, GraduationCap, icons } from "lucide-react";
+import { BookOpenText, Bot, GraduationCap, icons } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -38,6 +38,12 @@ const applications = [
     icon: <GraduationCap className="size-12" />,
     name: "Dyslexia Learning Tools",
     description: "Personalized Support for Young Readers",
+    link: "/#",
+  },
+  {
+    icon: <Bot className="size-12" />,
+    name: "Robotics",
+    description: "Empowering Young Minds with Robotics",
     link: "/#",
   },
 ];
