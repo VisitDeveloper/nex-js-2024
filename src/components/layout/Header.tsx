@@ -120,7 +120,8 @@ export default function HeaderLayout({ ...props }) {
               className="gap-5"
             >
               <Link
-                href={"/auth"}
+                // href={"/auth"}
+                href={"https://api.bwaveedu.com/admin"}
                 className="px-8 py-2 text-base inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none bg-[#FEF8EC] text-secondary-foreground dark:bg-opacity-10"
               >
                 Login
