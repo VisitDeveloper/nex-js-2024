@@ -19,6 +19,10 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "api.bwaveedu.com",
+      },
+      {
+        protocol: "https",
         hostname: "placehold.co",
       },
       {
