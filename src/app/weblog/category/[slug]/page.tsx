@@ -57,7 +57,6 @@ export default function Weblog({
   });
 
   useEffect(() => {
-    console.log("listOrCardActivate", listOrCardActivate);
   }, [listOrCardActivate]);
 
   return (
