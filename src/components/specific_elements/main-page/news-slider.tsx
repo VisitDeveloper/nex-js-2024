@@ -39,50 +39,54 @@ const NewsSlider = () => {
   });
 
   return (
-    <div className={cn("max-w-screen-xl mx-auto flex flex-col gap-8 my-32")}>
-      <div className={cn("px-5 xl:px-0", "flex flex-col gap-8")}>
-        <h3 className="font-bold text-3xl">BrainWave News – Stay Updated!</h3>
-        <p className="">Exciting Updates from BrainWave! Stay tuned for more updates!</p>
-      </div>
+    <div className={cn(" py-36")} id="resource">
+      <div className={cn("max-w-screen-xl mx-auto flex flex-col gap-8")}>
+        <div className={cn("px-5 xl:px-0", "flex flex-col gap-8")}>
+          <h3 className="font-bold text-3xl">BrainWave News – Stay Updated!</h3>
+          <p className="">
+            Exciting Updates from BrainWave! Stay tuned for more updates!
+          </p>
+        </div>
 
-      <div className="w-full">
-        <Carousel
-          opts={{
-            align: "center",
-            loop: true,
-          }}
-          className={cn(
-            "w-full relative",
-            "before:content-[''] before:absolute before:top-0 before:w-[10%] before:h-full before:pointer-events-none before:z-[2] before:left-0 before:bg-gradient-to-r before:from-white before:to-transparent",
-            "after:content-[''] after:absolute after:top-0 after:w-[10%] after:h-full after:pointer-events-none after:z-10 after:right-0 after:bg-gradient-to-l after:from-white after:to-transparent"
-          )}
-          plugins={[]}
-        >
-          <CarouselContent className="items-stretch">
-            {[...(data?.data || [])].map((_, index) => (
-              <CarouselItem
-                key={index}
-                className="text-center basis-[90%] px-5 lg:px-3 md:basis-[44%] lg:basis-[28%] 2xl:basis-[20%] h-full"
-              >
-                <NewsCard
-                  item={{
-                    orientation: "VERTICAL",
-                    publishAt: new Date(
-                      _.attributes.publishedAt
-                    ).toLocaleDateString(),
-                    link: `/weblog/${_.attributes.slug}`,
-                    title: _.attributes.title,
-                    description: _.attributes.description,
-                    author: _.attributes?.authorsBio?.data?.attributes
-                      ? _.attributes?.authorsBio?.data?.attributes?.name
-                      : null,
-                    banner: `${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${_?.attributes.cover?.data.attributes.url}`,
-                  }}
-                />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
+        <div className="w-full">
+          <Carousel
+            opts={{
+              align: "center",
+              loop: true,
+            }}
+            className={cn(
+              "w-full relative",
+              "before:content-[''] before:absolute before:top-0 before:w-[10%] before:h-full before:pointer-events-none before:z-[2] before:left-0 before:bg-gradient-to-r before:from-white before:to-transparent",
+              "after:content-[''] after:absolute after:top-0 after:w-[10%] after:h-full after:pointer-events-none after:z-10 after:right-0 after:bg-gradient-to-l after:from-white after:to-transparent"
+            )}
+            plugins={[]}
+          >
+            <CarouselContent className="items-stretch">
+              {[...(data?.data || [])].map((_, index) => (
+                <CarouselItem
+                  key={index}
+                  className="text-center basis-[90%] px-5 lg:px-3 md:basis-[44%] lg:basis-[28%] 2xl:basis-[20%] h-full"
+                >
+                  <NewsCard
+                    item={{
+                      orientation: "VERTICAL",
+                      publishAt: new Date(
+                        _.attributes.publishedAt
+                      ).toLocaleDateString(),
+                      link: `/weblog/${_.attributes.slug}`,
+                      title: _.attributes.title,
+                      description: _.attributes.description,
+                      author: _.attributes?.authorsBio?.data?.attributes
+                        ? _.attributes?.authorsBio?.data?.attributes?.name
+                        : null,
+                      banner: `${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${_?.attributes.cover?.data.attributes.url}`,
+                    }}
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </div>
       </div>
     </div>
   );

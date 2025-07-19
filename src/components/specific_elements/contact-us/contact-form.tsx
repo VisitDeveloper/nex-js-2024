@@ -38,7 +38,6 @@ export default function ContactForm() {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(JSON.stringify(data, null, 2));
 
     // if (formRef.current) {
     //     emailjs

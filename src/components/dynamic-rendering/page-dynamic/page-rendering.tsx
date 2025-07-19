@@ -62,7 +62,6 @@ const StylesMaps = (styles: Array<StylePropsArray>) => {
 const ConfigRenderComponent = (config: any) => {
 
   if (typeof KeysToComponentMap[config.component] !== "undefined") {
-    console.log(config.id, config.className, StylesMaps(config.styles));
     return createElement(
       KeysToComponentMap[config.component],
       {

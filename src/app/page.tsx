@@ -3,8 +3,10 @@
 import {
   AppSlider,
   Hero,
+  Innovative,
   NewsSlider,
   Newsletter,
+  OurTeam,
   ParentFeedback,
 } from "components";
 
@@ -12,6 +14,7 @@ import KnowMore from "components/specific_elements/main-page/know-more";
 import OurProgram from "components/specific_elements/main-page/our-program";
 import React from "react";
 import { cn } from "lib/utils";
+import About from "./about/page";
 
 // import Image from 'next/image';
 // import { MessageQuestion } from 'iconsax-react';
@@ -72,40 +75,38 @@ const Login = () => {
   return (
     <>
       <Hero />
-
-      <div
-        className={cn(
-          "h-full flex flex-col justify-center items-center w-full lg:max-w-screen-xl gap-8 py-32 mx-auto"
-        )}
-      >
+      <About />
+      <Innovative />
+      <div className="py-36" id="applications">
         <div
           className={cn(
-            "px-5 xl:px-0",
-            "flex flex-col justify-center items-center gap-8 mx-auto"
+            "h-full flex flex-col justify-center items-center w-full lg:max-w-screen-xl gap-8 mx-auto"
           )}
         >
-          <h2 className="font-bold text-5xl">Our Programs</h2>
-          <p className="max-w-screen-sm text-xl text-center">
-            Empowering children with engaging app books and dyslexia-friendly
-            learning tools tailored for every stage of early education.
-          </p>
-        </div>
+          <div
+            className={cn(
+              "px-5 xl:px-0",
+              "flex flex-col justify-center items-center gap-8 mx-auto"
+            )}
+          >
+            <h2 className="font-bold text-5xl">Our Programs</h2>
+            <p className="max-w-screen-sm text-xl text-center">
+              Empowering children with engaging app books and dyslexia-friendly
+              learning tools tailored for every stage of early education.
+            </p>
+          </div>
 
-        <div className="w-full">
-          <AppSlider />
+          <div className="w-full">
+            <AppSlider />
+          </div>
         </div>
       </div>
-
       <OurProgram />
-
       <KnowMore />
-
       <ParentFeedback />
-
       <NewsSlider />
-
+      <OurTeam/>
       <Newsletter />
-
       {/* <div className="mx-0 lg:mx-10 lg:rounded-3xl shadow-lg lg:mt-2 h-[98vh] back-dark">
         <div className="invisible">t</div>
         <div className="hidden lg:block">
@@ -120,26 +121,19 @@ const Login = () => {
       <div className="lg:hidden block">
         <ThreeElement />
       </div> */}
-
       {/* <ProgressItems /> */}
-
       {/* <Introduce /> */}
       {/* desktop */}
       {/* <Carousel /> */}
-
       {/* mobile */}
       {/* <SlideShow /> */}
-
       {/* <ProgressItems /> */}
-
       {/* <WhoWeAre />
 
 
             <ProgressItems />
       <OurTeam /> */}
-
       {/* {t("signIn")} */}
-
       {/* 
       <div>
       {loading && <>... loading </>}
@@ -151,7 +145,6 @@ const Login = () => {
         {error && <> Error </>}
         </div>
         */}
-
       {/* <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias sequi tempore tenetur ad harum culpa, recusandae dicta dignissimos voluptatibus voluptate accusamus corrupti minus hic atque explicabo laboriosam incidunt dolores nulla.</div> */}
     </>
   );

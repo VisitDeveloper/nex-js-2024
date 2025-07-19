@@ -26,7 +26,6 @@ Readonly<{
   const pathname = usePathname();
   const isAuthPage = pathname.startsWith("/auth");
   const isAdminPage = pathname.startsWith("/admin");
-  console.log("pathname ", pathname.split("/").filter(Boolean)[0]);
   const routeObjectWithOutLayout: any = {
     auth: "/auth",
     admin: "/admin",
