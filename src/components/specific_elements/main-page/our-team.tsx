@@ -108,7 +108,7 @@ export default function OurTeam() {
                 leftMap[index] || "left-0"
               }`}
             >
-              <div className="relative mx-auto lg:mb-auto rounded-full shadow overflow-hidden">
+              <div className="relative mx-auto lg:mb-auto rounded-full shadow overflow-hidden size-20 flex-shrink-0">
                 <UserRound className="size-20" />
               </div>
               <div className="flex flex-col justify-center items-center lg:items-start  sm:mt-0 sm:p-5 lg:py-0">
