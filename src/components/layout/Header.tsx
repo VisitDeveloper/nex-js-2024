@@ -72,7 +72,7 @@ export default function HeaderLayout({ ...props }) {
     },
   ];
   return (
-    <div className="relative top-0 sticky z-[11] block">
+    <div className="sticky top-0  z-[11] block">
       <Header
         {...props}
         className="bg-white w-full  xl:px-0 z-50 flex flex-col items-center "
@@ -85,13 +85,15 @@ export default function HeaderLayout({ ...props }) {
               justifyContent="start"
               className="gap-2"
             >
-              <Image
-                src="/logo.png"
-                className=""
-                width={56}
-                height={56}
-                alt="logo"
-              />
+              <Link href={"/"}>
+                <Image
+                  src="/logo.png"
+                  className=""
+                  width={56}
+                  height={56}
+                  alt="logo"
+                />
+              </Link>
 
               <span className="text-2xl text-[#19C1B6] font-bold">
                 BrainWave
@@ -175,9 +177,8 @@ export default function HeaderLayout({ ...props }) {
           <motion.div
             variants={threeElementsVariants}
             animate={controls}
-            className={`fixed top-[82px] right-[3%] size-64 bg-[#FEF8EC] rounded-xl shadow-lg z-40 transform transition-transform duration-300 ${
-              hamburgerMenu ? "translate-x-0" : "-translate-x-full"
-            }`}
+            className={`fixed top-[82px] right-[3%] size-64 bg-[#FEF8EC] rounded-xl shadow-lg z-40 transform transition-transform duration-300 ${hamburgerMenu ? "translate-x-0" : "-translate-x-full"
+              }`}
           >
             <ListSetup
               alignItems="center"
