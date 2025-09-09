@@ -4,7 +4,7 @@ import { useComingSoonCountDown } from "hooks/useCominSoonCountDown";
 import React from "react";
 
 export default function ReleasePage() {
-    const { days, hours, minutes, seconds } = useComingSoonCountDown("2025-12-01T00:00:00");
+    const { days, hours, minutes, seconds } = useComingSoonCountDown("2025-11-01T00:00:00");
 
     const arrayUnitTime = [
         {
@@ -61,10 +61,10 @@ export default function ReleasePage() {
             </section>
 
             {/* Price */}
-            <section className="text-center w-full max-w-2xl">
+            {/* <section className="text-center w-full max-w-2xl">
                 <h2 className="text-xl font-semibold mb-4">💰 Price</h2>
-                <p className="text-2xl font-bold text-green-600">$199</p>
-            </section>
+                <p className="text-2xl font-bold text-green-600">$1500</p>
+            </section> */}
         </div>
     );
 }
