@@ -56,26 +56,26 @@ export default function AppSlider() {
     undefined
   );
   const { selectedIndex } = useDotButton(api);
- const { days, hours, minutes, seconds } = useComingSoonCountDown("2025-12-01T00:00:00");
+  const { days, hours, minutes, seconds } = useComingSoonCountDown("2025-12-01T00:00:00");
 
-    const arrayUnitTime = [
-        {
-            name: 'days',
-            unit: days
-        },
-        {
-            name: 'hours',
-            unit: hours
-        },
-        {
-            name: 'minutes',
-            unit: minutes
-        },
-        {
-            name: 'seconds',
-            unit: seconds
-        }
-    ]
+  const arrayUnitTime = [
+    {
+      name: 'days',
+      unit: days
+    },
+    {
+      name: 'hours',
+      unit: hours
+    },
+    {
+      name: 'minutes',
+      unit: minutes
+    },
+    {
+      name: 'seconds',
+      unit: seconds
+    }
+  ]
 
 
 
@@ -131,10 +131,12 @@ export default function AppSlider() {
                       View Detail
                     </Button>
                   </DrawerTrigger>
-                  <DrawerContent>
-                    <div className="mx-auto w-full max-w-sm">
-                      <div className="flex flex-col justify-center items-center gap-4 h-[300px]">
-                        {/* <div>
+                  {_.name === "Robotics" ? null : (
+
+                    <DrawerContent>
+                      <div className="mx-auto w-full max-w-sm">
+                        <div className="flex flex-col justify-center items-center gap-4 h-[300px]">
+                          {/* <div>
                           <Image
                             width={56}
                             height={56}
@@ -143,52 +145,53 @@ export default function AppSlider() {
                             alt="Medium avatar"
                           />
                         </div> */}
-                        <div>{_.name}</div>
-                        <p className="line-clamp-3">{_.description}</p>
+                          <div>{_.name}</div>
+                          <p className="line-clamp-3">{_.description}</p>
 
-                        <div className="flex flex-row gap-2 items-center justify-center ">
-                          <Link
-                            href={"/"}
-                            className="flex flex-row gap-1 border-2 border-solid border-black dark:border-white rounded-lg p-1"
-                          >
-                            <div>
-                              <Apple
-                                size="50"
-                                className="dark:text-white text-black"
-                              />
-                            </div>
-                            <div className="flex flex-col gap-2 dark:text-white text-black">
-                              <span className="text-sm">Download on the</span>
-                              <span className="text-lg">Apple Store</span>
-                            </div>
-                          </Link>
+                          <div className="flex flex-row gap-2 items-center justify-center ">
+                            <Link
+                              href={"/"}
+                              className="flex flex-row gap-1 border-2 border-solid border-black dark:border-white rounded-lg p-1"
+                            >
+                              <div>
+                                <Apple
+                                  size="50"
+                                  className="dark:text-white text-black"
+                                />
+                              </div>
+                              <div className="flex flex-col gap-2 dark:text-white text-black">
+                                <span className="text-sm">Download on the</span>
+                                <span className="text-lg">Apple Store</span>
+                              </div>
+                            </Link>
 
-                          <Link
-                            href={"/"}
-                            className="flex flex-row gap-1 border-2 border-solid border-black dark:border-white rounded-lg p-1"
-                          >
-                            <div>
-                              <GooglePlay
-                                size="50"
-                                className="dark:text-white text-black"
-                              />
-                            </div>
-                            <div className="flex flex-col gap-2 dark:text-white text-black">
-                              <span className="text-sm">GET IT ON</span>
-                              <span className="text-lg">Google Play</span>
-                            </div>
-                          </Link>
+                            <Link
+                              href={"/"}
+                              className="flex flex-row gap-1 border-2 border-solid border-black dark:border-white rounded-lg p-1"
+                            >
+                              <div>
+                                <GooglePlay
+                                  size="50"
+                                  className="dark:text-white text-black"
+                                />
+                              </div>
+                              <div className="flex flex-col gap-2 dark:text-white text-black">
+                                <span className="text-sm">GET IT ON</span>
+                                <span className="text-lg">Google Play</span>
+                              </div>
+                            </Link>
+                          </div>
                         </div>
-                      </div>
-                      {/* <DrawerFooter>
+                        {/* <DrawerFooter>
                         <DrawerClose asChild>
                           <Button variant="outline" className="w-full">
                             Close
                           </Button>
                         </DrawerClose>
                       </DrawerFooter> */}
-                    </div>
-                  </DrawerContent>
+                      </div>
+                    </DrawerContent>
+                  )}
                 </Drawer>
               </div>
             </div>
