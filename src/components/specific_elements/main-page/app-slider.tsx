@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-
+import { useEffect, useState } from "react";
 import { Apple, GooglePlay } from "iconsax-react";
 import { BookOpenText, Bot, GraduationCap, icons } from "lucide-react";
 import {
@@ -26,6 +26,8 @@ import { EmblaCarouselType } from "embla-carousel";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "lib/utils";
+import { useRouter } from "next/navigation";
+import { useComingSoonCountDown } from "hooks/useCominSoonCountDown";
 
 const applications = [
   {
@@ -44,15 +46,38 @@ const applications = [
     icon: <Bot className="size-12" />,
     name: "Robotics",
     description: "Empowering Young Minds with Robotics",
-    link: "/#",
+    link: "/coming-soon",
   },
 ];
 
 export default function AppSlider() {
+  const router = useRouter();
   const [api, setApi] = React.useState<EmblaCarouselType | undefined>(
     undefined
   );
   const { selectedIndex } = useDotButton(api);
+ const { days, hours, minutes, seconds } = useComingSoonCountDown("2025-12-01T00:00:00");
+
+    const arrayUnitTime = [
+        {
+            name: 'days',
+            unit: days
+        },
+        {
+            name: 'hours',
+            unit: hours
+        },
+        {
+            name: 'minutes',
+            unit: minutes
+        },
+        {
+            name: 'seconds',
+            unit: seconds
+        }
+    ]
+
+
 
   return (
     <Carousel
@@ -77,7 +102,17 @@ export default function AppSlider() {
               </div>
               <span className="font-semibold text-xl">{_.name}</span>
               <div className="h-20 max-h-20">
-                <p className="line-clamp-3">{_.description}</p>
+                <p className="line-clamp-3">{_.name === "Robotics" ? null : _.description}</p>
+                {_.name === "Robotics" && (
+                  <div className="flex gap-2 text-center mb-4">
+                    {arrayUnitTime.map((item) => (
+                      <div key={item.name} className="bg-white shadow-lg rounded-2xl p-2 w-14">
+                        <p className="text-xs font-bold">{item.unit}</p>
+                        <p className="text-xs">{item.name}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
               <div className="">
                 <Drawer>
@@ -86,13 +121,18 @@ export default function AppSlider() {
                       variant="secondary"
                       className="bg-transparent rounded-full py-3 px-12 shadow-none"
                       type="button"
+                      onClick={() => {
+                        if (_.name === "Robotics") {
+                          router.push(_.link);
+                        } else {
+                        }
+                      }}
                     >
                       View Detail
                     </Button>
                   </DrawerTrigger>
                   <DrawerContent>
                     <div className="mx-auto w-full max-w-sm">
-                      {/* data {item} */}
                       <div className="flex flex-col justify-center items-center gap-4 h-[300px]">
                         {/* <div>
                           <Image
