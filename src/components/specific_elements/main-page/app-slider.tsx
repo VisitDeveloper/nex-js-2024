@@ -56,7 +56,7 @@ export default function AppSlider() {
     undefined
   );
   const { selectedIndex } = useDotButton(api);
-  const { days, hours, minutes, seconds } = useComingSoonCountDown("2025-11-01T00:00:00");
+  const { days, hours, minutes, seconds } = useComingSoonCountDown("2025-12-11T00:00:00");
 
   const arrayUnitTime = [
     {
