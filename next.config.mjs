@@ -1,11 +1,17 @@
 /** @type {import('next').NextConfig} */
+const apiBaseUrl =
+  process.env.API_BASE_URL ||
+  process.env.NEXT_PUBLIC_BASE_API_URL ||
+  "http://127.0.0.1:1337/api";
+
 const nextConfig = {
+  output: "standalone",
   // basePath: '/en', // Custom route
   async rewrites() {
     return [
       {
         source: "/api/:path*",
-        destination: "http://127.0.0.1:1337/api/:path*",
+        destination: `${apiBaseUrl}/:path*`,
       },
     ];
   },

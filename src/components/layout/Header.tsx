@@ -3,6 +3,7 @@
 import { Button, ListSetup, SwitchSimpleTheme } from "components";
 import {
   Drawer,
+  DrawerClose,
   DrawerContent,
   DrawerTrigger,
 } from "components/pure-elements/drawer";
@@ -18,7 +19,7 @@ import { cn } from "lib/utils";
 import Header from "components/elements/header";
 import Image from "next/image";
 import Link from "next/link";
-import { AlignJustify } from "lucide-react";
+import { AlignJustify, X } from "lucide-react";
 import { motion } from "motion/react";
 import { useScroll } from "hooks/useScroll";
 import { threeElementsVariants } from "config/animation";
@@ -31,7 +32,7 @@ export interface RouteHeader {
 }
 
 export default function HeaderLayout({ ...props }) {
-  const [hamburgerMenu, setHamburgerMenu] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [element, controls] = useScroll();
 
   const ArrayRouteHeader: Array<RouteHeader> = [
@@ -95,9 +96,15 @@ export default function HeaderLayout({ ...props }) {
                 />
               </Link>
 
-              <span className="text-2xl text-[#19C1B6] font-bold">
-                BrainWave
-              </span>
+              <div className="text-2xl text-[#19C1B6] font-bold relative">
+
+                <span>Brain Wave Education</span>
+
+
+                <span className="absolute -top-4 -right-4 leading-3 text-white bg-[#19C1B6] text-[10px] font-bold px-2 py-0 pb-0.5 rounded-full">
+                  Academy
+                </span>
+              </div>
             </ListSetup>
 
             <ListSetup
@@ -109,7 +116,7 @@ export default function HeaderLayout({ ...props }) {
               <Link
                 // href={"/auth"}
                 href={"https://api.bwaveedu.com/admin"}
-                className="px-8 py-2 text-base inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none bg-[#FEF8EC] text-secondary-foreground dark:bg-opacity-10"
+                className="hidden h-10 px-8 text-base lg:inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none bg-[#FEF8EC] text-secondary-foreground dark:bg-opacity-10"
               >
                 Login
               </Link>
@@ -117,7 +124,7 @@ export default function HeaderLayout({ ...props }) {
                 asChild
                 type="button"
                 className={cn(
-                  "bg-[#FEA439] rounded-full text-base font-medium py-2 shadow-none px-8 flex items-center gap-2"
+                  "bg-[#FEA439] rounded-full text-base font-medium h-10 shadow-none px-8 hidden lg:inline-flex items-center justify-center gap-2"
                 )}
               >
                 <Link
@@ -127,20 +134,87 @@ export default function HeaderLayout({ ...props }) {
                   Shop
                 </Link>
               </Button>
-              <motion.button
-                variants={threeElementsVariants}
-                animate={controls}
-                ref={element}
-                type="button"
-                className={"bg-white gap-2 block lg:hidden"}
-                onClick={() => setHamburgerMenu(!hamburgerMenu)}
+
+              <Drawer
+                direction="right"
+                open={mobileMenuOpen}
+                onOpenChange={setMobileMenuOpen}
               >
-                <AlignJustify
-                  size={26}
-                  color="#000000"
-                  style={{ fill: "black" }}
-                />
-              </motion.button>
+                <DrawerTrigger asChild>
+                  <motion.button
+                    variants={threeElementsVariants}
+                    animate={controls}
+                    ref={element}
+                    type="button"
+                    className={"bg-white gap-2 block lg:hidden"}
+                    aria-label="Open menu"
+                  >
+                    <AlignJustify size={26} color="#000000" />
+                  </motion.button>
+                </DrawerTrigger>
+                <DrawerContent className="fixed right-0 top-0 bottom-0 left-auto mt-0 h-screen w-[300px] max-w-[85vw] rounded-none border-l bg-white p-0">
+                  <div className="flex items-center justify-between border-b border-solid border-iconColor px-5 py-4">
+                    <div className="flex items-center gap-2">
+                      <Image
+                        src="/logo.png"
+                        width={40}
+                        height={40}
+                        alt="logo"
+                      />
+                      <div className="text-base font-bold text-[#19C1B6]">
+                        Brain Wave Education
+                      </div>
+                    </div>
+
+                    <DrawerClose asChild>
+                      <button
+                        type="button"
+                        aria-label="Close menu"
+                        className="inline-flex items-center justify-center rounded-md p-2 hover:bg-black/5"
+                      >
+                        <X className="size-5" />
+                      </button>
+                    </DrawerClose>
+                  </div>
+
+                  <nav
+                    className="flex flex-col gap-1 px-4 py-4"
+                    aria-label="Mobile menu"
+                  >
+                    {ArrayRouteHeader.map((item: RouteHeader) => (
+                      <Link
+                        href={`${item.route}`}
+                        key={item.id}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="rounded-lg px-3 py-3 text-base font-medium text-black transition-colors hover:bg-black/5"
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+
+                    <div className="mt-4 flex flex-col gap-2 border-t border-black/10 pt-4">
+                      <Link
+                        href={"https://api.bwaveedu.com/admin"}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="w-full h-10 px-4 text-base inline-flex items-center justify-center whitespace-nowrap rounded-full font-medium transition-colors bg-[#FEF8EC] text-secondary-foreground"
+                      >
+                        Login
+                      </Link>
+                      <Button
+                        asChild
+                        type="button"
+                        className={cn(
+                          "w-full h-10 bg-[#FEA439] rounded-full text-base font-medium shadow-none px-4 inline-flex items-center justify-center gap-2"
+                        )}
+                      >
+                        <Link href={""} onClick={() => setMobileMenuOpen(false)}>
+                          Shop
+                        </Link>
+                      </Button>
+                    </div>
+                  </nav>
+                </DrawerContent>
+              </Drawer>
             </ListSetup>
           </div>
         </div>
@@ -173,40 +247,6 @@ export default function HeaderLayout({ ...props }) {
             </ListSetup>
           </div>
         </div>
-        {hamburgerMenu && (
-          <motion.div
-            variants={threeElementsVariants}
-            animate={controls}
-            className={`fixed top-[82px] right-[3%] size-64 bg-[#FEF8EC] rounded-xl shadow-lg z-40 transform transition-transform duration-300 ${hamburgerMenu ? "translate-x-0" : "-translate-x-full"
-              }`}
-          >
-            <ListSetup
-              alignItems="center"
-              direction="row"
-              justifyContent="start"
-              className="gap-5 flex flex-col w-full h-full mx-auto text-black overflow-hidden m-auto justify-center items-center"
-            >
-              {ArrayRouteHeader.map((item: RouteHeader) => {
-                return (
-                  <>
-                    <Link
-                      href={`${item.route}`}
-                      key={item.id}
-                      className="flex flex-col items-center gap-2"
-                    >
-                      <div className="flex flex-col">
-                        <span className="relative group font-medium text-black">
-                          {item.name}
-                          <span className="absolute left-0 bottom-0 h-[1px] w-0 bg-iconColor transition-all duration-500 group-hover:w-full" />
-                        </span>
-                      </div>
-                    </Link>
-                  </>
-                );
-              })}
-            </ListSetup>
-          </motion.div>
-        )}
       </Header>
     </div>
   );

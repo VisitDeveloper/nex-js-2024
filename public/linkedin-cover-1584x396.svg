@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1584" height="396" viewBox="0 0 1584 396" role="img"
+  aria-label="Brainwave Education LinkedIn cover">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FEF6EC" />
+      <stop offset="100%" stop-color="#EDFEFC" />
+    </linearGradient>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#19C1B6" opacity="0.18" />
+    </pattern>
+    <filter id="softBlur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="28" result="blur" />
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 0.85 0" />
+    </filter>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="b" />
+      <feMerge>
+        <feMergeNode in="b" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1584" height="396" fill="url(#bg)" />
+  <rect width="1584" height="396" fill="url(#dots)" opacity="0.22" />
+
+  <!-- Blobs (keep left-bottom area clear for LinkedIn avatar overlay) -->
+  <g filter="url(#softBlur)" opacity="0.55">
+    <circle cx="1325" cy="90" r="160" fill="#19C1B6" opacity="0.16" />
+    <circle cx="930" cy="280" r="200" fill="#19C1B6" opacity="0.11" />
+  </g>
+
+  <!-- Subtle wave motif -->
+  <path d="M160 130 C 340 90, 520 170, 700 130 S 1060 90, 1240 130 S 1420 170, 1500 130" fill="none" stroke="#19C1B6"
+    stroke-width="2" opacity="0.22" stroke-linecap="round" />
+
+  <!-- Right-side content (safe area) -->
+  <g font-family="Plus Jakarta Sans, Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif">
+    <!-- Badge -->
+    <!-- <rect x="1110" y="44" rx="18" ry="18" width="250" height="42" fill="#EDFEFC" stroke="#19C1B6" stroke-width="2"
+      opacity="0.95" /> -->
+    <!-- <text x="1235" y="72" text-anchor="middle" font-size="16" font-weight="700" fill="#0F172A"
+      opacity="0.85">EdTech</text> -->
+
+    <!-- Eyebrow -->
+    <text x="620" y="95" font-size="20" font-weight="800" fill="#19C1B6" letter-spacing="2.2"
+      text-transform="uppercase">BRAINWAVE EDUCATION</text>
+
+    <!-- Headline -->
+    <text x="620" y="175" font-size="60" font-weight="900" fill="#111111">Innovative Learning Apps</text>
+    <text x="620" y="238" font-size="60" font-weight="900" fill="#19C1B6">for Every Child</text>
+
+    <!-- Subheading -->
+    <text x="620" y="305" font-size="20" font-weight="600" fill="#333333" opacity="0.95">
+      Smart stories, dyslexia-friendly tools, and engaging games for early learners.
+    </text>
+  </g>
+
+  <!-- Faint vignette for depth -->
+  <rect width="1584" height="396" fill="none" stroke="#19C1B6" stroke-width="2" opacity="0.08" />
+</svg>

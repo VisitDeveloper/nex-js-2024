@@ -105,7 +105,7 @@ const Login = () => {
       <KnowMore />
       <ParentFeedback />
       <NewsSlider />
-      <OurTeam/>
+      <OurTeam />
       <Newsletter />
       {/* <div className="mx-0 lg:mx-10 lg:rounded-3xl shadow-lg lg:mt-2 h-[98vh] back-dark">
         <div className="invisible">t</div>
