@@ -15,6 +15,16 @@ const fredoka = Fredoka({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  manifest: "/manifest.webmanifest",
+  themeColor: "#19C1B6",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icon.svg", sizes: "any", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/apple-icon", sizes: "180x180", type: "image/png" }],
+    shortcut: ["/icon.svg"],
+  },
   title: {
     default: "BrainWave Academy",
     template: "%s | BrainWave Academy",
