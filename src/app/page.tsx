@@ -6,7 +6,7 @@ import {
   Innovative,
   NewsSlider,
   Newsletter,
-  OurTeam,
+  // OurTeam,
   ParentFeedback,
 } from "components";
 
@@ -23,7 +23,6 @@ import About from "./about/page";
 // import ThreeElement from 'components/specific_elements/main-page/three-element';
 // import { Button } from "components/pure-elements/button";
 // import { useFetch } from "hooks/useFetch";
-// import { useLanguageClient } from "hooks/useLanguageClient";
 // import { useState } from "react";
 // import { PostService } from "services/post.service";
 // import { motion } from 'motion/react';
@@ -33,9 +32,7 @@ import About from "./about/page";
 // import { MessageQuestion } from "iconsax-react";
 
 // const post = new PostService()
-// { params: { lng } }: any
 const Login = () => {
-  // const { t } = useLanguageClient(lng, 'auth');
   // const [test] = useState<boolean>(false)
   // const [test2] = useState<boolean>(false);
   // const { theme } = useTheme()
@@ -105,7 +102,7 @@ const Login = () => {
       <KnowMore />
       <ParentFeedback />
       <NewsSlider />
-      <OurTeam />
+      {/* <OurTeam /> */}
       <Newsletter />
       {/* <div className="mx-0 lg:mx-10 lg:rounded-3xl shadow-lg lg:mt-2 h-[98vh] back-dark">
         <div className="invisible">t</div>
@@ -133,7 +130,6 @@ const Login = () => {
 
             <ProgressItems />
       <OurTeam /> */}
-      {/* {t("signIn")} */}
       {/* 
       <div>
       {loading && <>... loading </>}

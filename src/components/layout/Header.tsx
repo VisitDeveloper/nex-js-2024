@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, ListSetup, SwitchSimpleTheme } from "components";
+import { Button, ListSetup } from "components";
 import {
   Drawer,
   DrawerClose,
@@ -14,15 +14,18 @@ import {
   MobileProgramming,
   NoteText,
 } from "iconsax-react";
-import React, { JSX, useState } from "react";
+import React, { JSX, useEffect, useState } from "react";
 import { cn } from "lib/utils";
+import { normalizeRoleKey } from "lib/portal-roles";
 import Header from "components/elements/header";
 import Image from "next/image";
 import Link from "next/link";
-import { AlignJustify, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { AlignJustify, LogOut, Store, X } from "lucide-react";
 import { motion } from "motion/react";
 import { useScroll } from "hooks/useScroll";
 import { threeElementsVariants } from "config/animation";
+import LogoutConfirmDialog from "components/portal/logout-confirm-dialog";
 
 export interface RouteHeader {
   id: number;
@@ -32,59 +35,132 @@ export interface RouteHeader {
 }
 
 export default function HeaderLayout({ ...props }) {
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [element, controls] = useScroll();
+  const [loggingOut, setLoggingOut] = useState(false);
+  const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
+  const [sessionUser, setSessionUser] = useState<{
+    displayName: string;
+    role: string;
+  } | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/api/auth/me", { credentials: "same-origin" });
+        const data = (await res.json()) as {
+          user?: {
+            displayName?: string;
+            role?: string;
+          } | null;
+        };
+        if (cancelled) return;
+        const u = data?.user;
+        if (u) {
+          setSessionUser({
+            displayName: u.displayName?.trim() ?? "",
+            role: u.role ?? "",
+          });
+        } else {
+          setSessionUser(null);
+        }
+      } catch {
+        if (!cancelled) setSessionUser(null);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const isCustomer =
+    sessionUser != null && normalizeRoleKey(sessionUser.role) === "customer";
+  const accountHref = sessionUser ? "/account" : "/auth";
+  const accountLabel =
+    isCustomer && sessionUser?.displayName
+      ? sessionUser.displayName
+      : "Account";
+
+  async function confirmLogout() {
+    setLoggingOut(true);
+    try {
+      await fetch("/api/logout", { method: "POST", credentials: "include" });
+      setSessionUser(null);
+      setMobileMenuOpen(false);
+      setLogoutDialogOpen(false);
+      router.refresh();
+    } finally {
+      setLoggingOut(false);
+    }
+  }
 
   const ArrayRouteHeader: Array<RouteHeader> = [
     {
       id: 0,
       name: "BrainWave",
-      route: `#brainWave`,
+      route: `/#brainWave`,
       // route: `/`,
       icon: <Home size="20" className="text-iconColor" />,
     },
     {
       id: 1,
       name: "Innovative Approach",
-      route: `#innovativeApproach`,
+      route: `/#innovativeApproach`,
       // route: `/weblog`,
       icon: <MessageEdit size="20" className="text-iconColor" />,
     },
     {
       id: 2,
       name: "Applications",
-      route: `#applications`,
+      route: `/#applications`,
       // route: `/application-page`,
       icon: <MobileProgramming size="20" className="text-iconColor" />,
     },
     {
       id: 3,
       name: "Resource",
-      route: `#resource`,
+      route: `/#resource`,
       // route: `/about`,
       icon: <InfoCircle size="20" className="text-iconColor" />,
     },
     {
       id: 4,
       name: "Contact Us",
-      route: `#contactUs`,
+      route: `/#contactUs`,
       // route: `/contact-us`,
       icon: <NoteText size="20" className="text-iconColor" />,
     },
+    {
+      id: 5,
+      name: "Shop",
+      route: `/shop`,
+      icon: <Store size="20" className="text-iconColor" />,
+    }
   ];
   return (
     <div className="sticky top-0  z-[11] block">
+      <LogoutConfirmDialog
+        open={logoutDialogOpen}
+        onOpenChange={(o) => {
+          if (!loggingOut) setLogoutDialogOpen(o);
+        }}
+        onConfirm={confirmLogout}
+        busy={loggingOut}
+        confirmLabel="Log out"
+      />
       <Header
         {...props}
         className="bg-white w-full  xl:px-0 z-50 flex flex-col items-center "
       >
-        <div className=" py-3 px-5 w-full  border-b border-solid border-iconColor">
-          <div className="max-w-screen-xl mx-auto flex justify-between items-center w-full">
+        <div className="py-3 px-5 w-full border-b border-solid border-iconColor">
+          <div className="max-w-screen-xl mx-auto flex items-center justify-between w-full gap-4">
             <ListSetup
               alignItems="center"
               direction="row"
               justifyContent="start"
-              className="gap-2"
+              className="gap-2 min-w-0 shrink-0"
             >
               <Link href={"/"}>
                 <Image
@@ -96,42 +172,62 @@ export default function HeaderLayout({ ...props }) {
                 />
               </Link>
 
-              <div className="text-2xl text-[#19C1B6] font-bold relative">
-
-                <span>Brain Wave Education</span>
-
-
-                <span className="absolute -top-4 -right-4 leading-3 text-white bg-[#19C1B6] text-[10px] font-bold px-2 py-0 pb-0.5 rounded-full">
-                  Academy
-                </span>
-              </div>
+              <Link href={"/"}>
+                <div className="text-2xl text-[#19C1B6] font-bold relative">
+                  <span>Brain Wave Education</span>
+                  <span className="absolute -top-4 -right-4 leading-3 text-white bg-[#19C1B6] text-[10px] font-bold px-2 py-0 pb-0.5 rounded-full">
+                    Academy
+                  </span>
+                </div>
+              </Link>
             </ListSetup>
+
+            <nav
+              className="hidden min-w-0 flex-1 items-center justify-center lg:flex"
+              aria-label="Main"
+            >
+              <ListSetup
+                alignItems="center"
+                direction="row"
+                justifyContent="center"
+                className="gap-6 xl:gap-10 flex-wrap"
+              >
+                {ArrayRouteHeader.map((item: RouteHeader) => (
+                  <Link
+                    href={`${item.route}`}
+                    key={item.id}
+                    className="flex flex-row items-center gap-2"
+                  >
+                    <div className="flex flex-col">
+                      <span className="relative group font-medium text-base whitespace-nowrap">
+                        {item.name}
+                        <span className="absolute left-0 bottom-0 h-[1px] w-0 bg-iconColor transition-all duration-500 group-hover:w-full" />
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </ListSetup>
+            </nav>
 
             <ListSetup
               alignItems="center"
               direction="row"
               justifyContent="end"
-              className=" gap-3 lg:gap-5"
+              className="gap-2 lg:gap-3 shrink-0"
             >
-              <Link
-                // href={"/auth"}
-                href={"https://api.bwaveedu.com/admin"}
-                className="hidden h-10 px-8 text-base lg:inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none bg-[#FEF8EC] text-secondary-foreground dark:bg-opacity-10"
-              >
-                Login
-              </Link>
               <Button
                 asChild
                 type="button"
                 className={cn(
-                  "bg-[#FEA439] rounded-full text-base font-medium h-10 shadow-none px-8 hidden lg:inline-flex items-center justify-center gap-2"
+                  "bg-[#FEA439] rounded-full text-base font-medium h-10 shadow-none px-6 lg:px-8 hidden lg:inline-flex items-center justify-center gap-2 max-w-[min(11rem,32vw)]"
                 )}
               >
                 <Link
-                  // href={"/auth"}
-                  href={""}
+                  href={accountHref}
+                  className="truncate"
+                  title={accountLabel}
                 >
-                  Shop
+                  {accountLabel}
                 </Link>
               </Button>
 
@@ -193,13 +289,6 @@ export default function HeaderLayout({ ...props }) {
                     ))}
 
                     <div className="mt-4 flex flex-col gap-2 border-t border-black/10 pt-4">
-                      <Link
-                        href={"https://api.bwaveedu.com/admin"}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="w-full h-10 px-4 text-base inline-flex items-center justify-center whitespace-nowrap rounded-full font-medium transition-colors bg-[#FEF8EC] text-secondary-foreground"
-                      >
-                        Login
-                      </Link>
                       <Button
                         asChild
                         type="button"
@@ -207,43 +296,30 @@ export default function HeaderLayout({ ...props }) {
                           "w-full h-10 bg-[#FEA439] rounded-full text-base font-medium shadow-none px-4 inline-flex items-center justify-center gap-2"
                         )}
                       >
-                        <Link href={""} onClick={() => setMobileMenuOpen(false)}>
-                          Shop
+                        <Link
+                          href={accountHref}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="truncate max-w-full"
+                          title={accountLabel}
+                        >
+                          {accountLabel}
                         </Link>
                       </Button>
+                      {sessionUser ? (
+                        <button
+                          type="button"
+                          onClick={() => setLogoutDialogOpen(true)}
+                          disabled={loggingOut}
+                          className="flex w-full h-10 items-center justify-center gap-2 rounded-full border border-black/15 bg-white text-base font-medium text-zinc-800 hover:bg-black/[0.04] disabled:opacity-50"
+                        >
+                          <LogOut className="size-4" aria-hidden />
+                          Log out
+                        </button>
+                      ) : null}
                     </div>
                   </nav>
                 </DrawerContent>
               </Drawer>
-            </ListSetup>
-          </div>
-        </div>
-        <div className="px-5 w-full hidden lg:block">
-          <div className="max-w-screen-xl mx-auto flex justify-centers items-center w-full my-5 justify-items-center bg-white">
-            <ListSetup
-              alignItems="center"
-              direction="row"
-              justifyContent="start"
-              className="gap-10 hidden lg:flex mx-auto"
-            >
-              {ArrayRouteHeader.map((item: RouteHeader) => {
-                return (
-                  <>
-                    <Link
-                      href={`${item.route}`}
-                      key={item.id}
-                      className="flex flex-row items-center gap-2"
-                    >
-                      <div className="flex flex-col">
-                        <span className="relative group font-medium text-base">
-                          {item.name}
-                          <span className="absolute left-0 bottom-0 h-[1px] w-0 bg-iconColor transition-all duration-500 group-hover:w-full" />
-                        </span>
-                      </div>
-                    </Link>
-                  </>
-                );
-              })}
             </ListSetup>
           </div>
         </div>

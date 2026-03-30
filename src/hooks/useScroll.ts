@@ -7,7 +7,7 @@
 //     const controls = useAnimation();
 //     const [element, view] = useInView({ threshold: 0.5 });
 
-//     // استفاده از useEffect برای فراخوانی controls.start بعد از مونت شدن کامپوننت
+//     // Use useEffect to start controls after mount
 //     useEffect(() => {
 //         if (view) {
 //             controls.start('show');
@@ -32,7 +32,7 @@ export const useScroll = (): [any, AnimationControls] => {
     useEffect(() => {
         if (view && !hasAnimated) {
             controls.start('show');
-            setHasAnimated(true); // فقط یک بار انیمیشن اجرا شود
+            setHasAnimated(true); // Run animation only once
         }
     }, [view, hasAnimated, controls]);
 

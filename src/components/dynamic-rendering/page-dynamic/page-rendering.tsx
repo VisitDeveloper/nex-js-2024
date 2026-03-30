@@ -18,7 +18,7 @@ import {
   UL,
   Section
 } from "components/index";
-// import {DynamicRenderingGlobal} from "components/dynamic-rendering/component-dynamic-rendering/ComponentDynamic";
+// import {DynamicRenderingGlobal} from "components/dynamic-rendering/component-dynamic-rendering/component-dynamic";
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

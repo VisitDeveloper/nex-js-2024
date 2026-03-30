@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 import { TodosSlice , createTodosSlice } from './slices/todo-slice';
 import { UsersSlice , createUsersSlice } from './slices/user-slice';
 
-// type StoreState = TodosSlice; // اگر اسلایس‌های دیگر دارید، آنها را اینجا اضافه کنید.
+// type StoreState = TodosSlice; // If you have other slices, add them here.
 type StoreState = TodosSlice & UsersSlice;
 
 export const useTodoStore = create<StoreState>()(

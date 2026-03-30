@@ -37,12 +37,6 @@ const applications = [
     link: "/#",
   },
   {
-    icon: <GraduationCap className="size-12" />,
-    name: "Dyslexia Learning Tools",
-    description: "Personalized Support for Young Readers",
-    link: "/#",
-  },
-  {
     icon: <Bot className="size-12" />,
     name: "Robotics",
     description: "Empowering Young Minds with Robotics",

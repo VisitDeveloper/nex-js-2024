@@ -1,5 +1,7 @@
 import React from "react";
 
+import { PageLoading } from "components/elements/page-loading";
+
 export default function Loading() {
-  return <div className="mx-auto flex-grow h-full">Loading...</div>;
+  return <PageLoading />;
 }
