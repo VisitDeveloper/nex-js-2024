@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { User } from "lucide-react";
 import { cn } from "lib/utils";
+import { publicArticleCoverSrc } from "lib/strapi-media";
 import { useFetch } from "hooks/useFetch";
 
 const articleServices = new ArticleService();
@@ -19,7 +20,7 @@ const NewsSlider = () => {
     service: articleServices.read.bind(articleServices),
     options: {
       params: {
-        sort: { createdAt: "desc" },
+        sort: ["publishedAt:desc"],
         pagination: {
           page: 1,
           pageSize: 10,
@@ -46,6 +47,11 @@ const NewsSlider = () => {
           <p className="">
             Exciting Updates from BrainWave! Stay tuned for more updates!
           </p>
+          {loading ? <p className="text-sm text-neutral-500">Loading posts…</p> : null}
+          {error ? <p className="text-sm text-red-600">{error}</p> : null}
+          {!loading && !error && (data?.data?.length ?? 0) === 0 ? (
+            <p className="text-sm text-neutral-500">No published posts yet.</p>
+          ) : null}
         </div>
 
         <div className="w-full">
@@ -64,7 +70,7 @@ const NewsSlider = () => {
             <CarouselContent className="items-stretch">
               {[...(data?.data || [])].map((_, index) => (
                 <CarouselItem
-                  key={index}
+                  key={_.id ?? index}
                   className="text-center basis-[90%] px-5 lg:px-3 md:basis-[44%] lg:basis-[28%] 2xl:basis-[20%] h-full"
                 >
                   <NewsCard
@@ -79,7 +85,7 @@ const NewsSlider = () => {
                       author: _.attributes?.authorsBio?.data?.attributes
                         ? _.attributes?.authorsBio?.data?.attributes?.name
                         : null,
-                      banner: `${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${_?.attributes.cover?.data.attributes.url}`,
+                      banner: publicArticleCoverSrc(_.attributes),
                     }}
                   />
                 </CarouselItem>
@@ -118,6 +124,12 @@ export function NewsCard({ item }: { item: any }) {
           fill
           alt={item.title}
           className="object-cover"
+          sizes="(max-width: 768px) 90vw, 28vw"
+          unoptimized={
+            item.banner.startsWith("/") ||
+            item.banner.includes("localhost") ||
+            item.banner.includes("127.0.0.1")
+          }
         />
       </div>
       <div

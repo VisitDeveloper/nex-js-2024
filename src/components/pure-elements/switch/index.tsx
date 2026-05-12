@@ -34,47 +34,26 @@ Switch.displayName = SwitchPrimitives.Root.displayName;
 export { Switch };
 
 export default function SwitchSimpleTheme() {
-  const { setTheme } = useTheme();
-  const [statusTheme, setStatusTheme] = useState<boolean>(false);
+  const { setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  // Load theme status from localStorage on component mount
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      const isDark = savedTheme === "dark";
-      setStatusTheme(isDark);
-      setTheme(isDark ? "dark" : "light"); // Set theme based on saved state
-    }
-  }, [setTheme]);
+    setMounted(true);
+  }, []);
 
-  // Save theme status to localStorage when statusTheme changes
-  useEffect(() => {
-    localStorage.setItem("theme", statusTheme ? "dark" : "light");
-    setTheme(statusTheme ? "dark" : "light");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [statusTheme]);
+  if (!mounted) return null;
+
+  const isDark = resolvedTheme === "dark";
 
   return (
-    <div className="flex items-center space-x-2">
-      <Switch
-        id="airplane-mode"
-        checked={statusTheme}
-        onClick={() => setStatusTheme(!statusTheme)}
-        className={cn("hidden bg-gray-200", {
-          "bg-gray-800": statusTheme,
-        })}
-      />
-      <Label htmlFor="airplane-mode">
-        {statusTheme ? (
-          <>
-            <Sun1 size="20" className="dark:text-white cursor-pointer" />
-          </>
-        ) : (
-          <>
-            <Moon size="20" className="dark:text-black cursor-pointer" />
-          </>
-        )}
-      </Label>
-    </div>
+    <button
+      type="button"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/70 text-zinc-700 ring-1 ring-black/[0.08] backdrop-blur-sm transition hover:text-[#19C1B6] dark:bg-zinc-800/80 dark:text-zinc-200 dark:ring-white/10"
+      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+      title={isDark ? "Light mode" : "Dark mode"}
+    >
+      {isDark ? <Sun1 size="20" className="text-[#FEA439]" /> : <Moon size="20" />}
+    </button>
   );
 }

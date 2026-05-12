@@ -8,14 +8,14 @@ import Markdown from "react-markdown";
 import { Params } from "model/common.model";
 import Quote from "components/blog/article-sections/quote";
 import SlideShow from "components/blog/article-sections/slide-show";
-import VideoEmbed from "components/blog/article-sections/video-embed";
 import { cn } from "lib/utils";
 import remarkGfm from "remark-gfm";
+import { publicArticleCoverSrc } from "lib/strapi-media";
 import { useFetch } from "hooks/useFetch";
 
 const articleServices = new ArticleService();
 
-const Blog = async ({ params: { slug } }: { params: Params }) => {
+function Blog({ params: { slug } }: { params: Params }) {
   const { data, loading, error } = useFetch<{ data: Array<ArticleModel> }>({
     service: articleServices.read.bind(articleServices),
     options: {
@@ -38,6 +38,7 @@ const Blog = async ({ params: { slug } }: { params: Params }) => {
             populate: "*",
           },
         },
+        sort: ["publishedAt:desc"],
       },
     },
   });
@@ -49,12 +50,12 @@ const Blog = async ({ params: { slug } }: { params: Params }) => {
         <div className="dark:text-white  w-full bg-miniBackground text-black h-auto shadow-lg rounded-3xl max-w-screen-xl mx-auto">
           {loading && <div>Loading...</div>}
           {error && <div>{error}</div>}
-          {data && data.data.length === 0 && (
+          {data && Array.isArray(data.data) && data.data.length === 0 && (
             <div className="p-16 flex justify-center items-center">
               Not found
             </div>
           )}
-          {data && data.data.length > 0 && (
+          {data && Array.isArray(data.data) && data.data.length > 0 && (
             <div className="flex flex-col h-inherit grow justify-between">
               <div className="max-w-(--breakpoint-xl) 2xl:px-0 w-full pb-8 mx-auto flex flex-col justify-between gap-4">
                 {[...(data?.data || [])].map((article) => (
@@ -65,12 +66,23 @@ const Blog = async ({ params: { slug } }: { params: Params }) => {
                     )}
                   >
                     <Image
-                      src={`${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${article?.attributes.cover?.data.attributes.url}`}
-                      alt={article?.attributes.cover?.data.attributes.name}
+                      src={publicArticleCoverSrc(article.attributes)}
+                      alt={
+                        article?.attributes.cover?.data?.attributes?.name ||
+                        article.attributes.title
+                      }
                       width={600}
                       height={400}
                       className="w-full h-64 object-cover rounded-lg"
                       style={{ aspectRatio: "600/400", objectFit: "cover" }}
+                      unoptimized={(() => {
+                        const s = publicArticleCoverSrc(article.attributes);
+                        return (
+                          s.startsWith("/") ||
+                          s.includes("localhost") ||
+                          s.includes("127.0.0.1")
+                        );
+                      })()}
                     />
                     <div className="text-2xl font-semibold leading-none tracking-tight px-8 mt-8">
                       <div>{article.attributes.title}</div>
@@ -185,6 +197,6 @@ const Blog = async ({ params: { slug } }: { params: Params }) => {
       </div>
     </div>
   );
-};
+}
 
 export default Blog;

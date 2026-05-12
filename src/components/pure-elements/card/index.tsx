@@ -16,7 +16,7 @@ const Card: React.FC<CardProps> = ({ image, style }) => {
 
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(window.innerWidth <= 768); // عرض 768 پیکسل برای تشخیص موبایل
+            setIsMobile(window.innerWidth <= 768); // 768px breakpoint for mobile
         };
 
         handleResize();
@@ -51,9 +51,9 @@ const Card: React.FC<CardProps> = ({ image, style }) => {
             onTouchEnd={handleTouchEnd}
             style={{
                 ...style,
-                height: isMobile ? "150px" : "200px", // ارتفاع متناسب برای موبایل و دسکتاپ
-                minWidth: isMobile ? "200px" : "200px", // عرض متناسب برای موبایل و دسکتاپ
-                backgroundColor: "rgb(148 163 184)", // رنگ پس‌زمینه (Slate-400)
+                height: isMobile ? "150px" : "200px", // Responsive height
+                minWidth: isMobile ? "200px" : "200px", // Responsive width
+                backgroundColor: "rgb(148 163 184)", // Background (Slate-400)
             }}
         >
             {/* Hover/Touch Overlay */}
@@ -85,7 +85,7 @@ const Card: React.FC<CardProps> = ({ image, style }) => {
                 // width={200}
                 // height={100}
                 style={{
-                    objectFit: "cover", // تصویر به‌طور کامل کارت را پر می‌کند
+                    objectFit: "cover", // Fill the card
                 }}
             />
         </motion.div>

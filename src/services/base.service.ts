@@ -25,7 +25,7 @@ export class BaseServiceClass {
 
   constructor(baseURL?: string, revalidateSeconds?: number, cacheStatus?: any) {
     this.baseURL =
-      process.env.NEXT_PUBLIC_BASE_API_URL ||
+      process.env.NEXT_PUBLIC_BASE_API_URL_CLIENT ||
       process.env.NEXT_PUBLIC_BASE_URL ||
       baseURL;
     this.revalidateSeconds = revalidateSeconds;
@@ -93,14 +93,31 @@ export class BaseServiceClass {
     try {
       const response = await fetch(fullURL, options);
 
-      // Check if response is not OK (status 2xx)
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || `Error: ${response.statusText}`);
+        let message = `Error: ${response.status} ${response.statusText}`;
+        try {
+          const text = await response.text();
+          if (text) {
+            try {
+              const errorData = JSON.parse(text) as { message?: string; error?: string };
+              message =
+                (typeof errorData.message === "string" && errorData.message) ||
+                (typeof errorData.error === "string" && errorData.error) ||
+                message;
+            } catch {
+              const t = text.trim();
+              if (t.length > 0 && t.length < 280) message = t;
+            }
+          }
+        } catch {
+          /* keep message */
+        }
+        throw new Error(message);
       }
 
-      // If response is OK, return the parsed data
-      return await response.json();
+      return await response.json().catch(() => {
+        throw new Error("Invalid JSON from server");
+      });
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error(`Fetch error: ${error.message}`);
@@ -124,7 +141,7 @@ export class SoapService {
   ): Promise<any> {
     const fullURL = `${this.baseURL}/${url}`;
 
-    // ساخت پیام XML از body
+    // Build XML message from body
     const builder = new Builder();
     const xmlBody = builder.buildObject(body);
 
@@ -146,7 +163,7 @@ export class SoapService {
 
       const responseText = await response.text();
 
-      // تبدیل XML پاسخ به JSON
+      // Convert XML response into JSON
       const parsedResponse = await parseStringPromise(responseText);
       return parsedResponse;
     } catch (error: unknown) {

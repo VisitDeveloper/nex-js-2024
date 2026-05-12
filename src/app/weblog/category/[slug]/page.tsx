@@ -12,6 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { NewsCard } from "components/specific_elements/main-page/news-slider";
 import { cn } from "lib/utils";
+import { publicArticleCoverSrc } from "lib/strapi-media";
 import { useFetch } from "hooks/useFetch";
 
 const articleServices = new ArticleService();
@@ -32,9 +33,12 @@ export default function Weblog({
     service: articleServices.read.bind(articleServices),
     options: {
       params: {
-        sort: { createdAt: "desc" },
+        sort: ["publishedAt:desc"],
         pagination: {
-          page: page,
+          page:
+            page != null && page !== "" && !Number.isNaN(Number(page))
+              ? Math.max(1, Math.floor(Number(page)))
+              : 1,
           pageSize: 20,
         },
         populate: {
@@ -138,7 +142,7 @@ export default function Weblog({
                 {error}
               </div>
             )}
-            {data && data.data.length === 0 && (
+            {data && Array.isArray(data.data) && data.data.length === 0 && (
               <div className="p-16 flex justify-center items-center">
                 Not found
               </div>
@@ -163,7 +167,7 @@ export default function Weblog({
                     author: article.attributes?.authorsBio?.data?.attributes
                       ? article.attributes?.authorsBio?.data?.attributes?.name
                       : null,
-                    banner: `${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${article.attributes.cover?.data.attributes.url}`,
+                    banner: publicArticleCoverSrc(article.attributes),
                   }}
                 />
               ))}

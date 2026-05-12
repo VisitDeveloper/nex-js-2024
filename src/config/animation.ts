@@ -95,7 +95,7 @@ export const scrollReveal = {
 export const introduceVariants: Variants = {
     open: {
         transition: {
-            staggerChildren: 0.3, // فاصله بین انیمیشن هر عنصر
+            staggerChildren: 0.3, // Spacing between child animations
         },
     },
     closed: {},
@@ -116,7 +116,7 @@ export const threeElementsVariants = {
     show: {
         opacity: 1,
         transition: {
-            staggerChildren: 0.3, // زمان‌بندی برای نمایش هر آیتم
+            staggerChildren: 0.3, // Timing for each item reveal
         },
     },
 };
@@ -129,24 +129,24 @@ export const ThreeElementitemVariants = {
 export const fadeAnime: Variants = {
     hidden: { 
         opacity: 0,
-        y: 20, // اضافه شدن حرکت به سمت پایین
+        y: 20, // Slight downward motion
         transition: {
-            duration: 0.5, // کنترل سرعت انیمیشن در حالت پنهان
+            duration: 0.5, // Hidden-state animation duration
             ease: 'easeIn'
         }
     },
     show: {
         opacity: 1,
-        y: 0, // بازگشت به موقعیت اولیه
+        y: 0, // Return to original position
         transition: {
             ease: 'easeOut',
-            duration: 0.75, // کنترل سرعت انیمیشن در حالت نمایش
-            delay: 0.2, // اضافه کردن تأخیر برای شروع انیمیشن
+            duration: 0.75, // Visible-state animation duration
+            delay: 0.2, // Delay before starting animation
         }
     },
     exit: { 
         opacity: 0,
-        y: -20, // حرکت به سمت بالا هنگام خروج
+        y: -20, // Upward motion on exit
         transition: {
             duration: 0.5,
             ease: 'easeInOut'

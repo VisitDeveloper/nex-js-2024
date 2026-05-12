@@ -24,7 +24,7 @@ export default function ThreeElement() {
     const [textIndex, setTextIndex] = useState<number>(0);
 
     useEffect(() => {
-        let interval = setInterval(() => {
+        const interval = setInterval(() => {
             // setRandomIndex(getRandomNumber(0, numbers.length));
             setTextIndex(getRandomNumber(0, texts.length));
             // setParagraphIndex(getRandomNumber(0, paragraphs.length));
@@ -64,7 +64,7 @@ export default function ThreeElement() {
                                 React.js , Next.js , Angular , React Native , Redux Zustand ,
                                 Storybook , Less , Sass , Styled-component , Tailwind-css , Ant
                                 , MUI , Bootstrap , CSS Module , Semantice UI , HighCharts ,
-                                React Hook Form , Formik , Yup , Zod , i18next , Vite , Git ,
+                                React Hook Form , Formik , Yup , Zod , Vite , Git ,
                                 GitFlow , RTKQ , Context API , GraphQl , useQuery , RTL
                             </P>
                         </Div>

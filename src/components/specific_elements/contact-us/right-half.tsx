@@ -1,12 +1,12 @@
 import { Call, Location, Map1, Signpost, Sms } from "iconsax-react";
 import { Map, Marker } from "pigeon-maps";
 
-import ListSetup from "components/wrapper-elements/ListSetup";
+import ListSetup from "components/wrapper-elements/list-setup";
 import React from "react";
 import { motion } from "motion/react";
 
 export default function RightHalf() {
-  // مختصات مرکز ایالت میشیگان
+  // Center coordinates of Michigan
   const lat = 44.3148;
   const lng = -85.6024;
   return (

@@ -1,5 +1,5 @@
 // dynamic components rendering 
-export { default as DynamicObjectLiterals } from 'components/dynamic-rendering/component-dynamic-rendering/ComponentDynamic'
+export { default as DynamicObjectLiterals } from 'components/dynamic-rendering/component-dynamic-rendering/component-dynamic'
 
 // Elements
 export { default as ButtonElement } from "components/elements/button";
@@ -21,12 +21,12 @@ export { default as H6 } from "./elements/h6";
 
 // Wrapper Elements 
 export { default as Row } from 'components/wrapper-elements/Row';
-export { default as ListSetup } from 'components/wrapper-elements/ListSetup';
+export { default as ListSetup } from 'components/wrapper-elements/list-setup';
 
 // layout 
 export { default as HeaderLayout } from 'components/layout/Header'
 export { default as FooterLayout } from 'components/layout/Footer'
-export { default as MainLayout } from 'components/layout/MainLayout'
+export { default as MainLayout } from 'components/layout/main-layout'
 
 // pure-elements 
 export { default as SwitchSimpleTheme } from 'components/pure-elements/switch/index'

@@ -1,165 +1,166 @@
-'use client'
-import React, { useState } from 'react'
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
+'use client';
+
+import React, { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "components/pure-elements/form/index"
-import { Input, Button, SwitchSimpleTheme } from "components"
-import Link from 'next/link'
-import Image from 'next/image'
-import { ArrowLeft3, Star1 } from 'iconsax-react'
-import { useRouter } from 'next/navigation'
-import { color } from 'motion/react'
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "components/pure-elements/form/index";
+import Input from "components/pure-elements/input";
+import Button from "components/pure-elements/button";
+import { useRouter } from "next/navigation";
+import { cn } from "lib/utils";
+import { canAccessPortalAdmin } from "lib/portal-roles";
+import { AuthSplitCard } from "components/auth/auth-split-card";
+import { HcaptchaWidget } from "components/auth/hcaptcha-widget";
+
+const HCAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY ?? "";
 
 const FormSchema = z.object({
-    email: z.string().email("Invalid email address.").min(2, {
-        message: "Email must be at least 2 characters.",
-    }),
-    password: z.string().min(4, {
-        message: "Password must be at least 4 characters.",
-    }),
-
-})
-
-// password: z.string()
-//       .min(8, "رمز عبور باید حداقل ۸ کاراکتر باشد")
-//       .regex(/[A-Z]/, "رمز عبور باید حداقل یک حرف بزرگ داشته باشد")
-//       .regex(/[a-z]/, "رمز عبور باید حداقل یک حرف کوچک داشته باشد")
-//       .regex(/[0-9]/, "رمز عبور باید حداقل یک عدد داشته باشد")
-//       .regex(/[^A-Za-z0-9]/, "رمز عبور باید حداقل یک کاراکتر خاص داشته باشد"),
+  email: z.string().email("Invalid email address."),
+  password: z.string().min(4, { message: "Password must be at least 4 characters." }),
+});
 
 export default function Auth() {
-    const form = useForm<z.infer<typeof FormSchema>>({
-        resolver: zodResolver(FormSchema),
-        defaultValues: {
-            email: "",
-            password: ""
-        },
-    })
+  const router = useRouter();
+  const [serverError, setServerError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [hcaptchaToken, setHcaptchaToken] = useState<string | null>(null);
+  const [captchaResetKey, setCaptchaResetKey] = useState(0);
+  const captchaRequired = Boolean(HCAPTCHA_SITE_KEY);
 
-    function onSubmit(data: z.infer<typeof FormSchema>) {
-        console.log(JSON.stringify(data, null, 2))
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
-        // if (formRef.current) {
-        //     emailjs
-        //         .sendForm(
-        //             env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-        //             env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-        //             formRef.current,
-        //             {
-        //                 publicKey: env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
-        //             },
-        //         )
-        //         .then(
-        //             () => {
-        //                 form.reset(); //clear the fields after submission
-        //             },
-        //             (error) => {
-        //                 console.warn("FAILED...", JSON.stringify(error));
-        //             },
-        //         );
-        // }
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    setLoading(true);
+    setServerError("");
+    try {
+      if (captchaRequired && !hcaptchaToken) {
+        throw new Error("Please complete the captcha.");
+      }
 
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...data,
+          ...(HCAPTCHA_SITE_KEY ? { hcaptchaToken } : {}),
+        }),
+      });
+
+      const json = await response.json();
+      if (!response.ok) {
+        throw new Error(json?.error || "Login failed");
+      }
+
+      if (!canAccessPortalAdmin(json?.user?.role)) {
+        throw new Error("You are not allowed to access the admin portal.");
+      }
+
+      router.push("/portal/admin");
+    } catch (e) {
+      setServerError(e instanceof Error ? e.message : "Login failed");
+      if (captchaRequired) {
+        setHcaptchaToken(null);
+        setCaptchaResetKey((k) => k + 1);
+      }
+    } finally {
+      setLoading(false);
     }
+  };
 
-    const router = useRouter();
+  const inputClass =
+    "h-12 rounded-2xl border border-zinc-200/90 bg-white px-4 shadow-sm transition-shadow placeholder:text-zinc-400 focus-visible:border-[#19C1B6]/50 focus-visible:ring-2 focus-visible:ring-[#19C1B6]/20 dark:border-zinc-700 dark:bg-zinc-900/80";
 
-    return (
-        <>
-            <div className={`rounded-3xl shadow-lg md:w-[700px] md:h-[400px] bg-miniBackground  flex  gap-2 flex-row-reverse duration-1000`}>
-                <div className='rounded-3xl shadow-lg md:w-[350px] md:h-[400px] bg-[url(/bglog.jpg)] bg-cover bg-no-repeat bg-center p-4'>
+  return (
+    <div className="flex w-full items-center justify-center">
+      <AuthSplitCard
+        brandTitle="Admin Portal"
+        brandSubtitle="BrainWave • Store Ops"
+        leftFooter={
+          <div
+            className={cn(
+              "max-w-md rounded-2xl border border-white/60 bg-white/50 p-4 text-sm leading-relaxed text-zinc-700 backdrop-blur-sm dark:border-white/15 dark:bg-zinc-800/50 dark:text-zinc-300"
+            )}
+          >
+            Sign in with an authorized admin account to open <span className="font-semibold">/portal/admin</span>.
+          </div>
+        }
+      >
+        <div className="space-y-1">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#FEA439]">Staff only</p>
+          <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-3xl">
+            Admin sign in
+          </h1>
+          <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            Manage catalog, orders, users, and site content.
+          </p>
+        </div>
 
-                    <div className={`relative flex flex-col gap-2 justify-center items-center h-full backdrop-blur-xs  rounded-3xl shadow-lg  backdrop-grayscale duration-1000`}>
-                        <div className='absolute w-11/12 top-2 left-2 text-white  flex flex-row items-center justify-between cursor-pointer' >
-                            <div className='flex flex-row items-center' onClick={() => router.back()}>
-                                <ArrowLeft3 size="32" className='text-iconColor' />
-                                Back
-                            </div>
+        <div className="mt-8">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-sm font-medium text-zinc-700 dark:text-zinc-300">Email</FormLabel>
+                    <FormControl>
+                      <Input className={inputClass} placeholder="admin@example.com" {...field} />
+                    </FormControl>
+                    <FormMessage className="text-xs text-red-600" />
+                  </FormItem>
+                )}
+              />
 
-                            <div>
-                                <SwitchSimpleTheme />
-                            </div>
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-sm font-medium text-zinc-700 dark:text-zinc-300">Password</FormLabel>
+                    <FormControl>
+                      <Input type="password" className={inputClass} placeholder="••••••••" {...field} />
+                    </FormControl>
+                    <FormMessage className="text-xs text-red-600" />
+                  </FormItem>
+                )}
+              />
 
-                        </div>
-                        <div className='flex flex-row '>
-                            <span className='text-white text-4xl'>
-                                BrainWave
-                            </span>
-                            <span className='text-white text-4xl'>
-                                Logo
-                            </span>
-                        </div>
+              {HCAPTCHA_SITE_KEY ? (
+                <HcaptchaWidget
+                  siteKey={HCAPTCHA_SITE_KEY}
+                  onToken={setHcaptchaToken}
+                  resetKey={captchaResetKey}
+                />
+              ) : null}
 
-                    </div>
+              {serverError ? <div className="text-sm font-medium text-red-600">{serverError}</div> : null}
 
-                </div>
-
-                <div className=''>
-                    <h1 className='text-3xl mt-2 ml-0'>
-                        Login
-                    </h1>
-                    <Form {...form} >
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="w-[320px] h-[380px] mt-[-20px] space-y-6 flex flex-col items-center justify-center mx-auto">
-
-
-                            <FormField
-                                control={form.control}
-                                name="email"
-
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="text-sm">Email</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                className="border-iconColor bg-itemFormBackground w-[320px]"
-                                                placeholder="Email"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage className="text-[10px] text-red-600" />
-                                    </FormItem>
-                                )} />
-
-                            <FormField
-                                control={form.control}
-                                name="password"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="text-sm">Password</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                type='password'
-                                                className="border-iconColor bg-itemFormBackground w-[320px]"
-                                                placeholder="Password"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage className="text-[10px] text-red-600" />
-                                    </FormItem>
-                                )} />
-
-                            <Button
-                                className='w-full space-y-2'
-                                type="submit"
-                                variant={"secondary"}>
-                                Send
-                            </Button>
-                            
-                        </form>
-
-                    </Form>
-                </div>
-
-            </div >
-
-        </>
-    )
+              <Button
+                type="submit"
+                disabled={loading || (captchaRequired && !hcaptchaToken)}
+                className="h-12 w-full rounded-2xl bg-[#FEA439] text-base font-semibold text-zinc-900 shadow-lg shadow-[#FEA439]/25 transition hover:bg-[#ffb04d] disabled:opacity-60"
+              >
+                {loading ? "Please wait…" : "Sign in to dashboard"}
+              </Button>
+            </form>
+          </Form>
+        </div>
+      </AuthSplitCard>
+    </div>
+  );
 }

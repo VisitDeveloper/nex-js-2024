@@ -30,7 +30,7 @@ export default function Carousel() {
 
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(window.innerWidth <= 768); // عرض 768 پیکسل برای موبایل
+            setIsMobile(window.innerWidth <= 768); // 768px breakpoint for mobile
         };
 
         handleResize();
@@ -41,11 +41,11 @@ export default function Carousel() {
 
     useEffect(() => {
         let controls;
-        const cardWidth = isMobile ? 120 : 200; // عرض کارت بر اساس حالت موبایل یا دسکتاپ
-        const gap = isMobile ? 8 : 16; // فاصله بین کارت‌ها
-        const totalWidth = (cardWidth + gap) * images.length; // محاسبه کل عرض کارت‌ها
+        const cardWidth = isMobile ? 120 : 200; // Card width
+        const gap = isMobile ? 8 : 16; // Gap between cards
+        const totalWidth = (cardWidth + gap) * images.length; // Total width of cards
 
-        const finalPosition = -totalWidth; // موقعیت نهایی برای انیمیشن
+        const finalPosition = -totalWidth; // Final position for animation
 
         if (mustFinish) {
             controls = animate(xTranslation, [xTranslation.get(), finalPosition], {
@@ -71,9 +71,9 @@ export default function Carousel() {
 
     return (
         <div
-            className="relative overflow-hidden w-full md:block hidden" // جلوگیری از اسکرول صفحه
+            className="relative overflow-hidden w-full md:block hidden" // Prevent page scrolling
             style={{
-                height: isMobile ? 150 : 300, // ارتفاع متناسب با موبایل و دسکتاپ
+                height: isMobile ? 150 : 300, // Responsive height
             }}
         >
             <motion.div
@@ -86,7 +86,7 @@ export default function Carousel() {
                     className="absolute left-0 flex"
                     style={{
                         x: xTranslation,
-                        gap: isMobile ? '8px' : '16px', // فاصله بین کارت‌ها
+                        gap: isMobile ? '8px' : '16px', // Gap between cards
                     }}
                     ref={ref}
                     onHoverStart={() => {
@@ -103,7 +103,7 @@ export default function Carousel() {
                             image={`${item}`}
                             key={idx}
                             style={{
-                                width: isMobile ? '120px' : '200px', // تنظیم عرض کارت
+                                width: isMobile ? '120px' : '200px', // Card width
                                 flexShrink: 0,
                             }}
                         />

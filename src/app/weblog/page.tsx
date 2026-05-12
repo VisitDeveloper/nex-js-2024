@@ -11,6 +11,7 @@ import FeatureNews from "components/specific_elements/weblog/feature-news";
 import Link from "next/link";
 import { NewsCard } from "components/specific_elements/main-page/news-slider";
 import { cn } from "lib/utils";
+import { publicArticleCoverSrc } from "lib/strapi-media";
 import { useFetch } from "hooks/useFetch";
 
 const articleServices = new ArticleService();
@@ -23,7 +24,11 @@ export default function Weblog({
   params: Params;
   searchParams: SearchParams;
 }) {
-  const { page } = searchParams;
+  const pageRaw = searchParams?.page;
+  const pageNum =
+    pageRaw != null && pageRaw !== "" && !Number.isNaN(Number(pageRaw))
+      ? Math.max(1, Math.floor(Number(pageRaw)))
+      : 1;
 
   const [listOrCardActivate, setListOrCardActivate] = useState<boolean>(false);
 
@@ -39,9 +44,9 @@ export default function Weblog({
     service: articleServices.read.bind(articleServices),
     options: {
       params: {
-        sort: { createdAt: "desc" },
+        sort: ["publishedAt:desc"],
         pagination: {
-          page: page,
+          page: pageNum,
           pageSize: 5,
         },
         populate: {
@@ -167,7 +172,7 @@ export default function Weblog({
                     {error}
                   </div>
                 )}
-                {data && data.data.length === 0 && (
+                {data && Array.isArray(data.data) && data.data.length === 0 && (
                   <div className="p-16 flex justify-center items-center">
                     Not found
                   </div>
@@ -194,7 +199,7 @@ export default function Weblog({
                           ? article.attributes?.authorsBio?.data?.attributes
                               ?.name
                           : null,
-                        banner: `${process.env.NEXT_PUBLIC_BASE_IMAGE_URL}${article?.attributes.cover?.data.attributes.url}`,
+                        banner: publicArticleCoverSrc(article.attributes),
                       }}
                       key={article.id}
                     />
@@ -223,12 +228,12 @@ export default function Weblog({
                 {errorCategories}
               </div>
             )}
-            {categories && categories.data.length === 0 && (
+            {categories && Array.isArray(categories.data) && categories.data.length === 0 && (
               <div className="p-16 flex justify-center items-center">
                 Not found
               </div>
             )}
-            {categories && categories.data.length > 0 && (
+            {categories && Array.isArray(categories.data) && categories.data.length > 0 && (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 py-4">
                 {categories.data.map((category) => (
                   <Link

@@ -14,10 +14,10 @@ import {
 import Footer from "components/elements/footer";
 import Image from "next/image";
 import Link from "next/link";
-import ListSetup from "components/wrapper-elements/ListSetup";
+import ListSetup from "components/wrapper-elements/list-setup";
 import React from "react";
-import { RouteHeader } from "./Header";
-import Row from "components/wrapper-elements/Row";
+import { RouteHeader } from "./header";
+import Row from "components/wrapper-elements/row";
 import { cn } from "lib/utils";
 import { usePathname } from "next/navigation";
 
@@ -49,6 +49,26 @@ export default function FooterLayout({ ...props }) {
       id: 4,
       name: "Contact",
       route: "/contact-us",
+    },
+    {
+      id: 5,
+      name: "BrainWave Agency",
+      route: "https://agency.bwaveedu.com",
+    },
+    {
+      id: 6,
+      name: "Shop",
+      route: "/shop",
+    },
+    {
+      id: 7,
+      name: "Account",
+      route: "/account",
+    },
+    {
+      id: 8,
+      name: "Admin Portal",
+      route: "/portal/admin",
     },
   ];
 
@@ -151,11 +171,14 @@ export default function FooterLayout({ ...props }) {
                 >
                   {ArrayRouteFooter.length !== 0 &&
                     ArrayRouteFooter.map((item: RouteHeader) => {
+                      const isExternal = item.route.startsWith("http");
                       return (
                         <>
                           <Link
                             href={`${item.route}`}
                             key={item.id}
+                            target={isExternal ? "_blank" : undefined}
+                            rel={isExternal ? "noopener noreferrer" : undefined}
                             className="flex flex-row items-center gap-2"
                           >
                             <div className="flex flex-col">

@@ -3,20 +3,23 @@ import "./globals.css";
 
 import React from "react";
 import { Fredoka } from "next/font/google";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { cn } from "lib/utils";
 
-import ClientLayout from "./ClientLayout";
+import ClientLayout from "./client-layout";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.trim() || "https://bwaveedu.com";
 
 const fredoka = Fredoka({ subsets: ["latin"] });
 
+export const viewport: Viewport = {
+  themeColor: "#19C1B6",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   manifest: "/manifest.webmanifest",
-  themeColor: "#19C1B6",
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },

@@ -36,18 +36,12 @@ const applications = [
     description: "Interactive Learning for Every Age Group",
     link: "/#",
   },
-  {
-    icon: <GraduationCap className="size-12" />,
-    name: "Dyslexia Learning Tools",
-    description: "Personalized Support for Young Readers",
-    link: "/#",
-  },
-  {
-    icon: <Bot className="size-12" />,
-    name: "Robotics",
-    description: "Empowering Young Minds with Robotics",
-    link: "/coming-soon",
-  },
+  // {
+  //   icon: <Bot className="size-12" />,
+  //   name: "Robotics",
+  //   description: "Empowering Young Minds with Robotics",
+  //   link: "/coming-soon",
+  // },
 ];
 
 export default function AppSlider() {
