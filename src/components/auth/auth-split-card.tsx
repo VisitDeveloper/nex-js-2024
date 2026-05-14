@@ -47,7 +47,7 @@ export function AuthSplitCard({ brandTitle, brandSubtitle, leftFooter, children 
               <ArrowLeft3 size={22} className="text-[#19C1B6] transition-transform group-hover:-translate-x-0.5" />
               Back
             </button>
-            <SwitchSimpleTheme />
+            {/* <SwitchSimpleTheme /> */}
           </div>
 
           <div className="relative z-10 mt-6 flex flex-1 flex-col justify-center gap-8 lg:mt-0">
@@ -105,7 +105,7 @@ export function AuthSplitCard({ brandTitle, brandSubtitle, leftFooter, children 
             </div>
           </div>
 
-          <div className="relative z-10 mt-8 lg:mt-0">{leftFooter}</div>
+          {/* <div className="relative z-10 mt-8 lg:mt-0">{leftFooter}</div> */}
         </div>
 
         <div className="flex flex-col justify-center border-t border-black/[0.06] bg-miniBackground p-7 sm:p-9 lg:border-l lg:border-t-0 lg:p-11 dark:border-white/10 dark:bg-zinc-950/50">

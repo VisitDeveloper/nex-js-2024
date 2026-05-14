@@ -52,16 +52,19 @@ export default function About() {
           <motion.div
             variants={introduceitemVariants}
             className="mt-6 font-medium text-base text-[#333333]"
+
           >
+            {/* and robotics programs */}
+            {/* or a robot that teaches coding through play */}
             📘 Who We Are At BrainWave, we are a passionate team of educators,
             engineers, and designers united by a shared mission: to make early
             learning joyful, inclusive, and future-ready. We specialize in
-            creating interactive app-based books and robotics programs for
+            creating interactive app-based books for
             children ages 3 to 9, combining cognitive development theories with
             playful technology. Our work is driven by curiosity, research, and a
             deep belief in every child’s potential to thrive when supported by
             the right tools. Whether through a story that comes alive on a
-            tablet or a robot that teaches coding through play, we are committed
+            tablet, we are committed
             to helping young learners build confidence, creativity, and core
             skills that last a lifetime.
           </motion.div>
