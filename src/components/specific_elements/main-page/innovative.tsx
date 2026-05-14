@@ -53,8 +53,8 @@ export default function Innovative() {
               🎯 Our mission is to unlock the cognitive and creative potential
               of young children through innovative educational technology. We
               aim to provide developmentally appropriate, accessible, and
-              research-based learning tools—such as app-based storybooks,
-              dyslexia-friendly features, and beginner robotics—that nurture
+              research-based learning tools—such as app-based storybooks and
+              dyslexia-friendly features—that nurture
               literacy, critical thinking, and computational skills. At the
               heart of BrainWave is a commitment to equity and engagement: we
               believe every child deserves to explore, question, and grow in a
@@ -68,7 +68,7 @@ export default function Innovative() {
             className="basis-auto lg:basis-1/2 flex justify-end"
           >
             <Image
-              src={"/robo-kids.jpg"}
+              src={"/tab-kids.png"}
               alt="innovative Approach"
               width={500}
               height={500}

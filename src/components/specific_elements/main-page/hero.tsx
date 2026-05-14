@@ -27,7 +27,7 @@ const Hero = () => {
             <ul className="font-medium text-base text-[#333333] list-none">
               <li>🎯 Personalized Learning Journeys</li>
               <li>📚 App Books That Spark Curiosity</li>
-              <li>🧠 Dyslexia-Friendly Support for Every Learner</li>
+              {/* <li>🧠 Dyslexia-Friendly Support for Every Learner</li> */}
               <li>🚀 Gamified Learning for Skill Development</li>
             </ul>
             <div className="">
