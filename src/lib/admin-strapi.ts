@@ -1,3 +1,4 @@
+import "lib/node-buffer-polyfill";
 import { cookies } from "next/headers";
 import { verify } from "jsonwebtoken";
 import { COOKIE_NAME, STRAPI_JWT_COOKIE } from "config/constant";

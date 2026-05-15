@@ -20,12 +20,12 @@ export { default as H5 } from "./elements/h5";
 export { default as H6 } from "./elements/h6";
 
 // Wrapper Elements 
-export { default as Row } from 'components/wrapper-elements/Row';
+export { default as Row } from 'components/wrapper-elements/row';
 export { default as ListSetup } from 'components/wrapper-elements/list-setup';
 
 // layout 
-export { default as HeaderLayout } from 'components/layout/Header'
-export { default as FooterLayout } from 'components/layout/Footer'
+export { default as HeaderLayout } from 'components/layout/header'
+export { default as FooterLayout } from 'components/layout/footer'
 export { default as MainLayout } from 'components/layout/main-layout'
 
 // pure-elements 
