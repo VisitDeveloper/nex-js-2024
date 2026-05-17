@@ -1,3 +1,4 @@
+import "lib/node-buffer-polyfill";
 import jwt from "jsonwebtoken";
 
 export type SessionUser = {

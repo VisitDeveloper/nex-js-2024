@@ -1,3 +1,4 @@
+import "lib/node-buffer-polyfill";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { COOKIE_NAME, MAX_AGE, STRAPI_JWT_COOKIE } from "config/constant";
