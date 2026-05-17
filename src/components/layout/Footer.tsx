@@ -16,8 +16,8 @@ import Image from "next/image";
 import Link from "next/link";
 import ListSetup from "components/wrapper-elements/list-setup";
 import React from "react";
-import { RouteHeader } from "./header";
-import Row from "components/wrapper-elements/row";
+import { RouteHeader } from "./Header";
+import Row from "./../wrapper-elements/Row";
 import { cn } from "lib/utils";
 import { usePathname } from "next/navigation";
 
@@ -244,7 +244,7 @@ export default function FooterLayout({ ...props }) {
                       <Location size="20" className="text-iconColor" />
                     </ListSetup>
                     <span className="text-sm text-[#666666]">
-                      Westlands Building, Nairobi, KE
+                      Michigan Farmington Hills
                     </span>
                   </ListSetup>
                   <ListSetup
@@ -261,7 +261,7 @@ export default function FooterLayout({ ...props }) {
                       <Sms size="20" className="text-iconColor" />
                     </ListSetup>
                     <span className="text-sm text-[#666666]">
-                      textemail@yahoo.com
+                      info@bwaveedu.com
                     </span>
                   </ListSetup>
                   <ListSetup
@@ -278,7 +278,7 @@ export default function FooterLayout({ ...props }) {
                       <Call size="20" className="text-iconColor" />
                     </ListSetup>
                     <span className="text-sm text-[#666666]">
-                      +1-50-044-5450
+                      +1 (248) 505-0586
                     </span>
                   </ListSetup>
 
