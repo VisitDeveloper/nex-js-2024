@@ -32,13 +32,13 @@ import { useComingSoonCountDown } from "hooks/useCominSoonCountDown";
 const applications = [
   {
     icon: <BookOpenText className="size-12" />,
-    name: "AppStories",
+    name: "Brainy Tale",
     description: "Interactive Learning for Every Age Group",
-    link: "/#",
+    // link: "/#",
   },
   {
     icon: <Brush className="size-12" />,
-    name: "BrainiBrush",
+    name: "Brainy Brush",
     description: "Empowering Young Minds with Drawing and Creativity",
     // link: "/coming-soon",
   },
