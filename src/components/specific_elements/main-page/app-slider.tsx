@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { Apple, GooglePlay } from "iconsax-react";
+import { Apple, Brush, GooglePlay } from "iconsax-react";
 import { BookOpenText, Bot, GraduationCap, icons } from "lucide-react";
 import {
   Carousel,
@@ -32,25 +32,27 @@ import { useComingSoonCountDown } from "hooks/useCominSoonCountDown";
 const applications = [
   {
     icon: <BookOpenText className="size-12" />,
-    name: "AppStories",
+    name: "Brainy Tale",
     description: "Interactive Learning for Every Age Group",
-    link: "/#",
+    // link: "/#",
   },
-  // {
-  //   icon: <Bot className="size-12" />,
-  //   name: "Robotics",
-  //   description: "Empowering Young Minds with Robotics",
-  //   link: "/coming-soon",
-  // },
+  {
+    icon: <Brush className="size-12" />,
+    name: "Brainy Brush",
+    description: "Empowering Young Minds with Drawing and Creativity",
+    // link: "/coming-soon",
+  },
 ];
 
 export default function AppSlider() {
+
+
   const router = useRouter();
   const [api, setApi] = React.useState<EmblaCarouselType | undefined>(
     undefined
   );
   const { selectedIndex } = useDotButton(api);
-  const { days, hours, minutes, seconds } = useComingSoonCountDown("2025-12-11T00:00:00");
+  const { days, hours, minutes, seconds } = useComingSoonCountDown("2026-06-01T00:00:00+03:00");
 
   const arrayUnitTime = [
     {
@@ -96,8 +98,8 @@ export default function AppSlider() {
               </div>
               <span className="font-semibold text-xl">{_.name}</span>
               <div className="h-20 max-h-20">
-                <p className="line-clamp-3">{_.name === "Robotics" ? null : _.description}</p>
-                {_.name === "Robotics" && (
+                {/* <p className="line-clamp-3">{_.name === "Robotics" ? null : _.description}</p> */}
+                {_.name && (
                   <div className="flex gap-2 text-center mb-4">
                     {arrayUnitTime.map((item) => (
                       <div key={item.name} className="bg-white shadow-lg rounded-2xl p-2 w-14">
@@ -111,19 +113,19 @@ export default function AppSlider() {
               <div className="">
                 <Drawer>
                   <DrawerTrigger asChild>
-                    <Button
+                    {/* <Button
                       variant="secondary"
                       className="bg-transparent rounded-full py-3 px-12 shadow-none"
                       type="button"
                       onClick={() => {
-                        if (_.name === "Robotics") {
+                        if (_.name === "Robotics" && _.link) {
                           router.push(_.link);
                         } else {
                         }
                       }}
                     >
                       View Detail
-                    </Button>
+                    </Button> */}
                   </DrawerTrigger>
                   {_.name === "Robotics" ? null : (
 
