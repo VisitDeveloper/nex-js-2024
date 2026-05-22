@@ -92,3 +92,26 @@ node server.js
 ## Nginx / port
 
 PM2 listens on **port 3004** (`PORT` in [ecosystem.config.cjs](ecosystem.config.cjs)). Point Nginx/reverse proxy to `127.0.0.1:3004`.
+
+## Troubleshooting: `production-start-no-build-id`
+
+This means PM2 is **not** running the CI standalone bundle. It is still using the old git tree (`node_modules/next` + `next start`) instead of `current/server.js`.
+
+On the server, fix once:
+
+```bash
+cd /websites/brain-wave/brainwave-academy   # or /root/websites/brain-wave/brainwave-academy
+
+pm2 delete bwe-acad bwe-academy 2>/dev/null || true
+pm2 list
+
+# After a successful GitHub Deploy workflow:
+ls -la current/server.js current/.next/BUILD_ID
+
+cd current
+pm2 start ecosystem.config.cjs --env production
+pm2 save
+pm2 logs bwe-academy --lines 30
+```
+
+Do **not** run `yarn build` / `next start` in the repo root for production — only GitHub Actions builds; the server runs `current/` (standalone).

@@ -105,6 +105,15 @@ jobs:
             fi
             ln -sfn "$RELEASE_DIR" current
             cd current
-            bash _ci/server-deploy.sh startOrReload ecosystem.config.cjs --env production --update-env
+            if [[ ! -f server.js ]] || [[ ! -f .next/BUILD_ID ]]; then
+              echo "Standalone release is incomplete (need server.js and .next/BUILD_ID)" >&2
+              ls -la .next 2>/dev/null || true
+              exit 1
+            fi
+            # Drop old PM2 apps that ran `next start` from the git checkout (repo root).
+            for old in bwe-acad bwe-academy brainwave-academy nex-js-2024; do
+              bash _ci/server-deploy.sh delete "$old" 2>/dev/null || true
+            done
+            bash _ci/server-deploy.sh start ecosystem.config.cjs --env production --update-env
             bash _ci/server-deploy.sh save
             ls -dt releases/* 2>/dev/null | tail -n +6 | xargs rm -rf 2>/dev/null || true
