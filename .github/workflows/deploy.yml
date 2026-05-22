@@ -50,9 +50,11 @@ jobs:
 
       - name: Prepare standalone bundle
         run: |
-          chmod +x scripts/prepare-standalone.sh
+          chmod +x scripts/prepare-standalone.sh scripts/server-deploy.sh
           ./scripts/prepare-standalone.sh
           cp ecosystem.config.cjs .next/standalone/ecosystem.config.cjs
+          mkdir -p .next/standalone/_ci
+          cp scripts/server-deploy.sh .next/standalone/_ci/server-deploy.sh
           tar -czf academy-release.tar.gz -C .next/standalone .
 
       - name: Upload release artifact
@@ -103,6 +105,6 @@ jobs:
             fi
             ln -sfn "$RELEASE_DIR" current
             cd current
-            pm2 startOrReload ecosystem.config.cjs --env production --update-env
-            pm2 save
+            bash _ci/server-deploy.sh startOrReload ecosystem.config.cjs --env production --update-env
+            bash _ci/server-deploy.sh save
             ls -dt releases/* 2>/dev/null | tail -n +6 | xargs rm -rf 2>/dev/null || true

@@ -22,12 +22,18 @@ cd "$DEPLOY_PATH"
 nano .env   # copy from .env.example — runtime secrets only
 ```
 
-Install Node 20 + PM2 if needed:
+Install Node 20 + PM2 (required — GitHub SSH has no login shell, so `pm2` must exist globally):
 
 ```bash
-npm i -g pm2
+# as the same user as SSH_USER
+command -v node || curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - && sudo apt install -y nodejs
+npm install -g pm2
 pm2 startup   # follow printed instructions
+source ~/.bashrc
+command -v pm2   # must print a path
 ```
+
+CI uses `scripts/server-deploy.sh`, which loads `nvm` / `npm prefix -g` if `pm2` is not in the default PATH.
 
 ### `.env` on the server (not in Git)
 
