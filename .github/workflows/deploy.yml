@@ -1,0 +1,106 @@
+name: Deploy
+
+on:
+  push:
+    branches: [master, main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-academy-production
+  cancel-in-progress: true
+
+env:
+  NEXT_TELEMETRY_DISABLED: 1
+  NODE_ENV: production
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Build
+        env:
+          API_BASE_URL: ${{ vars.API_BASE_URL || 'https://api.bwaveedu.com/api' }}
+          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || 'https://bwaveedu.com' }}
+          NEXT_PUBLIC_BASE_API_URL_CLIENT: ${{ vars.NEXT_PUBLIC_BASE_API_URL_CLIENT || 'https://api.bwaveedu.com/api' }}
+          NEXT_PUBLIC_BASE_API_URL_SERVER: ${{ vars.NEXT_PUBLIC_BASE_API_URL_SERVER || 'https://api.bwaveedu.com' }}
+          NEXT_PUBLIC_BASE_IMAGE_URL: ${{ vars.NEXT_PUBLIC_BASE_IMAGE_URL || 'https://api.bwaveedu.com' }}
+          NEXT_PUBLIC_BASE_URL: ${{ vars.NEXT_PUBLIC_BASE_URL || 'https://bwaveedu.com' }}
+          NEXT_PUBLIC_HCAPTCHA_SITE_KEY: ${{ vars.NEXT_PUBLIC_HCAPTCHA_SITE_KEY || '' }}
+        run: npm run build
+
+      - name: Prepare standalone bundle
+        run: |
+          chmod +x scripts/prepare-standalone.sh
+          ./scripts/prepare-standalone.sh
+          cp ecosystem.config.cjs .next/standalone/ecosystem.config.cjs
+          tar -czf academy-release.tar.gz -C .next/standalone .
+
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: academy-release
+          path: academy-release.tar.gz
+          retention-days: 7
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download release artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: academy-release
+
+      - name: Upload tarball to server
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          source: academy-release.tar.gz
+          target: ${{ secrets.DEPLOY_PATH }}
+
+      - name: Extract and reload PM2
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          script_stop: true
+          script: |
+            set -euo pipefail
+            DEPLOY_PATH="${{ secrets.DEPLOY_PATH }}"
+            cd "$DEPLOY_PATH"
+            mkdir -p releases
+            RELEASE_DIR="releases/$(date +%Y%m%d%H%M%S)-${{ github.sha }}"
+            mkdir -p "$RELEASE_DIR"
+            tar -xzf academy-release.tar.gz -C "$RELEASE_DIR"
+            rm -f academy-release.tar.gz
+            if [[ -f .env ]]; then
+              cp .env "$RELEASE_DIR/.env"
+            fi
+            ln -sfn "$RELEASE_DIR" current
+            cd current
+            pm2 startOrReload ecosystem.config.cjs --env production --update-env
+            pm2 save
+            ls -dt releases/* 2>/dev/null | tail -n +6 | xargs rm -rf 2>/dev/null || true

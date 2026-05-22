@@ -6,6 +6,12 @@ const apiBaseUrl =
 
 const nextConfig = {
   output: "standalone",
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: false,
+  },
   // basePath: '/en', // Custom route
   async rewrites() {
     const base = apiBaseUrl.replace(/\/+$/, "");
