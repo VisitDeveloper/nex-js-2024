@@ -1,17 +1,22 @@
 #!/usr/bin/env bash
 # Run on the VPS (non-interactive SSH). Requires: tar extract done, cwd = $DEPLOY_PATH/current
-set -euo pipefail
+set -eo pipefail
 
 load_node_path() {
   export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
   if [[ -s "$NVM_DIR/nvm.sh" ]]; then
+    set +u
     # shellcheck source=/dev/null
     . "$NVM_DIR/nvm.sh"
+    set -e
   fi
-  for f in "$HOME/.profile" "$HOME/.bashrc" "$HOME/.bash_profile"; do
+  # Do not source .bashrc — non-interactive SSH has no PS1; many rc files break with `set -u`.
+  for f in "$HOME/.profile" "$HOME/.bash_profile"; do
     if [[ -s "$f" ]]; then
+      set +u
       # shellcheck source=/dev/null
-      . "$f"
+      . "$f" || true
+      set -e
     fi
   done
   if [[ -d "$HOME/.nvm/versions/node" ]]; then
