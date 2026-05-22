@@ -14,12 +14,12 @@ module.exports = {
       env: {
         NODE_ENV: "development",
         HOSTNAME: "0.0.0.0",
-        PORT: 3000,
+        PORT: 3004,
       },
       env_production: {
         NODE_ENV: "production",
         HOSTNAME: "0.0.0.0",
-        PORT: 3000,
+        PORT: 3004,
       },
     },
   ],

@@ -91,4 +91,4 @@ node server.js
 
 ## Nginx / port
 
-PM2 listens on `PORT` (default **3000** in [ecosystem.config.cjs](ecosystem.config.cjs)). Point reverse proxy to that port (docker-compose used **3004:3000** when containerized).
+PM2 listens on **port 3004** (`PORT` in [ecosystem.config.cjs](ecosystem.config.cjs)). Point Nginx/reverse proxy to `127.0.0.1:3004`.
