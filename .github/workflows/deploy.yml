@@ -11,7 +11,6 @@ concurrency:
 
 env:
   NEXT_TELEMETRY_DISABLED: 1
-  NODE_ENV: production
 
 jobs:
   build:
@@ -28,6 +27,8 @@ jobs:
 
       - name: Install dependencies
         run: npm ci --no-audit --no-fund
+        env:
+          NODE_ENV: development
 
       - name: Lint
         run: npm run lint
@@ -37,6 +38,7 @@ jobs:
 
       - name: Build
         env:
+          NODE_ENV: production
           API_BASE_URL: ${{ vars.API_BASE_URL || 'https://api.bwaveedu.com/api' }}
           NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || 'https://bwaveedu.com' }}
           NEXT_PUBLIC_BASE_API_URL_CLIENT: ${{ vars.NEXT_PUBLIC_BASE_API_URL_CLIENT || 'https://api.bwaveedu.com/api' }}
