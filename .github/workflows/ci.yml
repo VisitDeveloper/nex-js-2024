@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [master, main, development]
+  push:
+    branches: [development]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: .
+
+env:
+  NEXT_TELEMETRY_DISABLED: 1
+  API_BASE_URL: https://api.bwaveedu.com/api
+  NEXT_PUBLIC_SITE_URL: https://bwaveedu.com
+  NEXT_PUBLIC_BASE_API_URL_CLIENT: https://api.bwaveedu.com/api
+  NEXT_PUBLIC_BASE_API_URL_SERVER: https://api.bwaveedu.com
+  NEXT_PUBLIC_BASE_IMAGE_URL: https://api.bwaveedu.com
+  NEXT_PUBLIC_BASE_URL: https://bwaveedu.com
+
+jobs:
+  lint-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+        env:
+          NODE_ENV: development
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Production build
+        run: npm run build
+
+      - name: Verify standalone output
+        run: |
+          test -f .next/standalone/server.js
+          chmod +x scripts/prepare-standalone.sh
+          ./scripts/prepare-standalone.sh
