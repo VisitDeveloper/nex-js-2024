@@ -16,8 +16,8 @@ import Image from "next/image";
 import Link from "next/link";
 import ListSetup from "components/wrapper-elements/list-setup";
 import React from "react";
-import { RouteHeader } from "./Header";
-import Row from "./../wrapper-elements/Row";
+import { RouteHeader } from "./header";
+import Row from "./../wrapper-elements/row";
 import { cn } from "lib/utils";
 import { usePathname } from "next/navigation";
 
