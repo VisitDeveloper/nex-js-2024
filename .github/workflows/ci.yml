@@ -10,22 +10,20 @@ concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-defaults:
-  run:
-    working-directory: .
-
 env:
   NEXT_TELEMETRY_DISABLED: 1
-  API_BASE_URL: https://api.bwaveedu.com/api
-  NEXT_PUBLIC_SITE_URL: https://bwaveedu.com
-  NEXT_PUBLIC_BASE_API_URL_CLIENT: https://api.bwaveedu.com/api
-  NEXT_PUBLIC_BASE_API_URL_SERVER: https://api.bwaveedu.com
-  NEXT_PUBLIC_BASE_IMAGE_URL: https://api.bwaveedu.com
-  NEXT_PUBLIC_BASE_URL: https://bwaveedu.com
+  API_BASE_URL: ${{ vars.API_BASE_URL || 'https://api.bwaveedu.com/api' }}
+  NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || 'https://bwaveedu.com' }}
+  NEXT_PUBLIC_BASE_API_URL_CLIENT: ${{ vars.NEXT_PUBLIC_BASE_API_URL_CLIENT || 'https://api.bwaveedu.com/api' }}
+  NEXT_PUBLIC_BASE_API_URL_SERVER: ${{ vars.NEXT_PUBLIC_BASE_API_URL_SERVER || 'https://api.bwaveedu.com' }}
+  NEXT_PUBLIC_BASE_IMAGE_URL: ${{ vars.NEXT_PUBLIC_BASE_IMAGE_URL || 'https://api.bwaveedu.com' }}
+  NEXT_PUBLIC_BASE_URL: ${{ vars.NEXT_PUBLIC_BASE_URL || 'https://bwaveedu.com' }}
+  NEXT_PUBLIC_HCAPTCHA_SITE_KEY: ${{ vars.NEXT_PUBLIC_HCAPTCHA_SITE_KEY || '' }}
 
 jobs:
   lint-and-build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -48,6 +46,8 @@ jobs:
         run: npx tsc --noEmit
 
       - name: Production build
+        env:
+          NODE_ENV: production
         run: npm run build
 
       - name: Verify standalone output

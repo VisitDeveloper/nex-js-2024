@@ -11,10 +11,18 @@ concurrency:
 
 env:
   NEXT_TELEMETRY_DISABLED: 1
+  API_BASE_URL: ${{ vars.API_BASE_URL || 'https://api.bwaveedu.com/api' }}
+  NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || 'https://bwaveedu.com' }}
+  NEXT_PUBLIC_BASE_API_URL_CLIENT: ${{ vars.NEXT_PUBLIC_BASE_API_URL_CLIENT || 'https://api.bwaveedu.com/api' }}
+  NEXT_PUBLIC_BASE_API_URL_SERVER: ${{ vars.NEXT_PUBLIC_BASE_API_URL_SERVER || 'https://api.bwaveedu.com' }}
+  NEXT_PUBLIC_BASE_IMAGE_URL: ${{ vars.NEXT_PUBLIC_BASE_IMAGE_URL || 'https://api.bwaveedu.com' }}
+  NEXT_PUBLIC_BASE_URL: ${{ vars.NEXT_PUBLIC_BASE_URL || 'https://bwaveedu.com' }}
+  NEXT_PUBLIC_HCAPTCHA_SITE_KEY: ${{ vars.NEXT_PUBLIC_HCAPTCHA_SITE_KEY || '' }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,13 +47,6 @@ jobs:
       - name: Build
         env:
           NODE_ENV: production
-          API_BASE_URL: ${{ vars.API_BASE_URL || 'https://api.bwaveedu.com/api' }}
-          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || 'https://bwaveedu.com' }}
-          NEXT_PUBLIC_BASE_API_URL_CLIENT: ${{ vars.NEXT_PUBLIC_BASE_API_URL_CLIENT || 'https://api.bwaveedu.com/api' }}
-          NEXT_PUBLIC_BASE_API_URL_SERVER: ${{ vars.NEXT_PUBLIC_BASE_API_URL_SERVER || 'https://api.bwaveedu.com' }}
-          NEXT_PUBLIC_BASE_IMAGE_URL: ${{ vars.NEXT_PUBLIC_BASE_IMAGE_URL || 'https://api.bwaveedu.com' }}
-          NEXT_PUBLIC_BASE_URL: ${{ vars.NEXT_PUBLIC_BASE_URL || 'https://bwaveedu.com' }}
-          NEXT_PUBLIC_HCAPTCHA_SITE_KEY: ${{ vars.NEXT_PUBLIC_HCAPTCHA_SITE_KEY || '' }}
         run: npm run build
 
       - name: Prepare standalone bundle
@@ -67,11 +68,51 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      SSH_PORT: ${{ secrets.SSH_PORT != '' && secrets.SSH_PORT || '22' }}
     steps:
+      - name: Validate deploy secrets
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+        run: |
+          missing=0
+          for key in SSH_HOST SSH_USER SSH_PRIVATE_KEY DEPLOY_PATH; do
+            if [[ -z "${!key}" ]]; then
+              echo "::error::Missing required secret: $key" >&2
+              missing=1
+            fi
+          done
+          if [[ "$missing" -ne 0 ]]; then
+            echo "Add secrets under Settings → Secrets and variables → Actions" >&2
+            exit 1
+          fi
+          echo "Deploy target: ${SSH_USER}@${SSH_HOST}:${{ env.SSH_PORT }} → ${DEPLOY_PATH}"
+
       - name: Download release artifact
         uses: actions/download-artifact@v4
         with:
           name: academy-release
+
+      - name: Prepare server directory
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ env.SSH_PORT }}
+          fingerprint: ${{ secrets.SSH_FINGERPRINT }}
+          script_stop: true
+          command_timeout: 10m
+          script: |
+            set -eo pipefail
+            DEPLOY_PATH="${{ secrets.DEPLOY_PATH }}"
+            mkdir -p "$DEPLOY_PATH/releases"
+            touch "$DEPLOY_PATH/.deploy-ready"
+            echo "Deploy path ready: $DEPLOY_PATH"
 
       - name: Upload tarball to server
         uses: appleboy/scp-action@v1
@@ -79,9 +120,11 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT || 22 }}
+          port: ${{ env.SSH_PORT }}
+          fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           source: academy-release.tar.gz
           target: ${{ secrets.DEPLOY_PATH }}
+          overwrite: true
 
       - name: Extract and reload PM2
         uses: appleboy/ssh-action@v1
@@ -89,8 +132,10 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT || 22 }}
+          port: ${{ env.SSH_PORT }}
+          fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           script_stop: true
+          command_timeout: 10m
           script: |
             set -eo pipefail
             DEPLOY_PATH="${{ secrets.DEPLOY_PATH }}"
@@ -102,6 +147,8 @@ jobs:
             rm -f academy-release.tar.gz
             if [[ -f .env ]]; then
               cp .env "$RELEASE_DIR/.env"
+            else
+              echo "::warning::No .env in $DEPLOY_PATH — create one before going live (see DEPLOY.md)"
             fi
             ln -sfn "$RELEASE_DIR" current
             cd current
@@ -110,10 +157,10 @@ jobs:
               ls -la .next 2>/dev/null || true
               exit 1
             fi
-            # Drop old PM2 apps that ran `next start` from the git checkout (repo root).
             for old in bwe-acad bwe-academy brainwave-academy nex-js-2024; do
               bash _ci/server-deploy.sh delete "$old" 2>/dev/null || true
             done
             bash _ci/server-deploy.sh start ecosystem.config.cjs --env production --update-env
             bash _ci/server-deploy.sh save
             ls -dt releases/* 2>/dev/null | tail -n +6 | xargs rm -rf 2>/dev/null || true
+            echo "Deployed $(basename "$RELEASE_DIR") — listening on port 3004"

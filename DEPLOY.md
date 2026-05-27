@@ -9,7 +9,29 @@ Build runs on GitHub (fast). The VPS only extracts the standalone bundle and rel
 | [ci.yml](.github/workflows/ci.yml) | PR + push to `development` | lint, typecheck, build |
 | [deploy.yml](.github/workflows/deploy.yml) | push to `master` / `main`, or manual | build artifact + SSH deploy |
 
-## One-time server setup
+## New VPS (one-time)
+
+On the **new server**, as the same Linux user you will put in `SSH_USER`:
+
+```bash
+# Copy scripts/bootstrap-server.sh to the server, or paste its contents, then:
+export DEPLOY_PATH=/websites/brain-wave/brainwave-academy   # must match GitHub secret
+bash bootstrap-server.sh "$DEPLOY_PATH"
+
+cd "$DEPLOY_PATH"
+nano .env   # copy from .env.example — runtime secrets only
+```
+
+Add the deploy public key to `~/.ssh/authorized_keys` (see SSH key section below).
+
+Get the host fingerprint for GitHub (optional but recommended on a new IP):
+
+```bash
+ssh-keyscan -p 22 -t ed25519 YOUR_SERVER_IP
+# Add the sha256 line as secret SSH_FINGERPRINT (or leave unset to skip pinning)
+```
+
+## One-time server setup (manual)
 
 ```bash
 # Must match GitHub secret DEPLOY_PATH
@@ -58,7 +80,21 @@ Settings → Secrets and variables → Actions → **Secrets**:
 | `SSH_USER` | `deploy` or `root` |
 | `SSH_PRIVATE_KEY` | Private key (full PEM, including `BEGIN`/`END`) |
 | `SSH_PORT` | `22` (optional; omit to use 22) |
-| `DEPLOY_PATH` | `/websites/brain-wave/brainwave-academy` |
+| `DEPLOY_PATH` | `/websites/brain-wave/brainwave-academy` (or `/root/websites/brain-wave/brainwave-academy`) |
+| `SSH_FINGERPRINT` | Optional — output of `ssh-keyscan` (host key pinning on new server) |
+
+Workflow **Deploy** fails fast with a clear error if any required secret is missing.
+
+### SSH deploy key (for `SSH_PRIVATE_KEY`)
+
+On your laptop:
+
+```bash
+ssh-keygen -t ed25519 -C "github-actions-bwe-academy" -f ~/.ssh/bwe_academy_deploy -N ""
+```
+
+- Private key file → GitHub secret `SSH_PRIVATE_KEY` (entire PEM, newlines included)
+- `ssh-copy-id -i ~/.ssh/bwe_academy_deploy.pub SSH_USER@SSH_HOST`
 
 ## GitHub repository variables (optional)
 
